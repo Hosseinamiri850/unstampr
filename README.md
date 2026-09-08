@@ -133,6 +133,7 @@ All tunables live in `.env` (see `.env.example`):
 | `CREDITS_PER_IMAGE` / `CREDITS_PER_VIDEO_10_SECONDS` | 5 / 10 | server-side credit cost |
 | `WORKER_CONCURRENCY` | 2 | worker loop count |
 | `ZARINPAL_MERCHANT_ID` | _empty_ | when empty, mock payment provider is used |
+| `BALE_BOT_TOKEN` / `BALE_PROVIDER_TOKEN` / `BALE_WEBHOOK_SECRET` | _empty_ | Bale wallet payments (see docs/bale.md) |
 | `SESSION_SECRET` | dev-only | JWT signing secret — **set to 32+ random bytes in prod** |
 
 ## Workflow
@@ -173,6 +174,7 @@ is unset so local dev needs no gateway. Add providers in `src/lib/payments/`.
 - [docs/processing.md](docs/processing.md) — worker + FFmpeg internals
 - [docs/security.md](docs/security.md) — threat model + hardening
 - [docs/billing.md](docs/billing.md) — credits, plans, ZarinPal
+- [docs/bale.md](docs/bale.md) — Bale wallet payments (provider, linking, webhook, reconciliation)
 
 ## License
 

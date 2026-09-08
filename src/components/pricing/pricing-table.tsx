@@ -1,8 +1,7 @@
 import { getTranslations } from 'next-intl/server';
-import { Button } from '@/components/ui/button';
-import { Link } from '@/i18n/routing';
 import { cn } from '@/lib/utils';
 import { PLANS } from '@/lib/plans';
+import { PurchaseButton } from './purchase-button';
 
 export async function PricingTable() {
   const t = await getTranslations('pricing');
@@ -38,9 +37,7 @@ export async function PricingTable() {
               <p className="mt-2 text-sm text-muted-foreground">
                 {plan.credits.toLocaleString()} {t('credits')}
               </p>
-              <Button asChild className="mt-6" variant={popular ? 'default' : 'outline'}>
-                <Link href="/register">{t('choose')}</Link>
-              </Button>
+              <PurchaseButton planId={plan.id} priceToman={plan.priceToman ?? 0} credits={plan.credits} />
             </div>
           );
         })}

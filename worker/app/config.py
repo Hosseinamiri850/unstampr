@@ -33,6 +33,9 @@ class Settings:
     processing_backend: str
     max_job_attempts: int
     recovery_interval_seconds: int
+    payment_reconcile_url: str
+    payment_reconcile_token: str
+    payment_reconcile_interval_seconds: int
 
     @property
     def storage_opts(self) -> dict:
@@ -64,4 +67,7 @@ def load_settings() -> Settings:
         processing_backend=_env("PROCESSING_BACKEND", "opencv"),
         max_job_attempts=_int("MAX_JOB_ATTEMPTS", 3),
         recovery_interval_seconds=_int("RECOVERY_INTERVAL_SECONDS", 60),
+        payment_reconcile_url=_env("PAYMENT_RECONCILE_URL", ""),
+        payment_reconcile_token=_env("PAYMENT_RECONCILE_TOKEN", ""),
+        payment_reconcile_interval_seconds=_int("PAYMENT_RECONCILE_INTERVAL_SECONDS", 900),
     )

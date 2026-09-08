@@ -1,4 +1,4 @@
-import { pgTable, text, timestamp, integer, real, uuid, pgEnum, uniqueIndex } from 'drizzle-orm/pg-core';
+import { pgTable, text, timestamp, integer, bigint, real, uuid, pgEnum, uniqueIndex } from 'drizzle-orm/pg-core';
 import { sql } from 'drizzle-orm';
 
 export const jobStatusEnum = pgEnum('job_status', [
@@ -109,18 +109,68 @@ export const subscriptions = pgTable('subscriptions', {
   expiresAt: timestamp('expires_at', { withTimezone: true }),
 });
 
-export const paymentTransactions = pgTable('payment_transactions', {
-  id: uuid('id').primaryKey().defaultRandom(),
+export const paymentTransactions = pgTable(
+  'payment_transactions',
+  {
+    id: uuid('id').primaryKey().defaultRandom(),
+    userId: uuid('user_id')
+      .notNull()
+      .references(() => users.id),
+    provider: text('provider').notNull(),
+    providerAuthority: text('provider_authority'),
+    providerRefId: text('provider_ref_id'),
+    amountToman: integer('amount_toman').notNull(),
+    plan: text('plan').notNull(),
+    credits: integer('credits').notNull(),
+    status: text('status').default('pending').notNull(),
+    createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+    verifiedAt: timestamp('verified_at', { withTimezone: true }),
+    // Bale-specific (see drizzle/0003_payment_bale.sql for identifier semantics).
+    payload: text('payload'),
+    providerChargeId: text('provider_charge_id'),
+    providerWalletTracking: text('provider_wallet_tracking'),
+    providerInvoiceId: text('provider_invoice_id'),
+    payerChatId: text('payer_chat_id'),
+    expiresAt: timestamp('expires_at', { withTimezone: true }),
+    precheckoutSeenAt: timestamp('precheckout_seen_at', { withTimezone: true }),
+    settledVia: text('settled_via'),
+  },
+  (t) => [
+    uniqueIndex('uq_pay_tx_payload').on(t.payload).where(sql`payload IS NOT NULL`),
+    uniqueIndex('uq_pay_tx_charge_id').on(t.providerChargeId).where(sql`provider_charge_id IS NOT NULL`),
+    uniqueIndex('uq_pay_tx_ref_id').on(t.providerRefId).where(sql`provider_ref_id IS NOT NULL`),
+  ],
+);
+
+export const baleLinks = pgTable(
+  'bale_links',
+  {
+    userId: uuid('user_id')
+      .primaryKey()
+      .references(() => users.id, { onDelete: 'cascade' }),
+    baleChatId: text('bale_chat_id').notNull(),
+    baleUserId: text('bale_user_id').notNull(),
+    username: text('username'),
+    linkedAt: timestamp('linked_at', { withTimezone: true }).defaultNow().notNull(),
+  },
+  (t) => [
+    uniqueIndex('uq_bale_links_chat').on(t.baleChatId),
+    uniqueIndex('uq_bale_links_user').on(t.baleUserId),
+  ],
+);
+
+export const baleLinkCodes = pgTable('bale_link_codes', {
+  codeHash: text('code_hash').primaryKey(),
   userId: uuid('user_id')
     .notNull()
-    .references(() => users.id),
-  provider: text('provider').notNull(),
-  providerAuthority: text('provider_authority'),
-  providerRefId: text('provider_ref_id'),
-  amountToman: integer('amount_toman').notNull(),
-  plan: text('plan').notNull(),
-  credits: integer('credits').notNull(),
-  status: text('status').default('pending').notNull(),
+    .references(() => users.id, { onDelete: 'cascade' }),
   createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
-  verifiedAt: timestamp('verified_at', { withTimezone: true }),
+  expiresAt: timestamp('expires_at', { withTimezone: true }).notNull(),
+  usedAt: timestamp('used_at', { withTimezone: true }),
+});
+
+export const baleDrainState = pgTable('bale_drain_state', {
+  id: integer('id').primaryKey(),
+  lastOffset: bigint('last_offset', { mode: 'number' }).notNull().default(0),
+  updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull(),
 });

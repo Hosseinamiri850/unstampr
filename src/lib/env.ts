@@ -27,6 +27,13 @@ export interface AppEnv {
   ZARINPAL_MERCHANT_ID: string;
   ZARINPAL_CALLBACK_URL: string;
   ZARINPAL_SANDBOX: boolean;
+  BALE_BOT_TOKEN: string;
+  BALE_PROVIDER_TOKEN: string;
+  BALE_WEBHOOK_SECRET: string;
+  BALE_WEBHOOK_ENABLED: boolean;
+  BALE_INVOICE_TTL_SEC: number;
+  BALE_LINK_CODE_TTL_SEC: number;
+  RECONCILE_TOKEN: string;
   SESSION_SECRET: string;
 }
 
@@ -56,6 +63,13 @@ export function getEnv(): AppEnv {
     ZARINPAL_MERCHANT_ID: process.env.ZARINPAL_MERCHANT_ID ?? '',
     ZARINPAL_CALLBACK_URL: process.env.ZARINPAL_CALLBACK_URL ?? 'http://localhost:3000/api/payments/callback',
     ZARINPAL_SANDBOX: process.env.ZARINPAL_SANDBOX !== 'false',
+    BALE_BOT_TOKEN: process.env.BALE_BOT_TOKEN ?? '',
+    BALE_PROVIDER_TOKEN: process.env.BALE_PROVIDER_TOKEN ?? '',
+    BALE_WEBHOOK_SECRET: process.env.BALE_WEBHOOK_SECRET ?? '',
+    BALE_WEBHOOK_ENABLED: process.env.BALE_WEBHOOK_ENABLED === 'true',
+    BALE_INVOICE_TTL_SEC: num('BALE_INVOICE_TTL_SEC', 30 * 60),
+    BALE_LINK_CODE_TTL_SEC: num('BALE_LINK_CODE_TTL_SEC', 15 * 60),
+    RECONCILE_TOKEN: process.env.RECONCILE_TOKEN ?? '',
     SESSION_SECRET: process.env.SESSION_SECRET ?? 'dev-only-change-me-please-32-bytes!',
   };
   return cached;

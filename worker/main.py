@@ -284,6 +284,30 @@ def recovery_pass(r, settings) -> None:
         conn.close()
 
 
+def payment_reconcile_pass(settings) -> None:
+    """Trigger the web app's payment reconciliation sweep (POST /api/payments/reconcile).
+
+    Off unless PAYMENT_RECONCILE_URL is set. The web service owns all payment
+    logic and auth (x-reconcile-token); the worker only fires the trigger.
+    stdlib-only HTTP call, bounded timeout, every failure logged and swallowed —
+    a web outage or a bad response must never kill the worker loop.
+    """
+    if not settings.payment_reconcile_url:
+        return
+    import urllib.request
+
+    req = urllib.request.Request(
+        settings.payment_reconcile_url, method="POST",
+        headers={"x-reconcile-token": settings.payment_reconcile_token},
+    )
+    try:
+        with urllib.request.urlopen(req, timeout=60) as res:
+            body = res.read().decode("utf-8", "replace")[:500]
+            log.info("payment reconcile: HTTP %s %s", res.status, body)
+    except Exception as e:
+        log.warning("payment reconcile trigger failed (non-fatal): %s", e)
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Pakino worker")
     parser.add_argument("--once", action="store_true", help="process one job then exit")
@@ -293,6 +317,7 @@ def main() -> int:
     r = make_redis(settings)
     stop = {"flag": False}
     last_recovery = 0.0
+    last_reconcile = 0.0
 
     def handler(signum, _frame):
         log.info("received signal %s, stopping", signum)
@@ -324,6 +349,9 @@ def main() -> int:
                 log.exception("outbox dispatch pass failed")
             recovery_pass(r, settings)
             retention_pass(settings)
+            if now - last_reconcile > settings.payment_reconcile_interval_seconds:
+                last_reconcile = now
+                payment_reconcile_pass(settings)
 
         job = brpop_job(r, settings.queue_name, timeout=5)
         if job is None:

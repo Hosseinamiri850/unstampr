@@ -118,7 +118,17 @@
       "mvpDesc": "Longer videos and priority queue",
       "proPlus": "Pro+",
       "proPlusDesc": "More credits and fast queue"
-    }
+    },
+    "payWithBale": "Pay with Bale",
+    "processing": "Processing…",
+    "paymentFailed": "Payment failed. Please try again.",
+    "baleUnavailable": "Bale payments are unavailable.",
+    "baleNotLinked": "Connect your Bale account first to pay with Bale.",
+    "connectBale": "Connect Bale account",
+    "openBaleToLink": "Open Bale and send the code",
+    "linkCodeHint": "This code is single-use. In Bale, send /start with this code to the Pakino bot.",
+    "baleInvoiceSent": "Invoice sent to your Bale app",
+    "baleInvoiceSentHint": "Open the Bale app and pay the invoice. Credits are added automatically after payment."
   },
   "result": {
     "downloadImage": "Download image",

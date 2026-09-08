@@ -13,11 +13,22 @@ log = logging.getLogger("pakino.watermark")
 
 try:
     import remove_ai_watermarks as raiw  # type: ignore
+    from remove_ai_watermarks import api as _raiw_api
+    from remove_ai_watermarks import video as _raiw_video
+    from remove_ai_watermarks.identify import identify as _raiw_identify  # type: ignore
     _RAIW_AVAILABLE = True
 except Exception as e:  # pragma: no cover - env dependent
     log.warning("remove_ai_watermarks not available: %s", e)
     raiw = None  # type: ignore
+    _raiw_api = None  # type: ignore
+    _raiw_video = None  # type: ignore
+    _raiw_identify = None  # type: ignore
     _RAIW_AVAILABLE = False
+
+
+# Map the library's "high"/"medium"/"none" provenance confidence to a float
+# the web/DB layer can store (jobs.confidence is real).
+_CONFIDENCE_MAP = {"high": 0.95, "medium": 0.6, "none": None}
 
 
 class NoWatermarkError(Exception):
@@ -33,24 +44,45 @@ def lib_ready() -> bool:
 
 
 def detect_image(input_path: str) -> dict:
-    """Identify the visible provider mark in an image. Raises NoWatermarkError if none."""
+    """Identify the provenance / visible mark of an image.
+
+    Raises NoWatermarkError when no AI signal and no known visible mark found.
+    """
     if not _RAIW_AVAILABLE:
         raise UnsupportedWatermarkError("library missing")
-    info = raiw.identify(input_path)  # may return provenance dict / object
-    return _normalize_identify(info)
+    from pathlib import Path as _Path
+
+    report = _raiw_identify(_Path(input_path))
+    # A visible mark the remover knows about may exist even when metadata
+    # provenance is silent; the removal pass is the ground truth for output.
+    provider = report.platform or (report.watermarks[0] if report.watermarks else None)
+    if report.is_ai_generated is None and provider is None:
+        raise NoWatermarkError("no signal")
+    return {
+        "provider": str(provider) if provider else None,
+        "confidence": _CONFIDENCE_MAP.get(report.confidence),
+        "location": None,
+    }
 
 
 def detect_video(input_path: str) -> dict:
     if not _RAIW_AVAILABLE:
         raise UnsupportedWatermarkError("library missing")
-    info = raiw.identify_video(input_path)
-    return _normalize_identify(info)
+    report = _raiw_video.identify_video(input_path)
+    provider = report.platform or report.visible_mark
+    if report.is_ai_generated is None and provider is None:
+        raise NoWatermarkError("no signal")
+    return {
+        "provider": str(provider) if provider else None,
+        "confidence": _CONFIDENCE_MAP.get(report.confidence),
+        "location": None,
+    }
 
 
 def remove_image_visible(input_path: str, output_path: str) -> dict:
     if not _RAIW_AVAILABLE:
         raise UnsupportedWatermarkError("library missing")
-    result, removed = raiw.remove_visible(input_path, output_path)
+    result, removed = _raiw_api.remove_visible(input_path, output_path)
     return {"result": result, "removed": removed}
 
 
@@ -59,10 +91,8 @@ def remove_video_visible(
 ) -> dict:
     if not _RAIW_AVAILABLE:
         raise UnsupportedWatermarkError("library missing")
-    if mark:
-        out = raiw.remove_video_visible(input_path, output_path, mark=mark)
-    else:
-        out = raiw.remove_video_all(input_path, output_path)
+    kwargs = {"mark": mark} if mark else {}
+    out = _raiw_video.remove_video_visible(input_path, output_path, **kwargs)
     provider = getattr(out, "mark", None) if out is not None else None
     return {"provider": provider, "output": output_path}
 

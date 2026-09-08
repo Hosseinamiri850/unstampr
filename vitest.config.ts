@@ -8,5 +8,8 @@ export default defineConfig({
     globals: true,
     setupFiles: ['./src/test/setup.ts'],
     include: ['src/**/*.test.ts', 'src/**/*.test.tsx'],
+    // DB-backed integration suites share one PostgreSQL database; parallel test
+    // files let one file's cleanPakinoTables() wipe another file's fixtures.
+    fileParallelism: false,
   },
 });

@@ -1,10 +1,10 @@
 import { db, schema } from '@/lib/db/client';
-import { eq, sql } from 'drizzle-orm';
+import { eq } from 'drizzle-orm';
 import { getPaymentProvider } from '@/lib/payments';
+import { settlePayment } from '@/lib/payments/settlement';
 import { getEnv } from '@/lib/env';
-import { recordCreditTransaction } from '@/lib/credits';
 import { AppError } from '@/lib/types';
-import { ok, fail, handleError } from '@/lib/api/http';
+import { handleError } from '@/lib/api/http';
 import { NextResponse } from 'next/server';
 
 export async function GET(_req: Request) {
@@ -13,47 +13,59 @@ export async function GET(_req: Request) {
     if (provider.id !== 'mock') {
       return NextResponse.redirect(new URL('/dashboard?payment=failed', getEnv().APP_URL));
     }
-    return ok({ ok: true });
+    return NextResponse.redirect(new URL('/dashboard?payment=success', getEnv().APP_URL));
   } catch (e) {
     return handleError(e);
   }
 }
 
+/**
+ * ZarinPal gateway return. Provider verification (verify.json against the
+ * stored amount) happens HERE, before settlement; credits/plan/amount granted
+ * come exclusively from the internal payment row via settlePayment's atomic
+ * latch, so repeated or concurrent gateway redirects can never double-grant.
+ */
 export async function POST(req: Request) {
   try {
     const url = new URL(req.url);
     const authority = url.searchParams.get('Authority') ?? url.searchParams.get('authority');
     const status = url.searchParams.get('Status') ?? 'OK';
-    const userId = url.searchParams.get('user');
-    const plan = url.searchParams.get('plan');
-    if (!authority || !userId || !plan) return fail('generic', 400);
+    if (!authority) return NextResponse.redirect(new URL('/dashboard?payment=failed', getEnv().APP_URL));
+    if (status !== 'OK') {
+      return NextResponse.redirect(new URL('/dashboard?payment=failed', getEnv().APP_URL));
+    }
 
     const [tx] = await db
       .select()
       .from(schema.paymentTransactions)
       .where(eq(schema.paymentTransactions.providerAuthority, authority))
       .limit(1);
-    if (!tx) return fail('NOT_FOUND', 404);
-    if (status !== 'OK') throw new AppError('PROCESSING_FAILED', 'payment not ok', 400);
+    if (!tx) return NextResponse.redirect(new URL('/dashboard?payment=failed', getEnv().APP_URL));
 
     const provider = getPaymentProvider();
+    if (tx.provider !== provider.id) {
+      throw new AppError('PROVIDER_MISMATCH', 'payment belongs to another provider', 409);
+    }
     const verify = await provider.verifyPayment(authority, tx.amountToman);
-    if (!verify.verified) throw new AppError('PROCESSING_FAILED', verify.message, 400);
+    if (!verify.verified) {
+      return NextResponse.redirect(new URL('/dashboard?payment=failed', getEnv().APP_URL));
+    }
 
-    await db
-      .update(schema.paymentTransactions)
-      .set({ status: 'verified', providerRefId: verify.refId, verifiedAt: new Date() })
-      .where(eq(schema.paymentTransactions.id, tx.id));
-
-    const planCredits = tx.credits;
-    await db
-      .update(schema.users)
-      .set({ credits: sql`${schema.users.credits} + ${planCredits}`, plan: tx.plan })
-      .where(eq(schema.users.id, tx.userId));
-    await recordCreditTransaction(tx.userId, planCredits, 'purchase', null);
+    await settlePayment({
+      paymentId: tx.id,
+      source: 'zarinpal',
+      providerChargeId: verify.refId ?? authority,
+      providerRefId: verify.refId,
+      settledVia: 'callback',
+    });
 
     return NextResponse.redirect(new URL('/dashboard?payment=success', getEnv().APP_URL));
   } catch (e) {
+    if (e instanceof AppError && (e.code === 'ALREADY_SETTLED_DUP' || e.code === 'CHARGE_ID_CONFLICT')) {
+      // settlePayment already classified the outcome: duplicate → benign,
+      // conflicting ref id → do not grant; both redirect to the dashboard.
+      return NextResponse.redirect(new URL('/dashboard?payment=success', getEnv().APP_URL));
+    }
     return handleError(e);
   }
 }
