@@ -1,6 +1,5 @@
 'use client';
 
-import * as React from 'react';
 import { useState } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
 import { Link } from '@/i18n/routing';
@@ -28,14 +27,14 @@ export function ResultView({ job }: { job: JobDto }) {
         />
       ) : job.outputUrl ? (
         <div className="overflow-hidden rounded-xl border border-border bg-black">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
+          { }
           <video src={job.outputUrl} controls className="w-full" />
         </div>
       ) : null}
 
       <div className="flex flex-wrap gap-2">
         <Button asChild>
-          {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
+          { }
           <a href={job.outputUrl ?? '#'} download>
             <Download className="h-4 w-4" />
             {isImage ? t('downloadImage') : t('downloadVideo')}

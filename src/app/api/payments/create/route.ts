@@ -39,7 +39,7 @@ export async function POST(req: Request) {
     const provider = ((): ReturnType<typeof getPaymentProvider> => {
       if (requested === 'bale') return bale;
       if (requested === 'zarinpal') {
-        // eslint-disable-next-line @typescript-eslint/no-require-imports
+         
         return getPaymentProvider().id === 'bale' && !env.ZARINPAL_MERCHANT_ID ? bale : getPaymentProvider();
       }
       return getPaymentProvider();
