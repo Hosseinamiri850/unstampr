@@ -1,8 +1,8 @@
 {
   "meta": {
-    "title": "Pakino | AI Watermark Removal",
+    "title": "Unstampr | AI Watermark Removal",
     "description": "Fast, automatic removal of AI watermarks from images and videos.",
-    "ogTitle": "Pakino | AI Watermark Removal",
+    "ogTitle": "Unstampr | AI Watermark Removal",
     "ogDescription": "Remove watermarks from your AI-generated images and videos with automatic processing."
   },
   "nav": {
@@ -67,7 +67,7 @@
     "CANCELLED": "Processing cancelled."
   },
   "features": {
-    "title": "Why Pakino?",
+    "title": "Why Unstampr?",
     "auto": "Automatic processing",
     "autoDesc": "Detect and remove watermarks without manual setup.",
     "imageVideo": "Image and video support",
@@ -100,7 +100,7 @@
     "title": "Before and after",
     "before": "Before",
     "after": "After",
-    "subtitle": "Result processed with Pakino"
+    "subtitle": "Result processed with Unstampr"
   },
   "donate": {
     "title": "Support this project",
@@ -130,7 +130,7 @@
     "baleNotLinked": "Connect your Bale account first to pay with Bale.",
     "connectBale": "Connect Bale account",
     "openBaleToLink": "Open Bale and send the code",
-    "linkCodeHint": "This code is single-use. In Bale, send /start with this code to the Pakino bot.",
+    "linkCodeHint": "This code is single-use. In Bale, send /start with this code to the Unstampr bot.",
     "baleInvoiceSent": "Invoice sent to your Bale app",
     "baleInvoiceSentHint": "Open the Bale app and pay the invoice. Credits are added automatically after payment."
   },
@@ -174,7 +174,7 @@
     "typeVideo": "Video"
   },
   "auth": {
-    "loginTitle": "Log in to Pakino",
+    "loginTitle": "Log in to Unstampr",
     "loginSubtitle": "Access your account",
     "registerTitle": "Create account",
     "registerSubtitle": "Get started now",
@@ -220,7 +220,7 @@
   },
   "legal": {
     "responsibleUse": "Responsible use",
-    "responsibleUseNotice": "Pakino is designed to remove watermarks from AI-generated content and assumes you own the content or have permission to modify it. This service is not for bypassing commercial or paid stock licensing.",
+    "responsibleUseNotice": "Unstampr is designed to remove watermarks from AI-generated content and assumes you own the content or have permission to modify it. This service is not for bypassing commercial or paid stock licensing.",
     "terms": "Terms",
     "privacy": "Privacy"
   },

@@ -49,7 +49,7 @@ export function Footer() {
           </div>
         </div>
         <div className="mt-10 flex flex-col items-center justify-between gap-3 border-t border-border pt-6 text-xs text-muted-foreground sm:flex-row">
-          <span>© {year} Pakino</span>
+          <span>© {year} Unstampr</span>
           <DonationLinks compact />
           <span>{t('rights')}</span>
         </div>

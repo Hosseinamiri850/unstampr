@@ -11,7 +11,7 @@ import type {
 } from './types';
 
 /** 1 Toman = 10 Rial (Iranian standard). Sole conversion point for Bale —
- * internal Pakino pricing stays Toman; IRR exists only here. */
+ * internal Unstampr pricing stays Toman; IRR exists only here. */
 export function tomanToRial(toman: number): number {
   return toman * 10;
 }

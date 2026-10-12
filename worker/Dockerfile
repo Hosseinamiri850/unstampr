@@ -1,4 +1,4 @@
-# Pakino Python worker image — Python + FFmpeg + pinned requirements.
+# Unstampr Python worker image — Python + FFmpeg + pinned requirements.
 # Build: docker build -f worker/Dockerfile -t pakino-worker .
 
 FROM python:3.13-slim

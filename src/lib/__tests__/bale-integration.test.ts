@@ -132,7 +132,7 @@ suite('Bale integration (real PostgreSQL)', () => {
       expect(await consumeLinkCode(code, '333', '333')).toMatchObject({ ok: false, reason: 'EXPIRED_CODE' });
     });
 
-    it('blocks one bale chat on two pakino users; allows relink rotation', async () => {
+    it('blocks one bale chat on two app users; allows relink rotation', async () => {
       const u1 = await seedUser();
       const u2 = await seedUser();
       const { code: c1 } = await createLinkCode(u1, 900);

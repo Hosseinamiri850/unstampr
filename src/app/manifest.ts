@@ -4,9 +4,9 @@ import { getEnv } from '@/lib/env';
 export default function manifest(): MetadataRoute.Manifest {
   const base = getEnv().APP_URL;
   return {
-    name: 'پاکینو | حذف واترمارک',
-    short_name: 'پاکینو',
-    description: 'حذف سریع و خودکار واترمارک تصاویر و ویدیوهای تولیدشده با هوش مصنوعی.',
+    name: 'Unstampr | AI Watermark Removal',
+    short_name: 'Unstampr',
+    description: 'Remove AI watermarks from images and videos — fast, automatic, free.',
     start_url: `${base}/fa`,
     scope: `${base}/`,
     display: 'standalone',

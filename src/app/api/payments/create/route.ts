@@ -72,7 +72,7 @@ export async function POST(req: Request) {
         await bale.createPayment({
           amountToman: plan.priceToman,
           amountIrr: plan.priceToman * 10,
-          description: `Pakino ${plan.id}`,
+          description: `Unstampr ${plan.id}`,
           callbackUrl: '',
           userIdentifier: link.chatId,
           payload,
@@ -92,7 +92,7 @@ export async function POST(req: Request) {
     // ZarinPal / mock (existing behavior preserved).
     const result = await provider.createPayment({
       amountToman: plan.priceToman,
-      description: `Pakino ${plan.id}`,
+      description: `Unstampr ${plan.id}`,
       callbackUrl: `${env.ZARINPAL_CALLBACK_URL}?user=${session.userId}&plan=${plan.id}`,
       userIdentifier: session.userId,
     });

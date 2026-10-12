@@ -24,7 +24,7 @@ export default async function HomePage({ params }: Props) {
           __html: JSON.stringify({
             '@context': 'https://schema.org',
             '@type': 'SoftwareApplication',
-            name: 'Pakino',
+            name: 'Unstampr',
             applicationCategory: 'MultimediaApplication',
             operatingSystem: 'Web',
             inLanguage: ['fa', 'en'],

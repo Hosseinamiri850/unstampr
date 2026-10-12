@@ -1,4 +1,4 @@
-"""Pakino processing worker. Consumes Redis jobs, processes media with
+"""Unstampr processing worker. Consumes Redis jobs, processes media with
 remove-ai-watermarks + FFmpeg, uploads results to S3, updates PostgreSQL.
 
 Reliability model (docs/JOB_RELIABILITY_PLAN.md):
@@ -309,7 +309,7 @@ def payment_reconcile_pass(settings) -> None:
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Pakino worker")
+    parser = argparse.ArgumentParser(description="Unstampr worker")
     parser.add_argument("--once", action="store_true", help="process one job then exit")
     args = parser.parse_args()
 

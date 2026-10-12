@@ -23,7 +23,7 @@ supply them.
 
 | Column / concept | Bale source | Notes |
 |---|---|---|
-| `payload` | Pakino-generated 160-bit random hex, echoed as `invoice_payload` | correlation only, never auth |
+| `payload` | Unstampr-generated 160-bit random hex, echoed as `invoice_payload` | correlation only, never auth |
 | `provider_charge_id` | `PreCheckoutQuery.id` ≡ `SuccessfulPayment.telegram_payment_charge_id` | canonical tx id; key for `inquireTransaction`; UNIQUE index |
 | `provider_wallet_tracking` | `provider_payment_charge_id` | user-visible receipt number; never a DB key |
 | `provider_invoice_id` | `createInvoiceLink` result | audit only (unused in web checkout) |
@@ -32,10 +32,10 @@ supply them.
 
 ## Flow
 
-1. **Link** — user asks Pakino for a one-time code (`POST /api/payments/bale/link`).
+1. **Link** — user asks Unstampr for a one-time code (`POST /api/payments/bale/link`).
    Code = 160-bit random, stored SHA-256-hashed, single-use, 15-min TTL.
    User sends `/start <code>` to the bot → webhook links `bale_links(user_id,
-   bale_chat_id, bale_user_id)`. One Bale chat ↔ one Pakino user (unique indexes
+   bale_chat_id, bale_user_id)`. One Bale chat ↔ one Unstampr user (unique indexes
    both directions). Relinking rotates the user's binding.
 2. **Create** — `POST /api/payments/create {plan, provider:'bale'}`: requires a
    link, inserts the payment row FIRST (pending, payload, `payer_chat_id`,

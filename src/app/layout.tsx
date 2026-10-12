@@ -2,28 +2,28 @@ import type { ReactNode } from 'react';
 import './globals.css';
 
 export const metadata = {
-  metadataBase: new URL('https://pakino.app'),
+  metadataBase: new URL('https://unstampr.com'),
   title: {
-    default: 'Pakino | AI Watermark Removal',
-    template: '%s | Pakino',
+    default: 'Unstampr | AI Watermark Removal',
+    template: '%s | Unstampr',
   },
-  description: 'Fast automatic AI watermark removal for images and videos.',
-  applicationName: 'Pakino',
+  description: 'Remove AI watermarks from images and videos — fast, automatic, free.',
+  applicationName: 'Unstampr',
   manifest: '/manifest.webmanifest',
   appleWebApp: {
     capable: true,
     statusBarStyle: 'black-translucent',
-    title: 'Pakino',
+    title: 'Unstampr',
   },
   formatDetection: { telephone: false },
   alternates: { canonical: '/' },
   openGraph: {
     type: 'website',
-    siteName: 'Pakino',
-    title: 'Pakino | AI Watermark Removal',
-    description: 'Fast automatic AI watermark removal for images and videos.',
+    siteName: 'Unstampr',
+    title: 'Unstampr | AI Watermark Removal',
+    description: 'Remove AI watermarks from images and videos — fast, automatic, free.',
   },
-  twitter: { card: 'summary_large_image', title: 'Pakino', description: 'AI watermark removal' },
+  twitter: { card: 'summary_large_image', title: 'Unstampr', description: 'AI watermark removal' },
 };
 
 export const viewport = {

@@ -166,18 +166,18 @@ export async function handleSuccessfulPayment(event: BaleSuccessfulPayment, mess
 
 export async function handleStartCommand(msg: { chatId: string; fromId: string; code: string; username?: string }): Promise<WebhookOutcome> {
   if (!msg.code) {
-    await bale.sendMessage?.(msg.chatId, 'برای اتصال حساب، از داشبورد پاکینو کد اتصال بگیرید و همین‌جا بفرستید: /start CODE');
+    await bale.sendMessage?.(msg.chatId, 'برای اتصال حساب، از داشبورد Unstampr کد اتصال بگیرید و همین‌جا بفرستید: /start CODE');
     return { handled: true, note: 'start without code' };
   }
   const result = await consumeLinkCode(msg.code, msg.chatId, msg.fromId, msg.username);
   if (result.ok) {
-    await bale.sendMessage?.(msg.chatId, 'حساب شما با موفقیت به پاکینو متصل شد. حالا می‌توانید از داشبورد خرید کنید.');
+    await bale.sendMessage?.(msg.chatId, 'حساب شما با موفقیت به Unstampr متصل شد. حالا می‌توانید از داشبورد خرید کنید.');
     return { handled: true, note: `linked user=${result.userId}${result.relinked ? ' (relinked)' : ''}` };
   }
   const messages: Record<string, string> = {
-    INVALID_CODE: 'کد اتصال نامعتبر است. از داشبورد پاکینو کد جدید بگیرید.',
-    EXPIRED_CODE: 'کد اتصال منقضی شده است. از داشبورد پاکینو کد جدید بگیرید.',
-    CHAT_ALREADY_LINKED: 'این حساب بله قبلاً به یک کاربر پاکینو متصل است.',
+    INVALID_CODE: 'کد اتصال نامعتبر است. از داشبورد Unstampr کد جدید بگیرید.',
+    EXPIRED_CODE: 'کد اتصال منقضی شده است. از داشبورد Unstampr کد جدید بگیرید.',
+    CHAT_ALREADY_LINKED: 'این حساب بله قبلاً به یک کاربر Unstampr متصل است.',
     CODE_BOUND_TO_OTHER_USER: 'کد اتصال نامعتبر است.',
   };
   await bale.sendMessage?.(msg.chatId, messages[result.reason] ?? messages.INVALID_CODE!);

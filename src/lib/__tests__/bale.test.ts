@@ -231,7 +231,7 @@ describe('bale provider fetch behavior', () => {
     await bale.createPayment({
       amountToman: 99000,
       amountIrr: 990000,
-      description: 'Pakino mvp',
+      description: 'Unstampr mvp',
       callbackUrl: '',
       userIdentifier: '555',
       payload: 'tok',
