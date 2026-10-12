@@ -7,6 +7,8 @@ import { getEnv } from '@/lib/env';
 import { mapJob } from '@/lib/jobs-dto';
 import { AppError } from '@/lib/types';
 import { ok, fail, handleError } from '@/lib/api/http';
+import { checkDailyQuota } from '@/lib/api/quota';
+import { NextResponse } from 'next/server';
 import { z } from 'zod';
 
 export async function POST(req: Request) {
@@ -20,6 +22,18 @@ export async function POST(req: Request) {
     const [job] = await db.select().from(schema.jobs).where(eq(schema.jobs.id, parsed.data.jobId)).limit(1);
     if (!job || job.userId !== session.userId) throw new AppError('NOT_FOUND', undefined, 404);
 
+    // v1 free model: PAYMENTS_ENABLED=false → daily quota instead of credit
+    // deduction. The credit path below stays intact for v2 (shared plans).
+    if (!getEnv().PAYMENTS_ENABLED) {
+      const quota = await checkDailyQuota(session.userId, getEnv().FREE_DAILY_JOBS);
+      if (!quota.ok) {
+        return NextResponse.json(
+          { error: 'DAILY_QUOTA_EXCEEDED', used: quota.used, limit: getEnv().FREE_DAILY_JOBS, resetAt: quota.resetAt.toISOString() },
+          { status: 429 },
+        );
+      }
+    }
+
     // Video billing: reserve for the maximum allowed duration up front; the worker
     // settles to the actual ffprobe duration and refunds the difference (docs/billing.md).
     const reserved = estimateCredits(job.type, getEnv().MAX_VIDEO_DURATION);
@@ -30,7 +44,13 @@ export async function POST(req: Request) {
     const claimed = await db.transaction(async (tx) => {
       const rows = await tx
         .update(schema.jobs)
-        .set({ status: 'ANALYZING', progress: 5, startedAt: new Date(), creditsUsed: reserved })
+        .set({
+          status: 'ANALYZING',
+          progress: 5,
+          startedAt: new Date(),
+          // v1 free model: no charge; v2 sets creditsUsed = reserved.
+          creditsUsed: getEnv().PAYMENTS_ENABLED ? reserved : 0,
+        })
         .where(and(eq(schema.jobs.id, job.id), eq(schema.jobs.status, 'UPLOADING')))
         .returning({ id: schema.jobs.id });
       if (rows.length === 0) return [];
@@ -44,7 +64,11 @@ export async function POST(req: Request) {
     if (claimed.length === 0) return ok({ jobId: job.id });
 
     try {
-      await deductCredits(session.userId, reserved, job.id, 'job_start');
+      // v2 (PAYMENTS_ENABLED=true): credit deduction. v1 skips this — quota is
+      // the limiter above; credits stay on the account untouched.
+      if (getEnv().PAYMENTS_ENABLED) {
+        await deductCredits(session.userId, reserved, job.id, 'job_start');
+      }
     } catch (e) {
       // Atomic deduction failed (e.g. INSUFFICIENT_CREDITS): release the claim so
       // the user can retry after topping up. The deduction transaction rolled

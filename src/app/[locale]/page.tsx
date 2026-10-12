@@ -1,4 +1,5 @@
 import { getTranslations, setRequestLocale } from 'next-intl/server';
+import { getEnv } from '@/lib/env';
 import { Hero } from '@/components/landing/hero';
 import { Features } from '@/components/landing/features';
 import { HowItWorks } from '@/components/landing/how-it-works';
@@ -36,7 +37,7 @@ export default async function HomePage({ params }: Props) {
       <HowItWorks />
       <Providers />
       <BeforeAfter />
-      <PricingPreview />
+      {getEnv().PAYMENTS_ENABLED && <PricingPreview />}
       <PrivacyBanner />
       <Faq />
       <FinalCta />

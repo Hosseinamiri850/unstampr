@@ -21,6 +21,7 @@ function newPayload(): string {
 
 export async function POST(req: Request) {
   try {
+    if (!getEnv().PAYMENTS_ENABLED) throw new AppError('NOT_FOUND', undefined, 404);
     const session = await getSession();
     if (!session) throw new AppError('UNAUTHORIZED', undefined, 401);
     const parsed = body.safeParse(await req.json().catch(() => ({})));

@@ -1,3 +1,4 @@
+// v1: inactive (free-only launch). Activates with PAYMENTS_ENABLED=true in v2 — see docs/billing.md.
 import { getEnv } from '@/lib/env';
 import type { CreatePaymentInput, CreatePaymentResult, PaymentProvider, VerifyPaymentResult } from './types';
 

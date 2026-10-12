@@ -1,3 +1,6 @@
+// v1: payment providers are INACTIVE — the launch is free-only (daily quota).
+// This code is complete and tested; it activates with PAYMENTS_ENABLED=true in v2.
+// See docs/billing.md ("v1 status — payments deferred").
 import { getEnv } from '@/lib/env';
 import { zarinpal } from './zarinpal';
 import { mockPayment } from './mock';

@@ -1,6 +1,9 @@
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/routing';
 import { Logo } from './logo';
+import { DonationLinks } from './donation-links';
+
+const paymentsEnabled = process.env.NEXT_PUBLIC_PAYMENTS_ENABLED === 'true';
 
 export function Footer() {
   const t = useTranslations('footer');
@@ -22,9 +25,11 @@ export function Footer() {
               <Link href="/remove" className="text-sm text-muted-foreground hover:text-foreground">
                 {nav('remove')}
               </Link>
-              <Link href="/pricing" className="text-sm text-muted-foreground hover:text-foreground">
-                {nav('pricing')}
-              </Link>
+              {paymentsEnabled && (
+                <Link href="/pricing" className="text-sm text-muted-foreground hover:text-foreground">
+                  {nav('pricing')}
+                </Link>
+              )}
             </div>
             <div className="flex flex-col gap-2">
               <span className="text-sm font-semibold">{t('resources')}</span>
@@ -44,7 +49,8 @@ export function Footer() {
           </div>
         </div>
         <div className="mt-10 flex flex-col items-center justify-between gap-3 border-t border-border pt-6 text-xs text-muted-foreground sm:flex-row">
-          <span>© {year} پاکینو</span>
+          <span>© {year} Pakino</span>
+          <DonationLinks compact />
           <span>{t('rights')}</span>
         </div>
       </div>

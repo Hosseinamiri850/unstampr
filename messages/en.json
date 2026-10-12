@@ -102,6 +102,10 @@
     "after": "After",
     "subtitle": "Result processed with Pakino"
   },
+  "donate": {
+    "title": "Support this project",
+    "desc": "Everything here is free. If it helps you, consider supporting development."
+  },
   "pricing": {
     "title": "Pricing",
     "subtitle": "Choose the plan that fits you",
@@ -149,8 +153,10 @@
   "dashboard": {
     "title": "Dashboard",
     "remainingCredits": "Remaining credits",
+    "todayUsage": "used today",
     "of": "of",
     "currentPlan": "Current plan",
+    "dailyQuota": "Today's quota",
     "totalProcessed": "Files processed",
     "recentJobs": "Recent jobs",
     "noJobs": "No files processed yet",
@@ -195,6 +201,7 @@
     "UNSUPPORTED_WATERMARK": "This watermark type is not supported",
     "PROCESSING_FAILED": "Processing failed",
     "INSUFFICIENT_CREDITS": "You do not have enough credits",
+    "DAILY_QUOTA_EXCEEDED": "You've used today's free quota. Come back tomorrow!",
     "RATE_LIMITED": "Too many requests. Please slow down.",
     "STORAGE_ERROR": "File storage error",
     "WORKER_TIMEOUT": "Processing took too long",

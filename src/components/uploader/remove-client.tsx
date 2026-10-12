@@ -114,18 +114,23 @@ export function RemoveClient({ maxImage, maxVideo }: { maxImage: number; maxVide
       });
 
       // 3. confirm -> job enqueued
-      await fetch('/api/jobs', {
+      const confirmRes = await fetch('/api/jobs', {
         method: 'POST',
         headers: { 'content-type': 'application/json' },
         body: JSON.stringify({ jobId }),
         signal: controller.signal,
       });
+      if (!confirmRes.ok) {
+        const body = (await confirmRes.json().catch(() => ({}))) as { error?: string };
+        if (body.error === 'DAILY_QUOTA_EXCEEDED') throw new Error('DAILY_QUOTA_EXCEEDED');
+        throw new Error('confirm failed');
+      }
 
       setProgress(100);
       // navigate to processing status page
       router.push(`/dashboard?job=${jobId}`);
-    } catch {
-      setError(terr('PROCESSING_FAILED'));
+    } catch (e) {
+      setError(e instanceof Error && e.message === 'DAILY_QUOTA_EXCEEDED' ? terr('DAILY_QUOTA_EXCEEDED') : terr('PROCESSING_FAILED'));
       setState('selected');
     }
   };

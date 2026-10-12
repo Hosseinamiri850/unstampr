@@ -15,6 +15,7 @@ services:
     environment:
       NODE_ENV: production
       NEXT_PUBLIC_APP_URL: ${NEXT_PUBLIC_APP_URL:-http://localhost:3000}
+      NEXT_PUBLIC_FREE_CREDITS: ${ANON_FREE_CREDITS:-50}
       DATABASE_URL: ${DATABASE_URL:-postgres://pakino:pakino@postgres:5432/pakino}
       REDIS_URL: ${REDIS_URL:-redis://redis:6379}
       S3_ENDPOINT: ${S3_ENDPOINT:-http://minio:9000}
@@ -33,6 +34,8 @@ services:
       BALE_INVOICE_TTL_SEC: ${BALE_INVOICE_TTL_SEC:-1800}
       BALE_LINK_CODE_TTL_SEC: ${BALE_LINK_CODE_TTL_SEC:-900}
       PAYMENT_DEFAULT_PROVIDER: ${PAYMENT_DEFAULT_PROVIDER:-}
+      PAYMENTS_ENABLED: ${PAYMENTS_ENABLED:-false}
+      NEXT_PUBLIC_PAYMENTS_ENABLED: ${PAYMENTS_ENABLED:-false}
       RECONCILE_TOKEN: ${RECONCILE_TOKEN:-}
     ports:
       - "${WEB_PORT:-3000}:3000"

@@ -8,10 +8,14 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
 import { Skeleton } from '@/components/ui/skeleton';
 import { JobTracker } from '@/components/processing/job-tracker';
+import { DonationLinks } from '@/components/layout/donation-links';
 import { formatNumber } from '@/lib/utils';
 import type { JobStatus, WatermarkInfo } from '@/lib/types';
 
-type Account = { credits: number; plan: string; totalProcessed: number };
+type Account = { credits: number; plan: string; totalProcessed: number; quota?: { used: number; limit: number } };
+
+const freeCredits = Number(process.env.NEXT_PUBLIC_FREE_CREDITS ?? '50');
+const paymentsEnabled = process.env.NEXT_PUBLIC_PAYMENTS_ENABLED === 'true';
 type RecentJob = {
   id: string;
   type: 'image' | 'video';
@@ -54,12 +58,25 @@ export function DashboardClient({ userId: _userId, focusJobId }: { userId: strin
               <Skeleton className="h-8 w-24" />
             ) : (
               <>
-                <div className="text-3xl font-semibold">{formatNumber(account.credits, locale)}</div>
+                <div className="text-3xl font-semibold">
+                  {formatNumber(paymentsEnabled ? account.credits : (account.quota?.limit ?? freeCredits) - (account.quota?.used ?? 0), locale)}
+                </div>
                 <div className="mt-2">
-                  <Progress value={Math.min(100, (account.credits / 1000) * 100)} />
-                  <p className="mt-1 text-xs text-muted-foreground">
-                    {t('of')} {formatNumber(1000, locale)} {t('currentPlan').includes('طرح') ? '' : ''}
-                  </p>
+                  {paymentsEnabled ? (
+                    <>
+                      <Progress value={Math.min(100, (account.credits / freeCredits) * 100)} />
+                      <p className="mt-1 text-xs text-muted-foreground">
+                        {t('of')} {formatNumber(freeCredits, locale)}
+                      </p>
+                    </>
+                  ) : (
+                    <>
+                      <Progress value={Math.min(100, ((account.quota?.used ?? 0) / Math.max(1, account.quota?.limit ?? freeCredits)) * 100)} />
+                      <p className="mt-1 text-xs text-muted-foreground">
+                        {formatNumber(account.quota?.used ?? 0, locale)} {t('of')} {formatNumber(account.quota?.limit ?? freeCredits, locale)} {t('todayUsage')}
+                      </p>
+                    </>
+                  )}
                 </div>
               </>
             )}
@@ -68,10 +85,21 @@ export function DashboardClient({ userId: _userId, focusJobId }: { userId: strin
 
         <Card>
           <CardHeader>
-            <CardTitle className="text-sm font-medium text-muted-foreground">{t('currentPlan')}</CardTitle>
+            <CardTitle className="text-sm font-medium text-muted-foreground">
+              {paymentsEnabled ? t('currentPlan') : t('dailyQuota')}
+            </CardTitle>
           </CardHeader>
           <CardContent>
-            {loading || !account ? <Skeleton className="h-8 w-20" /> : <div className="text-2xl font-semibold">{account.plan}</div>}
+            {loading || !account ? (
+              <Skeleton className="h-8 w-20" />
+            ) : paymentsEnabled ? (
+              <div className="text-2xl font-semibold">{account.plan}</div>
+            ) : (
+              <div className="text-2xl font-semibold">
+                {formatNumber(Math.max(0, (account.quota?.limit ?? 0) - (account.quota?.used ?? 0)), locale)}
+                <span className="ms-1 text-sm font-normal text-muted-foreground">/ {formatNumber(account.quota?.limit ?? 0, locale)}</span>
+              </div>
+            )}
           </CardContent>
         </Card>
 
@@ -83,6 +111,10 @@ export function DashboardClient({ userId: _userId, focusJobId }: { userId: strin
             {loading || !account ? <Skeleton className="h-8 w-20" /> : <div className="text-2xl font-semibold">{formatNumber(account.totalProcessed, locale)}</div>}
           </CardContent>
         </Card>
+      </div>
+
+      <div className="mt-6">
+        <DonationLinks />
       </div>
 
       <div className="mt-8 flex items-center justify-between">

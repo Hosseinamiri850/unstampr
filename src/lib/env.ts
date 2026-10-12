@@ -21,9 +21,11 @@ export interface AppEnv {
   CREDITS_PER_IMAGE: number;
   CREDITS_PER_VIDEO_10_SECONDS: number;
   ANON_FREE_CREDITS: number;
+  FREE_DAILY_JOBS: number;
   WORKER_CONCURRENCY: number;
   PROCESSING_BACKEND: string;
   QUEUE_NAME: string;
+  PAYMENTS_ENABLED: boolean;
   ZARINPAL_MERCHANT_ID: string;
   ZARINPAL_CALLBACK_URL: string;
   ZARINPAL_SANDBOX: boolean;
@@ -57,9 +59,11 @@ export function getEnv(): AppEnv {
     CREDITS_PER_IMAGE: num('CREDITS_PER_IMAGE', 5),
     CREDITS_PER_VIDEO_10_SECONDS: num('CREDITS_PER_VIDEO_10_SECONDS', 10),
     ANON_FREE_CREDITS: num('ANON_FREE_CREDITS', 50),
+    FREE_DAILY_JOBS: num('FREE_DAILY_JOBS', 5),
     WORKER_CONCURRENCY: num('WORKER_CONCURRENCY', 2),
     PROCESSING_BACKEND: process.env.PROCESSING_BACKEND ?? 'opencv',
     QUEUE_NAME: process.env.QUEUE_NAME ?? 'pakino:jobs',
+    PAYMENTS_ENABLED: process.env.NEXT_PUBLIC_PAYMENTS_ENABLED === 'true',
     ZARINPAL_MERCHANT_ID: process.env.ZARINPAL_MERCHANT_ID ?? '',
     ZARINPAL_CALLBACK_URL: process.env.ZARINPAL_CALLBACK_URL ?? 'http://localhost:3000/api/payments/callback',
     ZARINPAL_SANDBOX: process.env.ZARINPAL_SANDBOX !== 'false',

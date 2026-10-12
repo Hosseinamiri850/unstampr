@@ -9,9 +9,11 @@ import { Logo } from './logo';
 import { LanguageSwitcher } from './language-switcher';
 import { cn } from '@/lib/utils';
 
+const paymentsEnabled = process.env.NEXT_PUBLIC_PAYMENTS_ENABLED === 'true';
+
 const NAV = [
   { key: 'remove', href: '/remove' },
-  { key: 'pricing', href: '/pricing' },
+  ...(paymentsEnabled ? [{ key: 'pricing', href: '/pricing' }] : []),
   { key: 'faq', href: '/faq' },
 ] as const;
 

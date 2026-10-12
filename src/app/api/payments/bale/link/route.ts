@@ -25,6 +25,7 @@ export async function GET() {
 /** Issue a fresh one-time linking code (raw code shown once, never stored raw). */
 export async function POST() {
   try {
+    if (!getEnv().PAYMENTS_ENABLED) throw new AppError('NOT_FOUND', undefined, 404);
     const session = await getSession();
     if (!session) throw new AppError('UNAUTHORIZED', undefined, 401);
     if (!baleConfigured()) return fail('BALE_NOT_CONFIGURED', 400);

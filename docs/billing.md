@@ -1,5 +1,13 @@
 # Billing (credits + plans + ZarinPal)
 
+> **v1 status — payments deferred.** The v1 launch is **free-only** with a daily
+> job quota (`FREE_DAILY_JOBS`, default 5) enforced per account. Every payment
+> module in this doc (`src/lib/payments/*`, ZarinPal, Bale, plans, credit
+> deduction in `POST /api/jobs`) is **fully implemented and kept intact** but
+> **inactive** behind `PAYMENTS_ENABLED=false` (default). To activate for v2:
+> set `PAYMENTS_ENABLED=true` — purchase UI, `/pricing` page and credit
+> deduction switch back on automatically (validated in 2026-09).
+
 ## Plans
 
 Server-side, configurable — **not** hardcoded in client code. Display defaults in
