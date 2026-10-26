@@ -1,0 +1,275 @@
+{
+  "meta": {
+    "title": "Unstampr | Remoção de marca d'água de IA",
+    "description": "Remoção rápida e automática de marcas d'água de IA em imagens e vídeos.",
+    "ogTitle": "Unstampr | Remoção de marca d'água de IA",
+    "ogDescription": "Remova marcas d'água das suas imagens e vídeos gerados por IA com processamento automático."
+  },
+  "nav": {
+    "remove": "Remover marca d'água",
+    "pricing": "Preços",
+    "faq": "FAQ",
+    "login": "Entrar",
+    "startFree": "Começar grátis",
+    "dashboard": "Painel"
+  },
+  "language": {
+    "fa": "فارسی",
+    "en": "English",
+    "switch": "Mudar idioma"
+  },
+  "common": {
+    "comingSoon": "Em breve",
+    "loading": "Carregando...",
+    "cancel": "Cancelar",
+    "delete": "Excluir",
+    "download": "Baixar",
+    "view": "Ver",
+    "retry": "Tentar de novo",
+    "processNew": "Processar novo arquivo",
+    "back": "Voltar",
+    "confirm": "Confirmar",
+    "newFile": "Novo arquivo",
+    "credits": "créditos"
+  },
+  "hero": {
+    "title": "Fique com a foto. Livre-se da marca d'água.",
+    "subtitle": "Arraste uma imagem ou um vídeo e nós removemos a marca d'água automaticamente — sem nada para configurar.",
+    "ctaPrimary": "Começar grátis",
+    "ctaSecondary": "Como funciona",
+    "badge": "Remoção de marca d'água de IA",
+    "trust": "Sem cadastro · Arquivos excluídos após 24h",
+    "demoCaption": "Arraste para ver a marca d'água desaparecer"
+  },
+  "upload": {
+    "idleTitle": "Seu arquivo está pronto?",
+    "idlePrompt": "Solte sua imagem ou vídeo aqui",
+    "idlePrompt2": "ou clique para selecionar um arquivo",
+    "selectFile": "Selecionar arquivo",
+    "dragging": "Solte o arquivo",
+    "startProcess": "Iniciar processamento",
+    "cancelUpload": "Cancelar upload",
+    "removeFile": "Remover arquivo",
+    "uploading": "Enviando...",
+    "unsupported": "Formato de arquivo não suportado",
+    "tooLarge": "O arquivo excede o limite de tamanho",
+    "empty": "Nenhum arquivo selecionado",
+    "supportedImages": "Imagens: PNG, JPG, WEBP",
+    "supportedVideos": "Vídeos: MP4, MOV, WEBM",
+    "maxImage": "Tamanho máximo da imagem",
+    "maxVideo": "Tamanho máximo do vídeo"
+  },
+  "stages": {
+    "UPLOADING": "Enviando...",
+    "ANALYZING": "Analisando o arquivo...",
+    "DETECTING": "Detectando a marca d'água...",
+    "PROCESSING": "Removendo a marca d'água...",
+    "ENCODING": "Preparando o resultado...",
+    "COMPLETED": "Processamento concluído.",
+    "FAILED": "O processamento falhou.",
+    "CANCELLED": "Processamento cancelado."
+  },
+  "features": {
+    "title": "Por que o Unstampr?",
+    "auto": "Processamento automático",
+    "autoDesc": "Detecte e remova marcas d'água sem configuração manual.",
+    "imageVideo": "Suporte a imagem e vídeo",
+    "imageVideoDesc": "Funciona para fotos e vídeos.",
+    "detect": "Detecção de marca d'água",
+    "detectDesc": "Detecção automática do tipo e da posição da marca d'água.",
+    "private": "Processamento privado",
+    "privateDesc": "Os arquivos são excluídos automaticamente após um período definido.",
+    "quality": "Resultado de alta qualidade",
+    "qualityDesc": "Preserva a qualidade original do arquivo após o processamento.",
+    "fast": "Rápido",
+    "fastDesc": "Fila de processamento otimizada para agilizar a entrega."
+  },
+  "howItWorks": {
+    "title": "Como funciona",
+    "step1": "Envie seu arquivo",
+    "step1Desc": "Selecione uma imagem ou um vídeo com marca d'água.",
+    "step2": "Marca d'água detectada",
+    "step2Desc": "O sistema identifica o tipo da marca d'água.",
+    "step3": "Marca d'água removida",
+    "step3Desc": "O processamento automático limpa seu arquivo.",
+    "step4": "Baixar",
+    "step4Desc": "Receba o resultado final."
+  },
+  "providers": {
+    "title": "Ferramentas de IA compatíveis",
+    "subtitle": "São suportadas marcas d'água das seguintes ferramentas"
+  },
+  "beforeAfter": {
+    "title": "Antes e depois",
+    "before": "Antes",
+    "after": "Depois",
+    "subtitle": "Resultado processado com o Unstampr",
+    "dragHint": "Arraste para comparar"
+  },
+  "donate": {
+    "title": "Apoie este projeto",
+    "desc": "Tudo aqui é gratuito. Se isso te ajuda, considere apoiar o desenvolvimento."
+  },
+  "pricing": {
+    "title": "Preços",
+    "subtitle": "Escolha o plano ideal para você",
+    "monthly": "mensal",
+    "credits": "créditos",
+    "mostPopular": "Mais popular",
+    "choose": "Escolher plano",
+    "current": "Plano atual",
+    "perMonth": "por mês",
+    "plans": {
+      "free": "Grátis",
+      "freeDesc": "Para começar e experimentar",
+      "mvp": "MVP",
+      "mvpDesc": "Vídeos mais longos e fila prioritária",
+      "proPlus": "Pro+",
+      "proPlusDesc": "Mais créditos e fila rápida"
+    },
+    "payWithBale": "Pagar com Bale",
+    "processing": "Processando…",
+    "paymentFailed": "O pagamento falhou. Tente novamente.",
+    "baleUnavailable": "Os pagamentos pelo Bale estão indisponíveis.",
+    "baleNotLinked": "Conecte sua conta do Bale primeiro para pagar com o Bale.",
+    "connectBale": "Conectar conta do Bale",
+    "openBaleToLink": "Abra o Bale e envie o código",
+    "linkCodeHint": "Este código é de uso único. No Bale, envie /start com este código para o bot do Unstampr.",
+    "baleInvoiceSent": "Fatura enviada para o seu app do Bale",
+    "baleInvoiceSentHint": "Abra o app do Bale e pague a fatura. Os créditos são adicionados automaticamente após o pagamento.",
+    "toman": "Toman"
+  },
+  "result": {
+    "downloadImage": "Baixar imagem",
+    "downloadVideo": "Baixar vídeo",
+    "originalSize": "Tamanho original",
+    "outputSize": "Tamanho do resultado",
+    "processingTime": "Tempo de processamento",
+    "detectedWatermark": "Marca d'água detectada",
+    "duration": "Duração",
+    "fileSize": "Tamanho do arquivo",
+    "status": "Status",
+    "provider": "Provedor",
+    "confidence": "Confiança",
+    "location": "Localização",
+    "noneDetected": "Nenhuma marca d'água compatível foi detectada.",
+    "noneDetectedDesc": "Seu arquivo não tem marca d'água de ferramentas de IA compatíveis. Você pode tentar outro arquivo."
+  },
+  "dashboard": {
+    "title": "Painel",
+    "remainingCredits": "Créditos restantes",
+    "todayUsage": "usados hoje",
+    "of": "de",
+    "currentPlan": "Plano atual",
+    "dailyQuota": "Cota de hoje",
+    "totalProcessed": "Arquivos processados",
+    "recentJobs": "Processamentos recentes",
+    "noJobs": "Nenhum arquivo processado ainda",
+    "viewAll": "Ver tudo",
+    "startProcessing": "Iniciar processamento",
+    "history": "Histórico",
+    "colFile": "Arquivo",
+    "colType": "Tipo",
+    "colWatermark": "Marca d'água",
+    "colStatus": "Status",
+    "colDate": "Data",
+    "colCredits": "Créditos",
+    "colActions": "Ações",
+    "typeImage": "Imagem",
+    "typeVideo": "Vídeo"
+  },
+  "auth": {
+    "loginTitle": "Entrar no Unstampr",
+    "loginSubtitle": "Acesse sua conta",
+    "registerTitle": "Criar conta",
+    "registerSubtitle": "Comece agora",
+    "email": "E-mail",
+    "password": "Senha",
+    "confirmPassword": "Confirme a senha",
+    "loginSubmit": "Entrar",
+    "registerSubmit": "Criar conta",
+    "noAccount": "Não tem conta?",
+    "haveAccount": "Já tem conta?",
+    "createAccount": "Criar conta",
+    "loginInstead": "Entrar",
+    "logout": "Sair",
+    "invalidCreds": "E-mail ou senha inválidos",
+    "emailExists": "Este e-mail já está cadastrado",
+    "loggedOut": "Você saiu da conta",
+    "welcomeCredits": "Créditos de boas-vindas adicionados"
+  },
+  "errors": {
+    "FILE_TOO_LARGE": "O arquivo excede o limite de tamanho",
+    "UNSUPPORTED_FORMAT": "Formato de arquivo não suportado",
+    "INVALID_VIDEO": "Arquivo de vídeo inválido",
+    "NO_WATERMARK_DETECTED": "Nenhuma marca d'água compatível foi detectada",
+    "UNSUPPORTED_WATERMARK": "Este tipo de marca d'água não é suportado",
+    "PROCESSING_FAILED": "O processamento falhou",
+    "INSUFFICIENT_CREDITS": "Você não tem créditos suficientes",
+    "DAILY_QUOTA_EXCEEDED": "Você usou a cota gratuita de hoje. Volte amanhã!",
+    "RATE_LIMITED": "Muitas solicitações. Vá com calma.",
+    "STORAGE_ERROR": "Erro no armazenamento do arquivo",
+    "WORKER_TIMEOUT": "O processamento demorou demais",
+    "UNAUTHORIZED": "Faça login primeiro",
+    "NOT_FOUND": "Não encontrado",
+    "generic": "Ocorreu um erro. Tente novamente."
+  },
+  "privacy": {
+    "title": "Privacidade",
+    "statement": "Sua privacidade é importante para nós.",
+    "filesUsed": "Os arquivos enviados são usados apenas para o processamento.",
+    "autoDelete": "Os arquivos são excluídos automaticamente após um período definido.",
+    "manualDelete": "Você pode excluir seus arquivos manualmente.",
+    "payment": "As informações de pagamento são tratadas pelo provedor de pagamento.",
+    "retention": "Período de retenção dos arquivos: 24 horas para entrada e saída."
+  },
+  "legal": {
+    "responsibleUse": "Uso responsável",
+    "responsibleUseNotice": "O Unstampr foi criado para remover marcas d'água de conteúdo gerado por IA e presume que você é o dono do conteúdo ou tem permissão para modificá-lo. Este serviço não serve para burlar licenças comerciais ou de bancos de imagens pagos.",
+    "terms": "Termos",
+    "privacy": "Privacidade"
+  },
+  "faq": {
+    "title": "Perguntas frequentes",
+    "items": {
+      "q1": "Quais tipos de marca d'água são suportados?",
+      "a1": "São suportadas marcas d'água de ferramentas de IA como Hailuo, Veo, Kling, Sora, Seedance e Dola.",
+      "q2": "O que acontece com meus arquivos após o processamento?",
+      "a2": "Os arquivos de entrada e de saída são excluídos automaticamente após 24 horas.",
+      "q3": "Preciso me cadastrar para usar?",
+      "a3": "É possível fazer processamentos gratuitos limitados sem cadastro, mas você precisa se cadastrar para ter histórico e mais créditos.",
+      "q4": "Há suporte a vídeo?",
+      "a4": "Sim, vídeos MP4, MOV e WEBM são processados com o áudio preservado.",
+      "q5": "O processamento funciona offline?",
+      "a5": "O processamento acontece nos nossos servidores; o app não processa offline."
+    },
+    "subtitle": "Respostas curtas para as perguntas de sempre."
+  },
+  "finalCta": {
+    "title": "Comece agora",
+    "subtitle": "Processe seu primeiro arquivo — de graça.",
+    "button": "Começar grátis"
+  },
+  "footer": {
+    "product": "Produto",
+    "resources": "Recursos",
+    "legal": "Jurídico",
+    "rights": "Todos os direitos reservados.",
+    "madeFor": "Feito para criadores do mundo todo"
+  },
+  "providersList": {
+    "hailuo": "Hailuo",
+    "veo": "Veo",
+    "kling": "Kling",
+    "sora": "Sora",
+    "seedance": "Seedance",
+    "dola": "Dola"
+  },
+  "workspace": {
+    "title": "Remova uma marca d'água",
+    "subtitle": "Adicione um arquivo e cuidamos do resto — sem nada para configurar.",
+    "step1": "Adicionar arquivo",
+    "step2": "Nós limpamos",
+    "step3": "Baixar"
+  }
+}

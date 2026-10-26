@@ -1,0 +1,275 @@
+{
+  "meta": {
+    "title": "Unstampr | KI-Wasserzeichen entfernen",
+    "description": "Schnelles, automatisches Entfernen von KI-Wasserzeichen aus Bildern und Videos.",
+    "ogTitle": "Unstampr | KI-Wasserzeichen entfernen",
+    "ogDescription": "Entferne Wasserzeichen aus deinen KI-generierten Bildern und Videos – vollautomatisch."
+  },
+  "nav": {
+    "remove": "Wasserzeichen entfernen",
+    "pricing": "Preise",
+    "faq": "FAQ",
+    "login": "Anmelden",
+    "startFree": "Kostenlos starten",
+    "dashboard": "Dashboard"
+  },
+  "language": {
+    "fa": "فارسی",
+    "en": "English",
+    "switch": "Sprache wechseln"
+  },
+  "common": {
+    "comingSoon": "Demnächst",
+    "loading": "Wird geladen...",
+    "cancel": "Abbrechen",
+    "delete": "Löschen",
+    "download": "Herunterladen",
+    "view": "Ansehen",
+    "retry": "Erneut versuchen",
+    "processNew": "Neue Datei verarbeiten",
+    "back": "Zurück",
+    "confirm": "Bestätigen",
+    "newFile": "Neue Datei",
+    "credits": "Credits"
+  },
+  "hero": {
+    "title": "Behalte das Bild. Weg mit dem Wasserzeichen.",
+    "subtitle": "Zieh ein Bild oder Video rein – wir entfernen das Wasserzeichen automatisch. Nichts einzustellen.",
+    "ctaPrimary": "Kostenlos starten",
+    "ctaSecondary": "So funktioniert's",
+    "badge": "KI-Wasserzeichen entfernen",
+    "trust": "Ohne Anmeldung · Dateien nach 24 h gelöscht",
+    "demoCaption": "Ziehen, um das Wasserzeichen verschwinden zu sehen"
+  },
+  "upload": {
+    "idleTitle": "Ist deine Datei bereit?",
+    "idlePrompt": "Zieh dein Bild oder Video hierher",
+    "idlePrompt2": "oder klick, um eine Datei auszuwählen",
+    "selectFile": "Datei auswählen",
+    "dragging": "Datei loslassen",
+    "startProcess": "Verarbeitung starten",
+    "cancelUpload": "Upload abbrechen",
+    "removeFile": "Datei entfernen",
+    "uploading": "Wird hochgeladen...",
+    "unsupported": "Dateiformat nicht unterstützt",
+    "tooLarge": "Datei überschreitet das Größenlimit",
+    "empty": "Keine Datei ausgewählt",
+    "supportedImages": "Bilder: PNG, JPG, WEBP",
+    "supportedVideos": "Videos: MP4, MOV, WEBM",
+    "maxImage": "Max. Bildgröße",
+    "maxVideo": "Max. Videogröße"
+  },
+  "stages": {
+    "UPLOADING": "Wird hochgeladen...",
+    "ANALYZING": "Datei wird analysiert...",
+    "DETECTING": "Wasserzeichen wird erkannt...",
+    "PROCESSING": "Wasserzeichen wird entfernt...",
+    "ENCODING": "Ausgabe wird vorbereitet...",
+    "COMPLETED": "Verarbeitung abgeschlossen.",
+    "FAILED": "Verarbeitung fehlgeschlagen.",
+    "CANCELLED": "Verarbeitung abgebrochen."
+  },
+  "features": {
+    "title": "Warum Unstampr?",
+    "auto": "Automatische Verarbeitung",
+    "autoDesc": "Wasserzeichen erkennen und entfernen – ganz ohne manuelles Einrichten.",
+    "imageVideo": "Bilder und Videos",
+    "imageVideoDesc": "Funktioniert mit Fotos und Videos.",
+    "detect": "Wasserzeichen-Erkennung",
+    "detectDesc": "Erkennt Typ und Position des Wasserzeichens automatisch.",
+    "private": "Private Verarbeitung",
+    "privateDesc": "Dateien werden nach einer festgelegten Zeit automatisch gelöscht.",
+    "quality": "Hohe Qualität",
+    "qualityDesc": "Die Originalqualität deiner Datei bleibt nach der Verarbeitung erhalten.",
+    "fast": "Schnell",
+    "fastDesc": "Warteschlange auf kurze Wartezeiten optimiert."
+  },
+  "howItWorks": {
+    "title": "So funktioniert's",
+    "step1": "Datei hochladen",
+    "step1Desc": "Wähl ein Bild oder Video mit Wasserzeichen aus.",
+    "step2": "Wasserzeichen erkannt",
+    "step2Desc": "Das System erkennt den Typ des Wasserzeichens.",
+    "step3": "Wasserzeichen entfernt",
+    "step3Desc": "Die automatische Verarbeitung bereinigt deine Datei.",
+    "step4": "Herunterladen",
+    "step4Desc": "Hol dir das fertige Ergebnis."
+  },
+  "providers": {
+    "title": "Unterstützte KI-Tools",
+    "subtitle": "Wasserzeichen dieser Tools werden unterstützt"
+  },
+  "beforeAfter": {
+    "title": "Vorher und nachher",
+    "before": "Vorher",
+    "after": "Nachher",
+    "subtitle": "Ergebnis mit Unstampr verarbeitet",
+    "dragHint": "Zum Vergleichen ziehen"
+  },
+  "donate": {
+    "title": "Unterstütze dieses Projekt",
+    "desc": "Hier ist alles kostenlos. Wenn es dir hilft, unterstütz gern die Entwicklung."
+  },
+  "pricing": {
+    "title": "Preise",
+    "subtitle": "Wähl den Plan, der zu dir passt",
+    "monthly": "monatlich",
+    "credits": "Credits",
+    "mostPopular": "Am beliebtesten",
+    "choose": "Plan wählen",
+    "current": "Aktueller Plan",
+    "perMonth": "pro Monat",
+    "plans": {
+      "free": "Kostenlos",
+      "freeDesc": "Zum Einstieg und Ausprobieren",
+      "mvp": "MVP",
+      "mvpDesc": "Längere Videos und Prioritäts-Warteschlange",
+      "proPlus": "Pro+",
+      "proPlusDesc": "Mehr Credits und schnelle Warteschlange"
+    },
+    "payWithBale": "Mit Bale bezahlen",
+    "processing": "Wird verarbeitet…",
+    "paymentFailed": "Zahlung fehlgeschlagen. Bitte versuch es erneut.",
+    "baleUnavailable": "Bale-Zahlungen sind derzeit nicht verfügbar.",
+    "baleNotLinked": "Verbinde zuerst dein Bale-Konto, um mit Bale zu bezahlen.",
+    "connectBale": "Bale-Konto verbinden",
+    "openBaleToLink": "Öffne Bale und sende den Code",
+    "linkCodeHint": "Dieser Code ist nur einmal gültig. Sende ihn in Bale mit /start an den Unstampr-Bot.",
+    "baleInvoiceSent": "Rechnung an deine Bale-App gesendet",
+    "baleInvoiceSentHint": "Öffne die Bale-App und bezahle die Rechnung. Die Credits werden nach der Zahlung automatisch gutgeschrieben.",
+    "toman": "Toman"
+  },
+  "result": {
+    "downloadImage": "Bild herunterladen",
+    "downloadVideo": "Video herunterladen",
+    "originalSize": "Originalgröße",
+    "outputSize": "Ausgabegröße",
+    "processingTime": "Verarbeitungszeit",
+    "detectedWatermark": "Erkanntes Wasserzeichen",
+    "duration": "Dauer",
+    "fileSize": "Dateigröße",
+    "status": "Status",
+    "provider": "Anbieter",
+    "confidence": "Sicherheit",
+    "location": "Position",
+    "noneDetected": "Kein unterstütztes Wasserzeichen gefunden.",
+    "noneDetectedDesc": "Deine Datei hat kein Wasserzeichen von unterstützten KI-Tools. Du kannst eine andere Datei ausprobieren."
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "remainingCredits": "Verbleibende Credits",
+    "todayUsage": "heute verbraucht",
+    "of": "von",
+    "currentPlan": "Aktueller Plan",
+    "dailyQuota": "Tageskontingent",
+    "totalProcessed": "Verarbeitete Dateien",
+    "recentJobs": "Letzte Aufträge",
+    "noJobs": "Noch keine Dateien verarbeitet",
+    "viewAll": "Alle ansehen",
+    "startProcessing": "Verarbeitung starten",
+    "history": "Verlauf",
+    "colFile": "Datei",
+    "colType": "Typ",
+    "colWatermark": "Wasserzeichen",
+    "colStatus": "Status",
+    "colDate": "Datum",
+    "colCredits": "Credits",
+    "colActions": "Aktionen",
+    "typeImage": "Bild",
+    "typeVideo": "Video"
+  },
+  "auth": {
+    "loginTitle": "Bei Unstampr anmelden",
+    "loginSubtitle": "Zugriff auf dein Konto",
+    "registerTitle": "Konto erstellen",
+    "registerSubtitle": "Jetzt loslegen",
+    "email": "E-Mail",
+    "password": "Passwort",
+    "confirmPassword": "Passwort bestätigen",
+    "loginSubmit": "Anmelden",
+    "registerSubmit": "Konto erstellen",
+    "noAccount": "Noch kein Konto?",
+    "haveAccount": "Schon ein Konto?",
+    "createAccount": "Konto erstellen",
+    "loginInstead": "Anmelden",
+    "logout": "Abmelden",
+    "invalidCreds": "E-Mail oder Passwort ist falsch",
+    "emailExists": "Diese E-Mail ist bereits registriert",
+    "loggedOut": "Abgemeldet",
+    "welcomeCredits": "Willkommens-Credits gutgeschrieben"
+  },
+  "errors": {
+    "FILE_TOO_LARGE": "Datei überschreitet das Größenlimit",
+    "UNSUPPORTED_FORMAT": "Dateiformat nicht unterstützt",
+    "INVALID_VIDEO": "Ungültige Videodatei",
+    "NO_WATERMARK_DETECTED": "Kein unterstütztes Wasserzeichen gefunden",
+    "UNSUPPORTED_WATERMARK": "Dieser Wasserzeichen-Typ wird nicht unterstützt",
+    "PROCESSING_FAILED": "Verarbeitung fehlgeschlagen",
+    "INSUFFICIENT_CREDITS": "Du hast nicht genug Credits",
+    "DAILY_QUOTA_EXCEEDED": "Du hast das kostenlose Tageskontingent aufgebraucht. Komm morgen wieder!",
+    "RATE_LIMITED": "Zu viele Anfragen. Bitte etwas langsamer.",
+    "STORAGE_ERROR": "Fehler beim Dateispeicher",
+    "WORKER_TIMEOUT": "Verarbeitung hat zu lange gedauert",
+    "UNAUTHORIZED": "Bitte melde dich zuerst an",
+    "NOT_FOUND": "Nicht gefunden",
+    "generic": "Ein Fehler ist aufgetreten. Bitte versuch es erneut."
+  },
+  "privacy": {
+    "title": "Datenschutz",
+    "statement": "Deine Privatsphäre ist uns wichtig.",
+    "filesUsed": "Hochgeladene Dateien werden nur für die Verarbeitung verwendet.",
+    "autoDelete": "Dateien werden nach einer festgelegten Zeit automatisch gelöscht.",
+    "manualDelete": "Du kannst deine Dateien jederzeit selbst löschen.",
+    "payment": "Zahlungsdaten werden vom Zahlungsanbieter verarbeitet.",
+    "retention": "Aufbewahrungszeit: 24 Stunden für Eingabe und Ausgabe."
+  },
+  "legal": {
+    "responsibleUse": "Verantwortungsvoller Umgang",
+    "responsibleUseNotice": "Unstampr entfernt Wasserzeichen aus KI-generierten Inhalten. Wir gehen davon aus, dass dir die Inhalte gehören oder du die Erlaubnis hast, sie zu bearbeiten. Der Dienst ist nicht dafür gedacht, kommerzielle oder kostenpflichtige Stock-Lizenzen zu umgehen.",
+    "terms": "AGB",
+    "privacy": "Datenschutz"
+  },
+  "faq": {
+    "title": "Häufige Fragen",
+    "items": {
+      "q1": "Welche Wasserzeichen-Typen werden unterstützt?",
+      "a1": "Unterstützt werden Wasserzeichen von KI-Tools wie Hailuo, Veo, Kling, Sora, Seedance und Dola.",
+      "q2": "Was passiert nach der Verarbeitung mit meinen Dateien?",
+      "a2": "Eingabe- und Ausgabedateien werden nach 24 Stunden automatisch gelöscht.",
+      "q3": "Muss ich mich registrieren?",
+      "a3": "Du kannst auch ohne Registrierung kostenlos verarbeiten, aber für Verlauf und mehr Credits brauchst du ein Konto.",
+      "q4": "Werden auch Videos unterstützt?",
+      "a4": "Ja, MP4-, MOV- und WEBM-Videos werden mit Originalton verarbeitet.",
+      "q5": "Funktioniert die Verarbeitung offline?",
+      "a5": "Die Verarbeitung läuft auf unseren Servern – die App funktioniert nicht offline."
+    },
+    "subtitle": "Kurze Antworten auf die üblichen Fragen."
+  },
+  "finalCta": {
+    "title": "Jetzt loslegen",
+    "subtitle": "Verarbeite deine erste Datei – kostenlos.",
+    "button": "Kostenlos starten"
+  },
+  "footer": {
+    "product": "Produkt",
+    "resources": "Ressourcen",
+    "legal": "Rechtliches",
+    "rights": "Alle Rechte vorbehalten.",
+    "madeFor": "Gebaut für Creator weltweit"
+  },
+  "providersList": {
+    "hailuo": "Hailuo",
+    "veo": "Veo",
+    "kling": "Kling",
+    "sora": "Sora",
+    "seedance": "Seedance",
+    "dola": "Dola"
+  },
+  "workspace": {
+    "title": "Wasserzeichen entfernen",
+    "subtitle": "Füg eine Datei hinzu – den Rest übernehmen wir. Nichts einzustellen.",
+    "step1": "Datei hinzufügen",
+    "step2": "Wir bereinigen sie",
+    "step3": "Herunterladen"
+  }
+}

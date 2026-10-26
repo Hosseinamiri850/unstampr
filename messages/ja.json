@@ -1,0 +1,275 @@
+{
+  "meta": {
+    "title": "Unstampr | AIウォーターマーク除去",
+    "description": "画像や動画からAIウォーターマークをすばやく自動で除去します。",
+    "ogTitle": "Unstampr | AIウォーターマーク除去",
+    "ogDescription": "AIで生成した画像や動画から、自動処理でウォーターマークを除去します。"
+  },
+  "nav": {
+    "remove": "ウォーターマークを除去",
+    "pricing": "料金",
+    "faq": "よくある質問",
+    "login": "ログイン",
+    "startFree": "無料で始める",
+    "dashboard": "ダッシュボード"
+  },
+  "language": {
+    "fa": "ペルシア語",
+    "en": "英語",
+    "switch": "言語を切り替える"
+  },
+  "common": {
+    "comingSoon": "近日公開",
+    "loading": "読み込み中...",
+    "cancel": "キャンセル",
+    "delete": "削除",
+    "download": "ダウンロード",
+    "view": "表示",
+    "retry": "再試行",
+    "processNew": "新しいファイルを処理",
+    "back": "戻る",
+    "confirm": "確定",
+    "newFile": "新しいファイル",
+    "credits": "クレジット"
+  },
+  "hero": {
+    "title": "写真はそのまま。ウォーターマークだけ消す。",
+    "subtitle": "画像や動画をドロップするだけで、ウォーターマークを自動で除去します。設定は不要です。",
+    "ctaPrimary": "無料で始める",
+    "ctaSecondary": "使い方",
+    "badge": "AIウォーターマーク除去",
+    "trust": "登録不要 · ファイルは24時間後に削除",
+    "demoCaption": "ドラッグしてウォーターマークが消えるのを確認"
+  },
+  "upload": {
+    "idleTitle": "ファイルの準備はできましたか？",
+    "idlePrompt": "画像または動画をここにドロップ",
+    "idlePrompt2": "またはクリックしてファイルを選択",
+    "selectFile": "ファイルを選択",
+    "dragging": "ファイルをドロップ",
+    "startProcess": "処理を開始",
+    "cancelUpload": "アップロードをキャンセル",
+    "removeFile": "ファイルを削除",
+    "uploading": "アップロード中...",
+    "unsupported": "このファイル形式には対応していません",
+    "tooLarge": "ファイルサイズの上限を超えています",
+    "empty": "ファイルが選択されていません",
+    "supportedImages": "画像: PNG, JPG, WEBP",
+    "supportedVideos": "動画: MP4, MOV, WEBM",
+    "maxImage": "画像の最大サイズ",
+    "maxVideo": "動画の最大サイズ"
+  },
+  "stages": {
+    "UPLOADING": "アップロード中...",
+    "ANALYZING": "ファイルを解析中...",
+    "DETECTING": "ウォーターマークを検出中...",
+    "PROCESSING": "ウォーターマークを除去中...",
+    "ENCODING": "出力を準備中...",
+    "COMPLETED": "処理が完了しました。",
+    "FAILED": "処理に失敗しました。",
+    "CANCELLED": "処理をキャンセルしました。"
+  },
+  "features": {
+    "title": "Unstamprが選ばれる理由",
+    "auto": "自動処理",
+    "autoDesc": "手動での設定なしで、ウォーターマークを検出して除去します。",
+    "imageVideo": "画像・動画に対応",
+    "imageVideoDesc": "写真も動画も処理できます。",
+    "detect": "ウォーターマーク検出",
+    "detectDesc": "ウォーターマークの種類と位置を自動で検出します。",
+    "private": "プライベートな処理",
+    "privateDesc": "ファイルは一定期間後に自動で削除されます。",
+    "quality": "高品質な出力",
+    "qualityDesc": "処理後も元のファイル品質を保ちます。",
+    "fast": "高速",
+    "fastDesc": "すばやく処理できるよう最適化されたキューです。"
+  },
+  "howItWorks": {
+    "title": "使い方",
+    "step1": "ファイルをアップロード",
+    "step1Desc": "ウォーターマーク付きの画像または動画を選択します。",
+    "step2": "ウォーターマークを検出",
+    "step2Desc": "システムがウォーターマークの種類を判別します。",
+    "step3": "ウォーターマークを除去",
+    "step3Desc": "自動処理でファイルをきれいにします。",
+    "step4": "ダウンロード",
+    "step4Desc": "完成したファイルを取得します。"
+  },
+  "providers": {
+    "title": "対応AIツール",
+    "subtitle": "以下のツールのウォーターマークに対応しています"
+  },
+  "beforeAfter": {
+    "title": "ビフォー・アフター",
+    "before": "処理前",
+    "after": "処理後",
+    "subtitle": "Unstamprで処理した結果",
+    "dragHint": "ドラッグして比較"
+  },
+  "donate": {
+    "title": "このプロジェクトを支援",
+    "desc": "ここにあるものはすべて無料です。お役に立てたら、開発の支援をご検討ください。"
+  },
+  "pricing": {
+    "title": "料金",
+    "subtitle": "あなたに合ったプランをお選びください",
+    "monthly": "月額",
+    "credits": "クレジット",
+    "mostPopular": "一番人気",
+    "choose": "プランを選ぶ",
+    "current": "現在のプラン",
+    "perMonth": "月あたり",
+    "plans": {
+      "free": "無料",
+      "freeDesc": "まずは気軽に試したい方に",
+      "mvp": "MVP",
+      "mvpDesc": "長めの動画と優先キュー",
+      "proPlus": "Pro+",
+      "proPlusDesc": "より多くのクレジットと高速キュー"
+    },
+    "payWithBale": "Baleで支払う",
+    "processing": "処理中…",
+    "paymentFailed": "支払いに失敗しました。もう一度お試しください。",
+    "baleUnavailable": "Baleでの支払いは現在ご利用いただけません。",
+    "baleNotLinked": "Baleで支払うには、先にBaleアカウントを連携してください。",
+    "connectBale": "Baleアカウントを連携",
+    "openBaleToLink": "Baleを開いてコードを送信",
+    "linkCodeHint": "このコードは1回限りです。BaleでUnstamprボットにこのコードを付けて /start を送信してください。",
+    "baleInvoiceSent": "請求書をBaleアプリに送信しました",
+    "baleInvoiceSentHint": "Baleアプリを開いて請求書をお支払いください。お支払い後、クレジットは自動で追加されます。",
+    "toman": "トマン"
+  },
+  "result": {
+    "downloadImage": "画像をダウンロード",
+    "downloadVideo": "動画をダウンロード",
+    "originalSize": "元のサイズ",
+    "outputSize": "出力サイズ",
+    "processingTime": "処理時間",
+    "detectedWatermark": "検出されたウォーターマーク",
+    "duration": "再生時間",
+    "fileSize": "ファイルサイズ",
+    "status": "ステータス",
+    "provider": "生成ツール",
+    "confidence": "信頼度",
+    "location": "位置",
+    "noneDetected": "対応するウォーターマークは検出されませんでした。",
+    "noneDetectedDesc": "このファイルには対応AIツールのウォーターマークがありません。別のファイルをお試しください。"
+  },
+  "dashboard": {
+    "title": "ダッシュボード",
+    "remainingCredits": "残りクレジット",
+    "todayUsage": "本日の使用量",
+    "of": "／",
+    "currentPlan": "現在のプラン",
+    "dailyQuota": "本日の上限",
+    "totalProcessed": "処理済みファイル数",
+    "recentJobs": "最近のジョブ",
+    "noJobs": "まだファイルを処理していません",
+    "viewAll": "すべて表示",
+    "startProcessing": "処理を開始",
+    "history": "履歴",
+    "colFile": "ファイル",
+    "colType": "種類",
+    "colWatermark": "ウォーターマーク",
+    "colStatus": "ステータス",
+    "colDate": "日時",
+    "colCredits": "クレジット",
+    "colActions": "操作",
+    "typeImage": "画像",
+    "typeVideo": "動画"
+  },
+  "auth": {
+    "loginTitle": "Unstamprにログイン",
+    "loginSubtitle": "アカウントにアクセス",
+    "registerTitle": "アカウントを作成",
+    "registerSubtitle": "今すぐ始めましょう",
+    "email": "メールアドレス",
+    "password": "パスワード",
+    "confirmPassword": "パスワード（確認）",
+    "loginSubmit": "ログイン",
+    "registerSubmit": "アカウントを作成",
+    "noAccount": "アカウントをお持ちでない方は",
+    "haveAccount": "アカウントをお持ちの方は",
+    "createAccount": "アカウントを作成",
+    "loginInstead": "ログイン",
+    "logout": "ログアウト",
+    "invalidCreds": "メールアドレスまたはパスワードが正しくありません",
+    "emailExists": "このメールアドレスはすでに登録されています",
+    "loggedOut": "ログアウトしました",
+    "welcomeCredits": "ウェルカムクレジットを付与しました"
+  },
+  "errors": {
+    "FILE_TOO_LARGE": "ファイルサイズの上限を超えています",
+    "UNSUPPORTED_FORMAT": "このファイル形式には対応していません",
+    "INVALID_VIDEO": "動画ファイルが正しくありません",
+    "NO_WATERMARK_DETECTED": "対応するウォーターマークは検出されませんでした",
+    "UNSUPPORTED_WATERMARK": "この種類のウォーターマークには対応していません",
+    "PROCESSING_FAILED": "処理に失敗しました",
+    "INSUFFICIENT_CREDITS": "クレジットが不足しています",
+    "DAILY_QUOTA_EXCEEDED": "本日の無料枠を使い切りました。また明日お越しください。",
+    "RATE_LIMITED": "リクエストが多すぎます。しばらく待ってからお試しください。",
+    "STORAGE_ERROR": "ファイルの保存に失敗しました",
+    "WORKER_TIMEOUT": "処理に時間がかかりすぎました",
+    "UNAUTHORIZED": "先にログインしてください",
+    "NOT_FOUND": "見つかりません",
+    "generic": "エラーが発生しました。もう一度お試しください。"
+  },
+  "privacy": {
+    "title": "プライバシー",
+    "statement": "お客様のプライバシーを大切にしています。",
+    "filesUsed": "アップロードされたファイルは処理にのみ使用します。",
+    "autoDelete": "ファイルは一定期間後に自動で削除されます。",
+    "manualDelete": "ファイルはご自身で削除することもできます。",
+    "payment": "決済情報は決済プロバイダーによって処理されます。",
+    "retention": "ファイルの保存期間: 入力・出力ともに24時間です。"
+  },
+  "legal": {
+    "responsibleUse": "適切なご利用について",
+    "responsibleUseNotice": "UnstamprはAI生成コンテンツからウォーターマークを除去するためのサービスで、コンテンツの権利を保有しているか、変更する許可があることを前提としています。商用素材や有料ストックのライセンスを回避する目的ではご利用いただけません。",
+    "terms": "利用規約",
+    "privacy": "プライバシー"
+  },
+  "faq": {
+    "title": "よくある質問",
+    "items": {
+      "q1": "どのウォーターマークに対応していますか？",
+      "a1": "Hailuo、Veo、Kling、Sora、Seedance、DolaなどのAIツールのウォーターマークに対応しています。",
+      "q2": "処理後のファイルはどうなりますか？",
+      "a2": "入力ファイルと出力ファイルは24時間後に自動で削除されます。",
+      "q3": "利用するのに登録は必要ですか？",
+      "a3": "登録なしでも無料の範囲でお試しいただけますが、履歴の保存やクレジットの追加にはアカウント登録が必要です。",
+      "q4": "動画にも対応していますか？",
+      "a4": "はい。MP4、MOV、WEBMの動画を音声を保持したまま処理します。",
+      "q5": "オフラインでも処理できますか？",
+      "a5": "処理はサーバー上で行われるため、アプリはオフラインでは動作しません。"
+    },
+    "subtitle": "よくいただく質問に簡潔にお答えします。"
+  },
+  "finalCta": {
+    "title": "今すぐ始めましょう",
+    "subtitle": "最初のファイルを無料で処理。",
+    "button": "無料で始める"
+  },
+  "footer": {
+    "product": "プロダクト",
+    "resources": "リソース",
+    "legal": "法的情報",
+    "rights": "無断転載を禁じます。",
+    "madeFor": "世界中のクリエイターのために"
+  },
+  "providersList": {
+    "hailuo": "Hailuo",
+    "veo": "Veo",
+    "kling": "Kling",
+    "sora": "Sora",
+    "seedance": "Seedance",
+    "dola": "Dola"
+  },
+  "workspace": {
+    "title": "ウォーターマークを除去",
+    "subtitle": "ファイルを追加するだけで、あとはお任せください。設定は不要です。",
+    "step1": "ファイルを追加",
+    "step2": "自動で除去",
+    "step3": "ダウンロード"
+  }
+}

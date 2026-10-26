@@ -4,7 +4,7 @@ import { notFound } from 'next/navigation';
 import { setRequestLocale, getMessages } from 'next-intl/server';
 import { Inter } from 'next/font/google';
 import localFont from 'next/font/local';
-import { dir, locales, defaultLocale, type Locale } from '@/i18n/config';
+import { dir, locales, defaultLocale, usesArabicScript, type Locale } from '@/i18n/config';
 import { Navbar } from '@/components/layout/navbar';
 import { Footer } from '@/components/layout/footer';
 import { ScrollProgress } from '@/components/motion/scroll-progress';
@@ -44,7 +44,7 @@ export default async function LocaleLayout({ children, params }: Props) {
     <html
       lang={locale}
       dir={direction}
-      className={locale === 'fa' || locale === 'ar' ? `${inter.variable} ${iranYekanX.variable}` : inter.variable}
+      className={usesArabicScript(locale) ? `${inter.variable} ${iranYekanX.variable}` : inter.variable}
       suppressHydrationWarning
     >
       <body className="min-h-dvh bg-background font-sans text-foreground antialiased">

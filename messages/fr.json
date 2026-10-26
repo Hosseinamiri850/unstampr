@@ -1,0 +1,275 @@
+{
+  "meta": {
+    "title": "Unstampr | Suppression de filigranes IA",
+    "description": "Suppression rapide et automatique des filigranes IA sur les images et les vidéos.",
+    "ogTitle": "Unstampr | Suppression de filigranes IA",
+    "ogDescription": "Supprimez les filigranes de vos images et vidéos générées par IA grâce à un traitement automatique."
+  },
+  "nav": {
+    "remove": "Supprimer le filigrane",
+    "pricing": "Tarifs",
+    "faq": "FAQ",
+    "login": "Connexion",
+    "startFree": "Commencer gratuitement",
+    "dashboard": "Tableau de bord"
+  },
+  "language": {
+    "fa": "فارسی",
+    "en": "English",
+    "switch": "Changer de langue"
+  },
+  "common": {
+    "comingSoon": "Bientôt disponible",
+    "loading": "Chargement…",
+    "cancel": "Annuler",
+    "delete": "Supprimer",
+    "download": "Télécharger",
+    "view": "Voir",
+    "retry": "Réessayer",
+    "processNew": "Traiter un nouveau fichier",
+    "back": "Retour",
+    "confirm": "Confirmer",
+    "newFile": "Nouveau fichier",
+    "credits": "crédits"
+  },
+  "hero": {
+    "title": "Gardez la photo. Oubliez le filigrane.",
+    "subtitle": "Déposez une image ou une vidéo : nous retirons le filigrane automatiquement, sans rien à configurer.",
+    "ctaPrimary": "Commencer gratuitement",
+    "ctaSecondary": "Comment ça marche",
+    "badge": "Suppression de filigranes IA",
+    "trust": "Sans inscription · Fichiers supprimés après 24 heures",
+    "demoCaption": "Faites glisser pour voir le filigrane disparaître"
+  },
+  "upload": {
+    "idleTitle": "Votre fichier est prêt ?",
+    "idlePrompt": "Déposez votre image ou votre vidéo ici",
+    "idlePrompt2": "ou cliquez pour choisir un fichier",
+    "selectFile": "Choisir un fichier",
+    "dragging": "Déposez le fichier",
+    "startProcess": "Lancer le traitement",
+    "cancelUpload": "Annuler l’envoi",
+    "removeFile": "Retirer le fichier",
+    "uploading": "Envoi en cours…",
+    "unsupported": "Format de fichier non pris en charge",
+    "tooLarge": "Le fichier dépasse la taille limite",
+    "empty": "Aucun fichier sélectionné",
+    "supportedImages": "Images : PNG, JPG, WEBP",
+    "supportedVideos": "Vidéos : MP4, MOV, WEBM",
+    "maxImage": "Taille maximale de l’image",
+    "maxVideo": "Taille maximale de la vidéo"
+  },
+  "stages": {
+    "UPLOADING": "Envoi en cours…",
+    "ANALYZING": "Analyse du fichier…",
+    "DETECTING": "Détection du filigrane…",
+    "PROCESSING": "Suppression du filigrane…",
+    "ENCODING": "Préparation du résultat…",
+    "COMPLETED": "Traitement terminé.",
+    "FAILED": "Échec du traitement.",
+    "CANCELLED": "Traitement annulé."
+  },
+  "features": {
+    "title": "Pourquoi Unstampr ?",
+    "auto": "Traitement automatique",
+    "autoDesc": "Détectez et supprimez les filigranes sans configuration manuelle.",
+    "imageVideo": "Images et vidéos prises en charge",
+    "imageVideoDesc": "Fonctionne aussi bien sur les photos que sur les vidéos.",
+    "detect": "Détection du filigrane",
+    "detectDesc": "Détection automatique du type et de l’emplacement du filigrane.",
+    "private": "Traitement confidentiel",
+    "privateDesc": "Les fichiers sont supprimés automatiquement après un délai défini.",
+    "quality": "Rendu de haute qualité",
+    "qualityDesc": "Préserve la qualité d’origine du fichier après le traitement.",
+    "fast": "Rapide",
+    "fastDesc": "Une file de traitement optimisée pour des résultats rapides."
+  },
+  "howItWorks": {
+    "title": "Comment ça marche",
+    "step1": "Envoyez votre fichier",
+    "step1Desc": "Choisissez une image ou une vidéo contenant un filigrane.",
+    "step2": "Filigrane détecté",
+    "step2Desc": "Le système identifie le type de filigrane.",
+    "step3": "Filigrane supprimé",
+    "step3Desc": "Le traitement automatique nettoie votre fichier.",
+    "step4": "Téléchargez le résultat",
+    "step4Desc": "Récupérez le fichier final."
+  },
+  "providers": {
+    "title": "Outils IA pris en charge",
+    "subtitle": "Les filigranes des outils suivants sont pris en charge"
+  },
+  "beforeAfter": {
+    "title": "Avant et après",
+    "before": "Avant",
+    "after": "Après",
+    "subtitle": "Résultat traité avec Unstampr",
+    "dragHint": "Faites glisser pour comparer"
+  },
+  "donate": {
+    "title": "Soutenez ce projet",
+    "desc": "Tout est gratuit ici. Si cela vous est utile, vous pouvez soutenir le développement."
+  },
+  "pricing": {
+    "title": "Tarifs",
+    "subtitle": "Choisissez la formule qui vous convient",
+    "monthly": "mensuel",
+    "credits": "crédits",
+    "mostPopular": "Le plus populaire",
+    "choose": "Choisir cette formule",
+    "current": "Formule actuelle",
+    "perMonth": "par mois",
+    "plans": {
+      "free": "Gratuit",
+      "freeDesc": "Pour commencer et essayer",
+      "mvp": "MVP",
+      "mvpDesc": "Vidéos plus longues et file prioritaire",
+      "proPlus": "Pro+",
+      "proPlusDesc": "Plus de crédits et file rapide"
+    },
+    "payWithBale": "Payer avec Bale",
+    "processing": "Traitement…",
+    "paymentFailed": "Le paiement a échoué. Veuillez réessayer.",
+    "baleUnavailable": "Les paiements par Bale ne sont pas disponibles.",
+    "baleNotLinked": "Connectez d’abord votre compte Bale pour payer avec Bale.",
+    "connectBale": "Connecter un compte Bale",
+    "openBaleToLink": "Ouvrez Bale et envoyez le code",
+    "linkCodeHint": "Ce code est à usage unique. Dans Bale, envoyez /start avec ce code au bot Unstampr.",
+    "baleInvoiceSent": "Facture envoyée dans votre application Bale",
+    "baleInvoiceSentHint": "Ouvrez l’application Bale et payez la facture. Les crédits sont ajoutés automatiquement après le paiement.",
+    "toman": "Toman"
+  },
+  "result": {
+    "downloadImage": "Télécharger l’image",
+    "downloadVideo": "Télécharger la vidéo",
+    "originalSize": "Taille d’origine",
+    "outputSize": "Taille du fichier final",
+    "processingTime": "Temps de traitement",
+    "detectedWatermark": "Filigrane détecté",
+    "duration": "Durée",
+    "fileSize": "Taille du fichier",
+    "status": "Statut",
+    "provider": "Fournisseur",
+    "confidence": "Niveau de confiance",
+    "location": "Emplacement",
+    "noneDetected": "Aucun filigrane pris en charge n’a été détecté.",
+    "noneDetectedDesc": "Votre fichier ne contient aucun filigrane d’un outil IA pris en charge. Vous pouvez essayer un autre fichier."
+  },
+  "dashboard": {
+    "title": "Tableau de bord",
+    "remainingCredits": "Crédits restants",
+    "todayUsage": "utilisés aujourd’hui",
+    "of": "sur",
+    "currentPlan": "Formule actuelle",
+    "dailyQuota": "Quota du jour",
+    "totalProcessed": "Fichiers traités",
+    "recentJobs": "Traitements récents",
+    "noJobs": "Aucun fichier traité pour le moment",
+    "viewAll": "Tout afficher",
+    "startProcessing": "Lancer un traitement",
+    "history": "Historique",
+    "colFile": "Fichier",
+    "colType": "Type",
+    "colWatermark": "Filigrane",
+    "colStatus": "Statut",
+    "colDate": "Date",
+    "colCredits": "Crédits",
+    "colActions": "Actions",
+    "typeImage": "Image",
+    "typeVideo": "Vidéo"
+  },
+  "auth": {
+    "loginTitle": "Connexion à Unstampr",
+    "loginSubtitle": "Accédez à votre compte",
+    "registerTitle": "Créer un compte",
+    "registerSubtitle": "Commencez dès maintenant",
+    "email": "E-mail",
+    "password": "Mot de passe",
+    "confirmPassword": "Confirmer le mot de passe",
+    "loginSubmit": "Se connecter",
+    "registerSubmit": "Créer un compte",
+    "noAccount": "Pas encore de compte ?",
+    "haveAccount": "Vous avez déjà un compte ?",
+    "createAccount": "Créer un compte",
+    "loginInstead": "Se connecter",
+    "logout": "Se déconnecter",
+    "invalidCreds": "E-mail ou mot de passe incorrect",
+    "emailExists": "Cette adresse e-mail est déjà enregistrée",
+    "loggedOut": "Vous êtes déconnecté",
+    "welcomeCredits": "Crédits de bienvenue ajoutés"
+  },
+  "errors": {
+    "FILE_TOO_LARGE": "Le fichier dépasse la taille limite",
+    "UNSUPPORTED_FORMAT": "Format de fichier non pris en charge",
+    "INVALID_VIDEO": "Fichier vidéo non valide",
+    "NO_WATERMARK_DETECTED": "Aucun filigrane pris en charge n’a été détecté",
+    "UNSUPPORTED_WATERMARK": "Ce type de filigrane n’est pas pris en charge",
+    "PROCESSING_FAILED": "Échec du traitement",
+    "INSUFFICIENT_CREDITS": "Vous n’avez pas assez de crédits",
+    "DAILY_QUOTA_EXCEEDED": "Vous avez utilisé votre quota gratuit du jour. Revenez demain !",
+    "RATE_LIMITED": "Trop de requêtes. Veuillez patienter.",
+    "STORAGE_ERROR": "Erreur de stockage du fichier",
+    "WORKER_TIMEOUT": "Le traitement a pris trop de temps",
+    "UNAUTHORIZED": "Veuillez d’abord vous connecter",
+    "NOT_FOUND": "Introuvable",
+    "generic": "Une erreur est survenue. Veuillez réessayer."
+  },
+  "privacy": {
+    "title": "Confidentialité",
+    "statement": "Votre vie privée nous tient à cœur.",
+    "filesUsed": "Les fichiers envoyés servent uniquement au traitement.",
+    "autoDelete": "Les fichiers sont supprimés automatiquement après un délai défini.",
+    "manualDelete": "Vous pouvez supprimer vos fichiers manuellement.",
+    "payment": "Les informations de paiement sont gérées par le prestataire de paiement.",
+    "retention": "Durée de conservation des fichiers : 24 heures pour l’entrée et la sortie."
+  },
+  "legal": {
+    "responsibleUse": "Utilisation responsable",
+    "responsibleUseNotice": "Unstampr est conçu pour supprimer les filigranes des contenus générés par IA et suppose que vous êtes propriétaire de ces contenus ou que vous êtes autorisé à les modifier. Ce service ne sert pas à contourner les licences commerciales ou payantes de banques d’images.",
+    "terms": "Conditions",
+    "privacy": "Confidentialité"
+  },
+  "faq": {
+    "title": "Questions fréquentes",
+    "items": {
+      "q1": "Quels types de filigranes sont pris en charge ?",
+      "a1": "Les filigranes des outils IA comme Hailuo, Veo, Kling, Sora, Seedance et Dola sont pris en charge.",
+      "q2": "Que deviennent mes fichiers après le traitement ?",
+      "a2": "Les fichiers d’entrée et de sortie sont supprimés automatiquement au bout de 24 heures.",
+      "q3": "Faut-il créer un compte pour l’utiliser ?",
+      "a3": "Un traitement gratuit limité est possible sans inscription, mais vous devez créer un compte pour accéder à l’historique et à plus de crédits.",
+      "q4": "Les vidéos sont-elles prises en charge ?",
+      "a4": "Oui, les vidéos MP4, MOV et WEBM sont traitées avec le son conservé.",
+      "q5": "Le traitement fonctionne-t-il hors ligne ?",
+      "a5": "Le traitement s’effectue sur nos serveurs ; l’application ne fonctionne pas hors ligne."
+    },
+    "subtitle": "Des réponses courtes aux questions habituelles."
+  },
+  "finalCta": {
+    "title": "Commencez dès maintenant",
+    "subtitle": "Traitez votre premier fichier — gratuitement.",
+    "button": "Commencer gratuitement"
+  },
+  "footer": {
+    "product": "Produit",
+    "resources": "Ressources",
+    "legal": "Mentions légales",
+    "rights": "Tous droits réservés.",
+    "madeFor": "Conçu pour les créateurs du monde entier"
+  },
+  "providersList": {
+    "hailuo": "Hailuo",
+    "veo": "Veo",
+    "kling": "Kling",
+    "sora": "Sora",
+    "seedance": "Seedance",
+    "dola": "Dola"
+  },
+  "workspace": {
+    "title": "Supprimer un filigrane",
+    "subtitle": "Ajoutez un fichier et nous nous occupons du reste, sans rien à configurer.",
+    "step1": "Ajouter un fichier",
+    "step2": "Nous le nettoyons",
+    "step3": "Télécharger"
+  }
+}
