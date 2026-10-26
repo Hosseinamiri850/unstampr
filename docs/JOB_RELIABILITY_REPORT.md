@@ -1,5 +1,9 @@
 # Job & Worker Reliability Report
 
+> **Reference for the shipped model.** Written at the end of the reliability phase; runtime details
+> have moved on since (the stack now runs `node:22-alpine` / `python:3.13-slim`). Current deployment
+> shape: [deployment.md](deployment.md).
+
 Phase: make the Job + Redis Queue + Python Worker pipeline resilient to
 crashes, retries, duplicate delivery, process restarts, and deployment
 failures. Design: `JOB_RELIABILITY_PLAN.md`, analysis: `JOB_RELIABILITY_AUDIT.md`.

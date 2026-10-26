@@ -1,5 +1,9 @@
 # Job & Worker Reliability Audit
 
+> **Historical record.** This audit describes the pipeline at commit `1b9bc45`, before the
+> reliability work landed. For the shipped behavior see
+> [JOB_RELIABILITY_REPORT.md](JOB_RELIABILITY_REPORT.md) and [architecture.md](architecture.md).
+
 Audit of every failure window in the current pipeline (commit `1b9bc45`).
 Source of truth: the code as it exists today — not documentation.
 

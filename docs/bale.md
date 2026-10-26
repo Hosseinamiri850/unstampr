@@ -1,5 +1,10 @@
 # Bale Payments
 
+> **v2 only — dormant in v1.** The v1 launch is free (`PAYMENTS_ENABLED=false`); Bale endpoints
+> return 404 and the UI never surfaces them. Everything below documents the implemented provider so
+> it can be switched on for v2 — see [billing.md](billing.md) and
+> [adr/0001-free-v1-daily-quota.md](adr/0001-free-v1-daily-quota.md).
+
 Bale Bot API wallet payments as a second payment provider next to ZarinPal.
 Implemented from live-verified API behavior (spike 2026-09-04 against
 `tapi.bale.ai` with the test provider token) — not from Telegram parity.

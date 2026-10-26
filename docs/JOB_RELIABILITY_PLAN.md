@@ -1,5 +1,8 @@
 # Job & Worker Reliability Plan
 
+> **Historical record.** This is the design document written before implementation. Shipped behavior
+> is summarized in [JOB_RELIABILITY_REPORT.md](JOB_RELIABILITY_REPORT.md).
+
 Design for making the job pipeline survive crashes, restarts, and duplicate
 delivery. Companion to `JOB_RELIABILITY_AUDIT.md`.
 

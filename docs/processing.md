@@ -8,8 +8,9 @@ UPLOADING → ANALYZING → DETECTING → PROCESSING → ENCODING → COMPLETED
                                                        ↘ CANCELLED (via Redis flag)
 ```
 
-Every transition writes `progress` (0–100) + a Persian/English stage label is rendered
-client-side via `messages/{fa,en}.json#stages`.
+Every transition writes `progress` (0–100); the human-readable stage label is rendered client-side
+from the `stages` namespace in `messages/{locale}.json` (en, fa, es, zh, hi), never hardcoded in the
+worker.
 
 ## remove-ai-watermarks use
 
@@ -41,13 +42,18 @@ rejects videos exceeding the duration limit with `INVALID_VIDEO`.
 
 ## File retention + cleanup
 
-A `python -m worker` process downloads/produces files in `tmp/` (auto-cleaned). Object storage
-keys (`uploads/`, `outputs/`) carry `expires_at` on the `files` row. To delete expired objects
-schedule (cron / systemd timer) a small job that:
+Object keys (`uploads/`, `outputs/`) carry `expires_at` on the `files` row, written at upload and
+output time with `FILE_RETENTION_HOURS` (default 24).
 
-1. `SELECT id, storage_key FROM files WHERE expires_at < now()` from Postgres
-2. `s3.delete_object(key)` for each
-3. `DELETE FROM files WHERE id = ...`
+Cleanup is **built into the worker loop** — no external cron needed. On every
+`RECOVERY_INTERVAL_SECONDS` (default 60) tick, `worker/main.py` runs:
 
-An MVP cleanup script can live alongside the worker; the MVP ships the schema field and policy
-in the privacy docs, and leaves the scheduler choice to deployment.
+1. `reliability.dispatch_outbox(...)` — re-delivers jobs whose outbox row never reached Redis.
+2. `recovery_pass(...)` — heals lost messages and re-queues stale jobs (bounded by
+   `MAX_JOB_ATTEMPTS`).
+3. `retention_pass(settings)` (`worker/app/retention.py`) — deletes expired S3 objects and their
+   `files` rows.
+
+So a single worker process is enough to enforce retention; with multiple replicas the passes are
+idempotent and simply repeat. Local temp media lives in a process-private `TemporaryDirectory()`
+cleaned on exit.
