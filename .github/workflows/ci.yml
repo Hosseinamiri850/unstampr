@@ -11,8 +11,14 @@ concurrency:
 
 jobs:
   frontend:
-    name: Frontend (typecheck, lint, vitest)
+    name: Frontend (typecheck, lint, test, build)
     runs-on: ubuntu-latest
+    # The production build must not depend on a developer's .env: these are the
+    # same fallbacks src/lib/env.ts uses, pinned so CI is deterministic.
+    env:
+      NEXT_PUBLIC_APP_URL: http://localhost:3000
+      NEXT_PUBLIC_PAYMENTS_ENABLED: 'false'
+      SESSION_SECRET: ci-only-not-a-real-secret-please-change-in-prod
     steps:
       - uses: actions/checkout@v4
 
@@ -28,6 +34,10 @@ jobs:
       - run: npm run lint
 
       - run: npm test
+
+      # Catches what typecheck/lint cannot: missing translation keys, bad
+      # server/client boundaries, prerender errors, broken imports.
+      - run: npm run build
 
   worker:
     name: Worker (pytest)
