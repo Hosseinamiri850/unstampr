@@ -1,104 +1,147 @@
 # Unstampr
 
 **Keep the photo. Lose the watermark.**
-Free, automatic removal of AI-generation watermarks from images and videos — no signup wall, no
-settings to learn.
+Free, automatic removal of AI-generation watermarks from images and videos.
 
-Built on [remove-ai-watermarks](https://github.com/wiltodelta/remove-ai-watermarks) + FFmpeg, with a
-Next.js 16 web app and a Python worker consuming a Redis queue.
+[![CI](https://github.com/Hosseinamiri850/unstampr/actions/workflows/ci.yml/badge.svg)](https://github.com/Hosseinamiri850/unstampr/actions/workflows/ci.yml)
+![Next.js](https://img.shields.io/badge/Next.js-16-black)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4-38bdf8)
+![next-intl](https://img.shields.io/badge/i18n-5_locales-174D3A)
+![License](https://img.shields.io/badge/license-Apache--2.0-blue)
+
+**Read in:** [English](#english) · [فارسی](#فارسی)
+
+![Unstampr landing hero](docs/screenshots/landing-hero.png)
+
+---
+
+## English
+
+### What it is
+
+Unstampr removes the visible watermarks that AI video/image generators stamp onto their output —
+Hailuo, Veo, Kling, Sora, Seedance, Dola. You drop a file, it comes back clean. No settings, no
+manual brushing, no signup wall.
+
+- **Web app:** Next.js 16 (App Router) + Tailwind CSS 4 + next-intl (5 locales) + framer-motion
+- **API:** Route Handlers, Drizzle ORM + PostgreSQL, Redis (queue · quota · rate limits)
+- **Worker:** Python 3.13, [`remove-ai-watermarks`](https://github.com/wiltodelta/remove-ai-watermarks) + FFmpeg
+- **Storage:** S3-compatible, presigned URLs only
 
 > Unstampr removes watermarks from AI-generated content and assumes you own the content or have
 > permission to modify it. It is **not** a way around commercial or stock-licensing watermarks.
->
-> Unstampr برای حذف واترمارک محتوای تولیدشده با هوش مصنوعی طراحی شده و فرض بر این است که شما مالک
-> محتوا یا مجوز تغییر آن را دارید. این سرویس برای دور زدن لایسنس محتوای تجاری یا استوک پولی نیست.
 
-![Landing hero](docs/screenshots/landing-hero.png)
-
-## Status — v1 (free launch)
+### Status — v1 free launch
 
 | Area | State |
 |------|-------|
-| Watermark removal (image + video) | ✅ live — visible marks from Hailuo, Veo, Kling, Sora, Seedance, Dola |
-| Account, quota, history, dashboard | ✅ live — free daily quota (`FREE_DAILY_JOBS`, default 5/day) |
-| Payments / subscriptions | ⏸ implemented but **dormant** behind `PAYMENTS_ENABLED=false` (v2) |
-| Donations | ✅ Buy Me a Coffee / Ko-fi / GitHub Sponsors (footer + dashboard) |
-| Languages | ✅ en · fa (RTL) · es · zh · hi — IP/locale detection, hreflang in sitemap |
-| UI/UX + motion design | ✅ dark-green design system, scroll-driven storytelling, interactive compare slider |
-| Product demo video | ⏳ pending (recording deferred to the release step) |
+| Image + video watermark removal | ✅ live |
+| Account, daily quota, history, dashboard | ✅ live — `FREE_DAILY_JOBS` (default 5/day) |
+| Payments / subscriptions | ⏸ implemented, dormant behind `PAYMENTS_ENABLED=false` (v2) |
+| Donations | ✅ Buy Me a Coffee · Ko-fi · GitHub Sponsors |
+| Languages | ✅ en · fa (RTL) · es · zh · hi, with IP-based detection |
+| UI/UX + motion | ✅ design system, scroll storytelling, interactive compare slider |
+| Product demo video | ⏳ planned |
 
-Full phase-by-phase status: [docs/ROADMAP.md](docs/ROADMAP.md).
+Full status: [docs/ROADMAP.md](docs/ROADMAP.md) · Design system: [docs/ui.md](docs/ui.md)
 
-## Stack
+### How it works — scroll storytelling
 
-- **Frontend:** Next.js 16 (App Router, Turbopack) · TypeScript strict · Tailwind CSS 4 ·
-  shadcn/ui (Radix) · next-intl 4 (5 locales) · framer-motion
-- **Backend API:** Next.js Route Handlers · Drizzle ORM + PostgreSQL · Redis (queue, quota, rate
-  limits) · JWT sessions (`jose` + `bcryptjs`)
-- **Worker:** Python 3.13 · `remove-ai-watermarks[visible,video]` · FFmpeg · psycopg · boto3
-- **Storage:** S3-compatible (MinIO locally) — presigned URLs only, no filesystem paths reach the
-  browser
-- **Payments (v2):** ZarinPal / Bale providers implemented and dormant (`PAYMENTS_ENABLED=false`)
+The "how it works" band pins a demo card and advances it as each step scrolls into view.
 
-## Architecture
+![Scroll storytelling](docs/screenshots/landing-steps.png)
+
+### Before / after, draggable
+
+The comparison is a real slider: drag it, or focus it and press ← →.
+
+![Before and after comparison](docs/screenshots/landing-compare.png)
+
+### Why Unstampr
+
+![Feature grid](docs/screenshots/landing-features.png)
+
+### The workspace
+
+Empty state → file selected. Same screen handles images and video, validates type and size at the
+edge, and streams the upload with live progress.
+
+<table>
+<tr>
+<td width="50%"><img src="docs/screenshots/workspace-idle.png" alt="Workspace empty state"></td>
+<td width="50%"><img src="docs/screenshots/workspace-selected.png" alt="Workspace with a file selected"></td>
+</tr>
+</table>
+
+### Mobile
+
+Designed at 390 px, not compressed from desktop.
+
+<table>
+<tr>
+<td width="33%"><img src="docs/screenshots/mobile-landing.png" alt="Mobile landing"></td>
+<td width="33%"><img src="docs/screenshots/mobile-workspace.png" alt="Mobile workspace"></td>
+<td width="33%"><img src="docs/screenshots/mobile-menu.png" alt="Mobile navigation"></td>
+</tr>
+</table>
+
+### RTL (Persian)
+
+One implementation, not two: logical CSS (`ms/me`, `ps/pe`, `start/end`) plus a direction-aware
+compare slider.
+
+<table>
+<tr>
+<td width="50%"><img src="docs/screenshots/rtl-workspace.png" alt="Persian workspace (RTL)"></td>
+<td width="50%"><img src="docs/screenshots/rtl-mobile.png" alt="Persian mobile hero (RTL)"></td>
+</tr>
+</table>
+
+### Other screens
+
+<table>
+<tr>
+<td width="50%"><img src="docs/screenshots/pricing.png" alt="Pricing (v2 preview)"></td>
+<td width="50%"><img src="docs/screenshots/faq.png" alt="FAQ"></td>
+</tr>
+<tr>
+<td width="50%"><img src="docs/screenshots/login.png" alt="Log in"></td>
+<td width="50%"><img src="docs/screenshots/landing-cta.png" alt="Closing call to action"></td>
+</tr>
+</table>
+
+### Architecture
 
 ```
 Browser → Next.js (UI + API) → PostgreSQL → Redis queue → Python worker
         → remove-ai-watermarks + FFmpeg → Object storage → result → Next.js → Browser
 ```
 
-Two runtime processes (Next.js + Python worker), three infra services (Postgres, Redis, S3).
-No per-responsibility microservices. Details: [docs/architecture.md](docs/architecture.md).
+Two runtime processes (Next.js + Python worker), three infra services (Postgres, Redis, S3). No
+microservices. Details: [docs/architecture.md](docs/architecture.md).
 
-## Free-tier model (v1)
+### Free tier (v1)
 
-- Every signed-in account gets `FREE_DAILY_JOBS` (default **5**) jobs per UTC day.
-- The counter lives in Redis (`quota:daily:{userId}:{YYYY-MM-DD}`) and is checked in
-  `POST /api/jobs` *before* a job is enqueued; exceeding it returns `DAILY_QUOTA_EXCEEDED`.
-- Credits, plans and payment providers are still in the codebase, but `PAYMENTS_ENABLED=false`
-  makes `POST /api/jobs` use the quota instead of deducting credits. See
-  [docs/billing.md](docs/billing.md).
-- Donations never gate features — they are plain links from env vars.
+- `FREE_DAILY_JOBS` (default **5**) jobs per signed-in account per UTC day.
+- Redis counter `quota:daily:{userId}:{date}`, checked in `POST /api/jobs` **before** enqueueing;
+  over-limit returns `DAILY_QUOTA_EXCEEDED` with `used`/`limit`/`resetAt`.
+- Credits and payment providers stay in the code but are dormant while
+  `PAYMENTS_ENABLED=false`. See [docs/adr/0001-free-v1-daily-quota.md](docs/adr/0001-free-v1-daily-quota.md).
+- Donations never gate a feature.
 
-## Quick start (local)
-
-### Prerequisites
-
-- Node.js ≥ 22, npm
-- Python ≥ 3.11 (the container uses 3.13)
-- FFmpeg (Windows: `winget install Gyan.FFmpeg`, or see [gyan.dev](https://www.gyan.dev/ffmpeg/builds/))
-- Docker (optional, for infra)
-
-### 1. Infrastructure
+### Quick start
 
 ```bash
-docker compose up -d
-```
+git clone https://github.com/Hosseinamiri850/unstampr.git
+cd unstampr
 
-This starts Postgres, Redis and MinIO, applies everything in `drizzle/` on first boot and creates
-the `pakino` bucket. The compose Postgres maps to **host port 5433** (`localhost:5433`) because a
-native Windows PostgreSQL usually owns 5432; containers still use `postgres:5432`.
-
-Without Docker, install PostgreSQL 16 + Redis 7 + MinIO and run:
-
-```bash
-psql "$DATABASE_URL" -f drizzle/0000_init.sql
-```
-
-### 2. Environment
-
-```bash
-cp .env.example .env       # defaults match docker-compose
-```
-
-### 3. Web app
-
-```bash
+docker compose up -d          # postgres (host :5433) + redis + minio
+cp .env.example .env
 npm install
-npm run dev                # http://localhost:3000 → redirects to /en
+npm run dev                   # http://localhost:3000 → /en
 ```
 
-### 4. Worker
+Worker, in a second terminal:
 
 ```bash
 python -m venv .venv
@@ -107,129 +150,273 @@ pip install -r worker/requirements.txt
 python -m worker                  # consumes pakino:jobs
 ```
 
-## Scripts
+Prerequisites: Node ≥ 22 · Python ≥ 3.11 (container uses 3.13) · FFmpeg · Docker (optional).
+
+### Scripts
 
 | Command | What it does |
 |---------|--------------|
-| `npm run dev` | Next.js dev server (Turbopack) |
+| `npm run dev` | dev server (Turbopack) |
 | `npm run build` / `npm start` | production build / serve |
-| `npm run lint` | ESLint over `src/**` |
 | `npm run typecheck` | `tsc --noEmit` |
-| `npm test` | Vitest — 52 tests; DB-backed suites skip when Postgres is unreachable |
-| `python -m pytest worker/tests -q` | worker tests (needs the venv from step 4) |
+| `npm run lint` | ESLint over `src/**` |
+| `npm test` | Vitest — 52 tests (DB suites skip without Postgres) |
+| `python -m pytest worker/tests -q` | worker tests |
 
-> **Windows + `next build`:** if the build fails with `ERR_SWC_NATIVE_CACHE`, point the native
-> binding cache at a user-owned directory:
-> `$env:SWC_NATIVE_BINDING_CACHE='C:\Users\<you>\swc-safe'`.
+CI runs all of the above **plus** `npm run build` on every push and PR.
 
-## Production (Docker)
+### Production
 
 ```bash
 SESSION_SECRET=$(openssl rand -hex 32) \
 docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d --build
-
-docker compose ps
-docker compose logs -f worker
 ```
 
-Images: `node:22-alpine` (web), `python:3.13-slim` + FFmpeg (worker), `postgres:16-alpine`,
-`redis:7-alpine`, MinIO. Never use `npm run dev` in production. See
-[docs/deployment.md](docs/deployment.md) for global-hosting notes (Vercel/Fly/Railway + managed
-Postgres/Redis/S3) and [docs/JOB_RELIABILITY_REPORT.md](docs/JOB_RELIABILITY_REPORT.md) for the
-queue reliability model.
+Images: `node:22-alpine`, `python:3.13-slim` (+ FFmpeg), `postgres:16-alpine`, `redis:7-alpine`,
+MinIO. Global hosting notes, geo headers and the launch checklist:
+[docs/deployment.md](docs/deployment.md).
 
-## Configuration
-
-All tunables live in `.env` (see [.env.example](.env.example)):
+### Configuration
 
 | Var | Default | Purpose |
 |-----|---------|---------|
-| `NEXT_PUBLIC_APP_URL` | `http://localhost:3000` | public origin (OG, sitemap, callbacks) |
+| `NEXT_PUBLIC_APP_URL` | `http://localhost:3000` | public origin (OG, sitemap) |
 | `DATABASE_URL` | `postgres://pakino:pakino@localhost:5432/pakino` | Postgres |
 | `REDIS_URL` | `redis://localhost:6379` | queue, quota, rate limits |
 | `S3_*` | MinIO local | object storage |
 | `MAX_IMAGE_SIZE` / `MAX_VIDEO_SIZE` / `MAX_VIDEO_DURATION` | 10 MB / 500 MB / 300 s | per-file limits |
-| `FREE_DAILY_JOBS` | `5` | v1 free-tier daily quota per account |
+| `FREE_DAILY_JOBS` | `5` | daily free quota |
 | `FILE_RETENTION_HOURS` | `24` | auto-delete input + output |
-| `NEXT_PUBLIC_DONATION_BMAC` / `_KOFI` / `_GITHUB` | _empty_ | donation links (footer + dashboard) |
-| `NEXT_PUBLIC_PAYMENTS_ENABLED` | `false` | v2 switch: purchase UI, `/pricing`, credit deduction |
-| `SESSION_SECRET` | dev-only | JWT signing secret — **32+ random bytes in prod** |
-| `ZARINPAL_*` / `BALE_*` | _empty_ | v2 payment providers (see [docs/bale.md](docs/bale.md)) |
+| `NEXT_PUBLIC_DONATION_BMAC` / `_KOFI` / `_GITHUB` | _empty_ | donation links |
+| `NEXT_PUBLIC_PAYMENTS_ENABLED` | `false` | v2 switch for plans + credits |
+| `SESSION_SECRET` | dev-only | JWT signing secret — 32+ random bytes in prod |
 
-## Workflow
+### Workflow
 
 1. Upload → presigned `PUT` to S3 → job row `UPLOADING`
-2. `POST /api/jobs` → daily quota checked (v1) or credits deducted (v2) → message `RPUSH`ed to Redis (`pakino:jobs`)
+2. `POST /api/jobs` → quota checked (v1) or credits deducted (v2) → message pushed to Redis
 3. Worker `BRPOP`s → `ANALYZING → DETECTING → PROCESSING → ENCODING → COMPLETED`
-4. The UI polls `GET /api/jobs/:id`, then renders the before/after comparison + download
+4. UI polls `GET /api/jobs/:id` → before/after comparison + download
 
-When no supported watermark is found the job completes with `errorCode: NO_WATERMARK_DETECTED`,
-produces no output, and the UI says so.
+If no supported watermark is detected the job completes with `NO_WATERMARK_DETECTED` and no output —
+the UI says so instead of pretending it worked.
 
-## Internationalization
+### Internationalization
 
-Five locales ship today: `en` (default), `fa` (RTL), `es`, `zh`, `hi` — routed under `/{locale}/**`
-with `localePrefix: 'always'`. Messages live in `messages/{locale}.json` and every catalog is kept at
-key parity with `en`.
+Five locales ship today (`en` default, `fa` RTL, `es`, `zh`, `hi`) under `/{locale}/**`. Locale
+resolution: `NEXT_LOCALE` cookie → explicit path → geo header (`x-vercel-ip-country`,
+`cf-ipcountry`, `x-geo-country`) → `Accept-Language`. `sitemap.xml` emits hreflang for every
+locale × route. Adding a locale: [docs/development.md](docs/development.md#working-with-messages-i18n).
 
-- **Locale resolution:** `NEXT_LOCALE` cookie → explicit `/{locale}/` path → geo header
-  (`x-vercel-ip-country`, `cf-ipcountry`, `x-geo-country`) → `Accept-Language`. Country→locale
-  mapping lives in [src/proxy.ts](src/proxy.ts).
-- **RTL:** `dir` is derived from the locale; components use logical utilities (`ms`/`me`, `ps`/`pe`,
-  `start`/`end`) so there is one implementation, not two.
-- **SEO:** `sitemap.xml` emits hreflang alternates for every locale × route.
-- **Adding a locale:** add `messages/<locale>.json` (same keys as `en`), register it in
-  [src/i18n/config.ts](src/i18n/config.ts) (`locales`, `localeLabels`, `rtlLocales`), optionally add
-  a country mapping in `src/proxy.ts`, then `npm run typecheck && npm run build`.
-  `scripts/build-catalog.py` rebuilds a nested catalog from a flat `scripts/trans/<locale>.json`.
+### Documentation
 
-## UI & motion
+[docs/ROADMAP.md](docs/ROADMAP.md) · [architecture](docs/architecture.md) ·
+[development](docs/development.md) · [deployment](docs/deployment.md) · [ui](docs/ui.md) ·
+[processing](docs/processing.md) · [security](docs/security.md) · [billing](docs/billing.md) ·
+[bale](docs/bale.md) · [job reliability](docs/JOB_RELIABILITY_REPORT.md)
 
-- **Design system:** dark-green brand ramp + warm neutrals as CSS variables in
-  [src/app/globals.css](src/app/globals.css), exposed as Tailwind theme tokens (`bg-primary`,
-  `bg-brand-soft`, `shadow-soft`, `shadow-lift`, `gradient-brand`, `bg-dots`).
-- **Motion:** `framer-motion` primitives in [src/components/motion](src/components/motion) —
-  `Reveal`, `StaggerGroup`, `Parallax`, `HeroMotion`, `ScrollProgress` and the draggable,
-  keyboard-accessible `CompareSlider`.
-- **Scroll storytelling:** the "how it works" band pins a demo card and advances it as each step
-  enters the viewport.
-- **Accessibility:** visible focus rings, keyboard-driven slider, `aria-current` navigation, and a
-  full `prefers-reduced-motion` path (animations collapse to static content — no information is
-  lost). Reveal animations also carry a `<noscript>` fallback.
+**License:** Apache-2.0 (inherits `remove-ai-watermarks`). Code © Unstampr contributors.
 
-![Scroll storytelling](docs/screenshots/landing-steps.png)
+---
 
-RTL check: ![Persian mobile hero](docs/screenshots/rtl-mobile.png)
+## فارسی
 
-## Payments & donations (v1)
+### این پروژه چیست
 
-`PaymentProvider` (`createPayment` / `verifyPayment` / `refundPayment`) plus credits, plans and
-ledger are implemented, tested and **dormant** behind `PAYMENTS_ENABLED=false`. Flip it to `true` in
-v2 to bring back `/pricing`, purchase UI and credit deduction. Details:
-[docs/billing.md](docs/billing.md).
+**Unstampr** همان کاری را می‌کند که اسمش می‌گوید: واترمارکِ ابزارهای تولید محتوای هوش مصنوعی را از
+تصویر و ویدیو برمی‌دارد — Hailuo، Veo، Kling، Sora، Seedance، Dola. فایل را می‌دهی، تمیز تحویل
+می‌گیری. بدون تنظیم، بدون قلم‌موی دستی، بدون دیوار ثبت‌نام.
 
-## Limitations / next up
+- **وب‌اپ:** Next.js 16 + Tailwind CSS 4 + next-intl (۵ زبان) + framer-motion
+- **API:** Route Handlers، Drizzle ORM + PostgreSQL، Redis (صف · سهمیه · محدودیت نرخ)
+- **ورکر:** Python 3.13، [`remove-ai-watermarks`](https://github.com/wiltodelta/remove-ai-watermarks) + FFmpeg
+- **ذخیره‌سازی:** S3-compatible، فقط با URL امضاشده
 
-- Visible watermarks only. The invisible path of `remove-ai-watermarks` needs CUDA and is
-  intentionally not wired in.
-- Job status uses long-polling; WebSockets are optional.
-- Remaining locales (`ar`, `pt-BR`, `ru`, `fr`, `de`, `ja`) and the product demo video are tracked in
-  [docs/ROADMAP.md](docs/ROADMAP.md).
+> Unstampr برای حذف واترمارک محتوای تولیدشده با هوش مصنوعی است و فرض می‌کند شما مالک محتوا یا مجاز به
+> تغییر آن هستید. این سرویس برای دور زدن لایسنس محتوای تجاری یا استوک پولی نیست.
 
-## Documentation
+### وضعیت — نسخه ۱ (رایگان)
 
-- [docs/ROADMAP.md](docs/ROADMAP.md) — phase status, what's done, what's left
-- [docs/architecture.md](docs/architecture.md) — components, data flow, boundaries
-- [docs/development.md](docs/development.md) — local dev, catalogs, common issues
-- [docs/deployment.md](docs/deployment.md) — production + global hosting
-- [docs/ui.md](docs/ui.md) — design tokens, motion conventions, a11y rules
-- [docs/processing.md](docs/processing.md) — worker + FFmpeg internals
-- [docs/security.md](docs/security.md) — threat model + hardening
-- [docs/billing.md](docs/billing.md) — v1 free model; credits, plans, ZarinPal (v2)
-- [docs/bale.md](docs/bale.md) — Bale wallet payments (v2)
-- [docs/adr/0001-free-v1-daily-quota.md](docs/adr/0001-free-v1-daily-quota.md) — why v1 is free + quota
-- [docs/JOB_RELIABILITY_REPORT.md](docs/JOB_RELIABILITY_REPORT.md) — queue reliability model
+| بخش | وضعیت |
+|------|-------|
+| حذف واترمارک تصویر و ویدیو | ✅ فعال |
+| حساب، سهمیه روزانه، تاریخچه، داشبورد | ✅ فعال — `FREE_DAILY_JOBS` (پیش‌فرض ۵ در روز) |
+| پرداخت / اشتراک | ⏸ کدها کامل، ولی خاموش پشت `PAYMENTS_ENABLED=false` (نسخه ۲) |
+| حمایت مالی | ✅ Buy Me a Coffee · Ko-fi · GitHub Sponsors |
+| زبان‌ها | ✅ en · fa (RTL) · es · zh · hi با تشخیص از روی IP |
+| UI/UX و موشن | ✅ سیستم طراحی، اسکرول‌استوری، اسلایدر مقایسه تعاملی |
+| ویدیو دموی محصول | ⏳ در برنامه |
 
-## License
+وضعیت کامل فازها: [docs/ROADMAP.md](docs/ROADMAP.md) · سیستم طراحی: [docs/ui.md](docs/ui.md)
 
-Apache-2.0 (inherits `remove-ai-watermarks`). Code © Unstampr contributors.
+### نحوه کار — روایت اسکرولی
+
+بخش «چطور کار می‌کند» یک کارت دمو را سنجاق می‌کند و با ورود هر مرحله به دید کاربر، همان مرحله را
+نشان می‌دهد.
+
+![اسکرول استوری](docs/screenshots/landing-steps.png)
+
+### قبل و بعد، کشیدنی
+
+مقایسه واقعی است: با ماوس بکش، یا فوکوس کن و با کلیدهای ← → جابه‌جا شو.
+
+![مقایسه قبل و بعد](docs/screenshots/landing-compare.png)
+
+### چرا Unstampr
+
+![ویژگی‌ها](docs/screenshots/landing-features.png)
+
+### محیط کار (Workspace)
+
+از حالت خالی تا انتخاب فایل؛ همان صفحه هم تصویر و هم ویدیو را می‌گیرد، نوع و حجم را در لبه API
+اعتبارسنجی می‌کند و آپلود را با پیشرفت زنده نشان می‌دهد.
+
+<table>
+<tr>
+<td width="50%"><img src="docs/screenshots/workspace-idle.png" alt="محیط کار — حالت خالی"></td>
+<td width="50%"><img src="docs/screenshots/workspace-selected.png" alt="محیط کار — فایل انتخاب‌شده"></td>
+</tr>
+</table>
+
+### موبایل
+
+برای ۳۹۰ پیکسل طراحی شده، نه فشرده‌شده از دسکتاپ.
+
+<table>
+<tr>
+<td width="33%"><img src="docs/screenshots/mobile-landing.png" alt="لندینگ موبایل"></td>
+<td width="33%"><img src="docs/screenshots/mobile-workspace.png" alt="محیط کار موبایل"></td>
+<td width="33%"><img src="docs/screenshots/mobile-menu.png" alt="منوی موبایل"></td>
+</tr>
+</table>
+
+### راست‌به‌چپ
+
+یک پیاده‌سازی، نه دو تا: CSS منطقی (`ms/me`، `ps/pe`، `start/end`) و اسلایدر مقایسه‌ی
+جهت‌آگاه.
+
+<table>
+<tr>
+<td width="50%"><img src="docs/screenshots/rtl-workspace.png" alt="محیط کار فارسی (RTL)"></td>
+<td width="50%"><img src="docs/screenshots/rtl-mobile.png" alt="هدر موبایل فارسی (RTL)"></td>
+</tr>
+</table>
+
+### صفحه‌های دیگر
+
+<table>
+<tr>
+<td width="50%"><img src="docs/screenshots/pricing.png" alt="قیمت‌ها (پیش‌نمایش نسخه ۲)"></td>
+<td width="50%"><img src="docs/screenshots/faq.png" alt="سؤالات متداول"></td>
+</tr>
+<tr>
+<td width="50%"><img src="docs/screenshots/login.png" alt="ورود"></td>
+<td width="50%"><img src="docs/screenshots/landing-cta.png" alt="دعوت پایانی"></td>
+</tr>
+</table>
+
+### معماری
+
+```
+مرورگر → Next.js (UI + API) → PostgreSQL → صف Redis → ورکر پایتون
+        → remove-ai-watermarks + FFmpeg → آبجکت استوریج → نتیجه → Next.js → مرورگر
+```
+
+دو فرآیند اجرایی (Next.js و ورکر پایتون) و سه سرویس زیرساخت (Postgres، Redis، S3). بدون
+میکروسرویس. جزئیات: [docs/architecture.md](docs/architecture.md).
+
+### مدل رایگان (نسخه ۱)
+
+- `FREE_DAILY_JOBS` (پیش‌فرض **۵**) کار در روز، برای هر حساب، بر مبنای روز UTC.
+- شمارنده در Redis (`quota:daily:{userId}:{date}`) و بررسی در `POST /api/jobs` **قبل از** صف‌شدن؛
+  عبور از سهمیه → `DAILY_QUOTA_EXCEEDED` همراه `used`/`limit`/`resetAt`.
+- کردیت و درگاه‌ها در کد می‌مانند ولی تا وقتی `PAYMENTS_ENABLED=false` است خاموش‌اند. دلیل و مسیر
+  فعال‌سازی: [docs/adr/0001-free-v1-daily-quota.md](docs/adr/0001-free-v1-daily-quota.md).
+- حمایت مالی هیچ قابلیتی را قفل نمی‌کند.
+
+### شروع سریع
+
+```bash
+git clone https://github.com/Hosseinamiri850/unstampr.git
+cd unstampr
+
+docker compose up -d          # postgres (پورت میزبان 5433) + redis + minio
+cp .env.example .env
+npm install
+npm run dev                   # http://localhost:3000 → /en
+```
+
+ورکر در ترمینال دوم:
+
+```bash
+python -m venv .venv
+.venv\Scripts\activate            # ویندوز   (روی لینوکس: source .venv/bin/activate)
+pip install -r worker/requirements.txt
+python -m worker                  # مصرف صف pakino:jobs
+```
+
+پیش‌نیازها: Node ≥ ۲۲ · Python ≥ ۳٫۱۱ (کانتینر ۳٫۱۳) · FFmpeg · Docker (اختیاری).
+
+### اسکریپت‌ها
+
+| دستور | کار |
+|------|-----|
+| `npm run dev` | سرور توسعه (Turbopack) |
+| `npm run build` / `npm start` | بیلد تولیدی / اجرا |
+| `npm run typecheck` | `tsc --noEmit` |
+| `npm run lint` | ESLint روی `src/**` |
+| `npm test` | Vitest — ۵۲ تست (سوئیت‌های DB بدون Postgres رد می‌شوند) |
+| `python -m pytest worker/tests -q` | تست‌های ورکر |
+
+CI همه‌ی این‌ها **به‌همراه** `npm run build` را روی هر push و PR اجرا می‌کند.
+
+### اجرای تولیدی
+
+```bash
+SESSION_SECRET=$(openssl rand -hex 32) \
+docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d --build
+```
+
+ایمیج‌ها: `node:22-alpine`، `python:3.13-slim` (+ FFmpeg)، `postgres:16-alpine`، `redis:7-alpine`،
+MinIO. میزبانی جهانی، هدرهای geo و چک‌لیست لانچ: [docs/deployment.md](docs/deployment.md).
+
+### تنظیمات
+
+| متغیر | پیش‌فرض | کاربرد |
+|-------|---------|--------|
+| `NEXT_PUBLIC_APP_URL` | `http://localhost:3000` | دامنه عمومی (OG، sitemap) |
+| `DATABASE_URL` | `postgres://pakino:pakino@localhost:5432/pakino` | Postgres |
+| `REDIS_URL` | `redis://localhost:6379` | صف، سهمیه، محدودیت نرخ |
+| `S3_*` | MinIO محلی | ذخیره‌سازی آبجکت |
+| `MAX_IMAGE_SIZE` / `MAX_VIDEO_SIZE` / `MAX_VIDEO_DURATION` | ۱۰MB / ۵۰۰MB / ۳۰۰s | محدودیت هر فایل |
+| `FREE_DAILY_JOBS` | `5` | سهمیه روزانه رایگان |
+| `FILE_RETENTION_HOURS` | `24` | حذف خودکار ورودی و خروجی |
+| `NEXT_PUBLIC_DONATION_BMAC` / `_KOFI` / `_GITHUB` | _خالی_ | لینک‌های حمایت مالی |
+| `NEXT_PUBLIC_PAYMENTS_ENABLED` | `false` | کلید نسخه ۲ برای پلن و کردیت |
+| `SESSION_SECRET` | فقط توسعه | کلید امضای JWT — در تولید ۳۲ بایت تصادفی |
+
+### جریان کار
+
+۱. آپلود → `PUT` امضاشده به S3 → ردیف job با وضعیت `UPLOADING`
+۲. `POST /api/jobs` → بررسی سهمیه (نسخه ۱) یا کسر کردیت (نسخه ۲) → پیام به Redis
+۳. ورکر `BRPOP` → `ANALYZING → DETECTING → PROCESSING → ENCODING → COMPLETED`
+۴. UI روی `GET /api/jobs/:id` نظرسنجی می‌کند → مقایسه قبل/بعد + دانلود
+
+اگر واترمارک پشتیبانی‌شده‌ای پیدا نشود، کار با `NO_WATERMARK_DETECTED` و بدون خروجی تمام می‌شود و
+UI همین را صادقانه می‌گوید.
+
+### چندزبانه
+
+پنج زبان فعال است (`en` پیش‌فرض، `fa` راست‌به‌چپ، `es`، `zh`، `hi`) زیر `/{locale}/**`. ترتیب تشخیص
+زبان: کوکی `NEXT_LOCALE` → مسیر صریح → هدر geo (`x-vercel-ip-country`، `cf-ipcountry`،
+`x-geo-country`) → `Accept-Language`. `sitemap.xml` برای هر زبان × مسیر، hreflang می‌دهد. روش
+افزودن زبان: [docs/development.md](docs/development.md#working-with-messages-i18n).
+
+### مستندات
+
+[docs/ROADMAP.md](docs/ROADMAP.md) · [معماری](docs/architecture.md) ·
+[توسعه](docs/development.md) · [استقرار](docs/deployment.md) · [UI](docs/ui.md) ·
+[پردازش](docs/processing.md) · [امنیت](docs/security.md) · [صورتحساب](docs/billing.md) ·
+[بله](docs/bale.md) · [پایداری صف](docs/JOB_RELIABILITY_REPORT.md)
+
+**لایسنس:** Apache-2.0 (وارث `remove-ai-watermarks`). کد © مشارکت‌کنندگان Unstampr.
