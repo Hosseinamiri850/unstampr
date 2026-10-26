@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { useForm, type Resolver } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
@@ -13,6 +13,9 @@ import { loginSchema, registerSchema } from '@/lib/validation/auth';
 
 type Props = { mode: 'login' | 'register' };
 
+/** One form object serves both modes; the register schema adds confirmPassword. */
+type FormValues = { email: string; password: string; confirmPassword: string };
+
 export function AuthForm({ mode }: Props) {
   const t = useTranslations('auth');
   const terr = useTranslations('errors');
@@ -22,7 +25,10 @@ export function AuthForm({ mode }: Props) {
 
   const schema = isRegister ? registerSchema : loginSchema;
 
-  const form = useForm({ resolver: zodResolver(schema), defaultValues: { email: '', password: '', confirmPassword: '' } });
+  const form = useForm<FormValues>({
+    resolver: zodResolver(schema) as unknown as Resolver<FormValues>,
+    defaultValues: { email: '', password: '', confirmPassword: '' },
+  });
   const {
     register: reg,
     handleSubmit,

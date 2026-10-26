@@ -1,5 +1,5 @@
-/**
- * Bale end-to-end integration tests — real PostgreSQL (port 5433).
+﻿/**
+ * Bale end-to-end integration tests â€” real PostgreSQL (port 5433).
  * Linking, pre-checkout handling, successful-payment settlement, webhook
  * flows and concurrency. Network calls (answerPreCheckoutQuery, sendMessage,
  * inquireTransaction) are stubbed at module boundary; all state and latch
@@ -15,23 +15,30 @@ import { consumeLinkCode, createLinkCode } from '@/lib/payments/bale-linking';
 import { handlePreCheckout, handleSuccessfulPayment, processUpdate } from '@/lib/payments/bale-webhook';
 import type { BalePreCheckoutQuery } from '@/lib/payments/bale';
 
+type BaleApi = {
+  answerPreCheckout: (queryId: string, ok: boolean, errorMessage?: string) => Promise<void>;
+  sendMessage: (chatId: string, text: string) => Promise<void>;
+  inquireTransaction: (transactionId: string) => Promise<unknown>;
+};
+const baleApi = baleMod.bale as unknown as BaleApi;
+
 let dbUp = false;
 try {
   await sql`SELECT 1`;
   dbUp = true;
 } catch {
-  console.warn('[bale-integration] PostgreSQL unreachable — skipping');
+  console.warn('[bale-integration] PostgreSQL unreachable â€” skipping');
 }
 const suite = dbUp ? describe : describe.skip;
 
 // -- network stubs: Bale Bot API never actually called from tests ------------
 beforeAll(() => {
-  vi.spyOn(baleMod.bale, 'answerPreCheckout' as never).mockResolvedValue(undefined);
-  vi.spyOn(baleMod.bale, 'sendMessage' as never).mockResolvedValue(undefined);
-  vi.spyOn(baleMod.bale, 'inquireTransaction' as never).mockResolvedValue(null);
+  vi.spyOn(baleApi, 'answerPreCheckout').mockResolvedValue(undefined);
+  vi.spyOn(baleApi, 'sendMessage').mockResolvedValue(undefined);
+  vi.spyOn(baleApi, 'inquireTransaction').mockResolvedValue(null);
 });
 afterEach(() => {
-  vi.mocked(baleMod.bale.inquireTransaction as unknown as { mockResolvedValue: (v: unknown) => void }).mockResolvedValue(null);
+  vi.mocked(baleApi.inquireTransaction).mockResolvedValue(null);
 });
 
 async function seedUser(): Promise<string> {
@@ -123,7 +130,7 @@ suite('Bale integration (real PostgreSQL)', () => {
         INSERT INTO bale_link_codes (code_hash, user_id, expires_at)
         VALUES (${Buffer.from('deadhash').toString('hex').slice(0, 64)}, ${userId}, now() - interval '1 hour')
         RETURNING code_hash`;
-      // Simulate expiry: insert then force expires_at into the past — but
+      // Simulate expiry: insert then force expires_at into the past â€” but
       // consumeLinkCode checks expiry AFTER the single-use latch; a raw hash we
       // can't reproduce means we test via the public API with a genuinely
       // expired short-TTL code instead:
@@ -140,7 +147,7 @@ suite('Bale integration (real PostgreSQL)', () => {
       const { code: c2 } = await createLinkCode(u2, 900);
       expect(await consumeLinkCode(c2, '777', '777')).toMatchObject({ ok: false, reason: 'CHAT_ALREADY_LINKED' });
 
-      // Relink: u1 rotates to a new chat — allowed by upsert on user PK.
+      // Relink: u1 rotates to a new chat â€” allowed by upsert on user PK.
       const { code: c3 } = await createLinkCode(u1, 900);
       expect(await consumeLinkCode(c3, '888', '888')).toMatchObject({ ok: true, relinked: true });
       const [row] = await sql`SELECT bale_chat_id FROM bale_links WHERE user_id=${u1}`;
@@ -176,7 +183,7 @@ suite('Bale integration (real PostgreSQL)', () => {
       const userId = await seedUser();
       await linkUser(userId);
       const p = await seedBalePayment(userId);
-      const answer = vi.spyOn(baleMod.bale, 'answerPreCheckout' as never).mockResolvedValue(undefined);
+      const answer = vi.spyOn(baleApi, 'answerPreCheckout').mockResolvedValue(undefined);
 
       const outcome = await handlePreCheckout({
         id: 'Q1', from: { id: 1666471893 }, currency: 'IRR', total_amount: 990000, invoice_payload: p.payload,
@@ -195,7 +202,7 @@ suite('Bale integration (real PostgreSQL)', () => {
       const userId = await seedUser();
       await linkUser(userId);
       const p = await seedBalePayment(userId);
-      const answer = vi.spyOn(baleMod.bale, 'answerPreCheckout' as never).mockResolvedValue(undefined);
+      const answer = vi.spyOn(baleApi, 'answerPreCheckout').mockResolvedValue(undefined);
 
       await handlePreCheckout({ id: 'QA', from: { id: 1666471893 }, currency: 'IRR', total_amount: 990000, invoice_payload: p.payload });
       await handlePreCheckout({ id: 'QB', from: { id: 1666471893 }, currency: 'IRR', total_amount: 990000, invoice_payload: p.payload });
@@ -208,11 +215,11 @@ suite('Bale integration (real PostgreSQL)', () => {
       expect(row!.provider_charge_id).toBe('QA');
     });
 
-    it('wrong amount / currency / payer / expired / unknown payload → ok=false, no state change', async () => {
+    it('wrong amount / currency / payer / expired / unknown payload â†’ ok=false, no state change', async () => {
       const userId = await seedUser();
       await linkUser(userId);
       const p = await seedBalePayment(userId);
-      const answer = vi.spyOn(baleMod.bale, 'answerPreCheckout' as never).mockResolvedValue(undefined);
+      const answer = vi.spyOn(baleApi, 'answerPreCheckout').mockResolvedValue(undefined);
 
       const cases: [string, ReturnType<typeof preCheckoutUpdate>][] = [
         ['wrong amount', preCheckoutUpdate('QX1', p.payload, 99000)],
@@ -237,7 +244,7 @@ suite('Bale integration (real PostgreSQL)', () => {
       const expired = await seedBalePayment(userId, { expiresAt: new Date(Date.now() - 1000) });
       const settled = await seedBalePayment(userId);
       await settlePayment({ paymentId: settled.id, source: 'bale', providerChargeId: 'CHZ', payload: settled.payload, settledVia: 'webhook' });
-      const answer = vi.spyOn(baleMod.bale, 'answerPreCheckout' as never).mockResolvedValue(undefined);
+      const answer = vi.spyOn(baleApi, 'answerPreCheckout').mockResolvedValue(undefined);
 
       await handlePreCheckout({ id: 'QE1', from: { id: 1666471893 }, currency: 'IRR', total_amount: 990000, invoice_payload: expired.payload });
       await handlePreCheckout({ id: 'QE2', from: { id: 1666471893 }, currency: 'IRR', total_amount: 990000, invoice_payload: settled.payload });
@@ -252,7 +259,7 @@ suite('Bale integration (real PostgreSQL)', () => {
       const userId = await seedUser();
       await linkUser(userId);
       const p = await seedBalePayment(userId);
-      const send = vi.spyOn(baleMod.bale, 'sendMessage' as never).mockResolvedValue(undefined);
+      const send = vi.spyOn(baleApi, 'sendMessage').mockResolvedValue(undefined);
 
       const outcome = await handleSuccessfulPayment(
         { currency: 'IRR', total_amount: 990000, invoice_payload: p.payload, telegram_payment_charge_id: 'CHS1', provider_payment_charge_id: 'TRK1' },
@@ -266,7 +273,7 @@ suite('Bale integration (real PostgreSQL)', () => {
       expect(send).toHaveBeenCalled();
     });
 
-    it('duplicate successful_payment → already_settled, zero additional credits', async () => {
+    it('duplicate successful_payment â†’ already_settled, zero additional credits', async () => {
       const userId = await seedUser();
       await linkUser(userId);
       const p = await seedBalePayment(userId);
@@ -277,7 +284,7 @@ suite('Bale integration (real PostgreSQL)', () => {
       expect(await ledgerCount(userId)).toBe(1);
     });
 
-    it('8 concurrent duplicate deliveries → exactly one grant', async () => {
+    it('8 concurrent duplicate deliveries â†’ exactly one grant', async () => {
       const userId = await seedUser();
       await linkUser(userId);
       const p = await seedBalePayment(userId);
@@ -289,7 +296,7 @@ suite('Bale integration (real PostgreSQL)', () => {
       expect(await ledgerCount(userId)).toBe(1);
     }, 20000);
 
-    it('conflicting charge id → pending_review, no grant', async () => {
+    it('conflicting charge id â†’ pending_review, no grant', async () => {
       const userId = await seedUser();
       await linkUser(userId);
       const p = await seedBalePayment(userId);
@@ -301,11 +308,11 @@ suite('Bale integration (real PostgreSQL)', () => {
       expect(row!.status).toBe('pending_review');
     });
 
-    it('amount / currency / payload / payer mismatch → pending_review or reject, no grant', async () => {
+    it('amount / currency / payload / payer mismatch â†’ pending_review or reject, no grant', async () => {
       const userId = await seedUser();
       await linkUser(userId);
       const p = await seedBalePayment(userId);
-      const answer = vi.spyOn(baleMod.bale, 'answerPreCheckout' as never).mockResolvedValue(undefined);
+      const answer = vi.spyOn(baleApi, 'answerPreCheckout').mockResolvedValue(undefined);
       void answer;
 
       await handleSuccessfulPayment({ currency: 'IRR', total_amount: 880000, invoice_payload: p.payload, telegram_payment_charge_id: 'CM1' }, 1666471893);
@@ -319,7 +326,7 @@ suite('Bale integration (real PostgreSQL)', () => {
       expect(await ledgerCount(userId)).toBe(0);
     });
 
-    it('inquire paid-confirmed → settles; inquire unreachable → still settles on webhook signal; inquire contradiction → pending_review', async () => {
+    it('inquire paid-confirmed â†’ settles; inquire unreachable â†’ still settles on webhook signal; inquire contradiction â†’ pending_review', async () => {
       const userId = await seedUser();
       await linkUser(userId);
 
@@ -328,12 +335,12 @@ suite('Bale integration (real PostgreSQL)', () => {
       (baleMod.bale.inquireTransaction as unknown as { mockResolvedValue: (v: unknown) => void }).mockResolvedValue({ id: 'IQ1', status: 'paid', userID: 1666471893, amount: 990000 });
       expect((await handleSuccessfulPayment({ currency: 'IRR', total_amount: 990000, invoice_payload: p1.payload, telegram_payment_charge_id: 'IQ1' }, 1666471893)).note).toBe('settled +1000');
 
-      // 2) inquiry unreachable (throws) → webhook is primary signal
+      // 2) inquiry unreachable (throws) â†’ webhook is primary signal
       const p2 = await seedBalePayment(userId);
       (baleMod.bale.inquireTransaction as unknown as { mockRejectedValue: (v: unknown) => void }).mockRejectedValue(new Error('down'));
       expect((await handleSuccessfulPayment({ currency: 'IRR', total_amount: 990000, invoice_payload: p2.payload, telegram_payment_charge_id: 'IQ2' }, 1666471893)).note).toBe('settled +1000');
 
-      // 3) inquiry contradicts (status failed) → pending_review
+      // 3) inquiry contradicts (status failed) â†’ pending_review
       const p3 = await seedBalePayment(userId);
       (baleMod.bale.inquireTransaction as unknown as { mockResolvedValue: (v: unknown) => void }).mockResolvedValue({ id: 'IQ3', status: 'failed', userID: 1666471893, amount: 990000 });
       const outcome = await handleSuccessfulPayment({ currency: 'IRR', total_amount: 990000, invoice_payload: p3.payload, telegram_payment_charge_id: 'IQ3' }, 1666471893);
@@ -370,7 +377,7 @@ suite('Bale integration (real PostgreSQL)', () => {
       expect(await balanceOf(userId)).toBe(1000);
     });
 
-    it('duplicate webhook delivery of the same update → idempotent', async () => {
+    it('duplicate webhook delivery of the same update â†’ idempotent', async () => {
       const userId = await seedUser();
       await linkUser(userId);
       const p = await seedBalePayment(userId);
