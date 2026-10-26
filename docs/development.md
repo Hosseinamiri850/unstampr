@@ -59,10 +59,12 @@ bale) require a reachable Postgres and skip otherwise.
   catalog from a flat `scripts/trans/<locale>.json` and refuses to write if keys are missing/extra.
 - `scripts/gen-catalogs.py` holds the canonical `catalog(...)` factory (structure + non-English
   copy) used to regenerate catalogs.
-- Wired locales today: `en`, `fa`, `es`, `zh`, `hi`. Pending work is tracked in
-  [ROADMAP.md](ROADMAP.md).
-- To surface a new locale end to end: add the catalog, register it in `src/i18n/config.ts`
-  (`locales`, `localeLabels`, `rtlLocales`), optionally map countries in `src/proxy.ts`, then run
+- Wired locales: `en`, `fa`, `ar` (both RTL), `es`, `zh`, `hi`, `pt-BR`, `ru`, `fr`, `de`, `ja`.
+- `scripts/trans/` holds one flat file per locale plus `_template.json` (all 221 keys, empty
+  values). When a nested catalog changes, regenerate the flat source from it so both stay in sync.
+- To surface a new locale end to end: add the catalog (`messages/<locale>.json` + flat source),
+  register it in `src/i18n/config.ts` (`locales`, `localeLabels`, `rtlLocales`,
+  `usesArabicScript`), optionally map countries in `src/proxy.ts`, then run
   `npm run typecheck && npm run build`.
 
 ## UI conventions

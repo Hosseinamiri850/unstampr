@@ -6,12 +6,14 @@ Free, automatic removal of AI-generation watermarks from images and videos.
 [![CI](https://github.com/Hosseinamiri850/unstampr/actions/workflows/ci.yml/badge.svg)](https://github.com/Hosseinamiri850/unstampr/actions/workflows/ci.yml)
 ![Next.js](https://img.shields.io/badge/Next.js-16-black)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4-38bdf8)
-![next-intl](https://img.shields.io/badge/i18n-5_locales-174D3A)
+![next-intl](https://img.shields.io/badge/i18n-11_locales-174D3A)
 ![License](https://img.shields.io/badge/license-Apache--2.0-blue)
 
 **Read in:** [English](#english) · [فارسی](#فارسی)
 
 ![Unstampr landing hero](docs/screenshots/landing-hero.png)
+
+▶ **[Watch the 17-second product demo](docs/media/demo.mp4)** — recorded from the running app.
 
 ---
 
@@ -23,7 +25,7 @@ Unstampr removes the visible watermarks that AI video/image generators stamp ont
 Hailuo, Veo, Kling, Sora, Seedance, Dola. You drop a file, it comes back clean. No settings, no
 manual brushing, no signup wall.
 
-- **Web app:** Next.js 16 (App Router) + Tailwind CSS 4 + next-intl (5 locales) + framer-motion
+- **Web app:** Next.js 16 (App Router) + Tailwind CSS 4 + next-intl (11 locales) + framer-motion
 - **API:** Route Handlers, Drizzle ORM + PostgreSQL, Redis (queue · quota · rate limits)
 - **Worker:** Python 3.13, [`remove-ai-watermarks`](https://github.com/wiltodelta/remove-ai-watermarks) + FFmpeg
 - **Storage:** S3-compatible, presigned URLs only
@@ -39,9 +41,8 @@ manual brushing, no signup wall.
 | Account, daily quota, history, dashboard | ✅ live — `FREE_DAILY_JOBS` (default 5/day) |
 | Payments / subscriptions | ⏸ implemented, dormant behind `PAYMENTS_ENABLED=false` (v2) |
 | Donations | ✅ Buy Me a Coffee · Ko-fi · GitHub Sponsors |
-| Languages | ✅ en · fa (RTL) · es · zh · hi, with IP-based detection |
-| UI/UX + motion | ✅ design system, scroll storytelling, interactive compare slider |
-| Product demo video | ⏳ planned |
+| Languages | ✅ en · fa · ar (RTL) · es · zh · hi · pt-BR · ru · fr · de · ja — 11 locales, IP-based detection |
+| UI/UX + motion | ✅ design system, scroll storytelling, interactive compare slider, [demo video](docs/media/demo.mp4) |
 
 Full status: [docs/ROADMAP.md](docs/ROADMAP.md) · Design system: [docs/ui.md](docs/ui.md)
 
@@ -106,6 +107,10 @@ compare slider.
 </tr>
 <tr>
 <td width="50%"><img src="docs/screenshots/login.png" alt="Log in"></td>
+<td width="50%"><img src="docs/screenshots/support.png" alt="Support the project"></td>
+</tr>
+<tr>
+<td width="50%"><img src="docs/screenshots/arabic-landing.png" alt="Arabic landing (RTL)"></td>
 <td width="50%"><img src="docs/screenshots/landing-cta.png" alt="Closing call to action"></td>
 </tr>
 </table>
@@ -203,10 +208,11 @@ the UI says so instead of pretending it worked.
 
 ### Internationalization
 
-Five locales ship today (`en` default, `fa` RTL, `es`, `zh`, `hi`) under `/{locale}/**`. Locale
-resolution: `NEXT_LOCALE` cookie → explicit path → geo header (`x-vercel-ip-country`,
-`cf-ipcountry`, `x-geo-country`) → `Accept-Language`. `sitemap.xml` emits hreflang for every
-locale × route. Adding a locale: [docs/development.md](docs/development.md#working-with-messages-i18n).
+Eleven locales ship today — `en` (default), `fa` + `ar` (RTL), `es`, `zh`, `hi`, `pt-BR`, `ru`, `fr`,
+`de`, `ja` — routed under `/{locale}/**`. Locale resolution: `NEXT_LOCALE` cookie → explicit path →
+geo header (`x-vercel-ip-country`, `cf-ipcountry`, `x-geo-country`) → `Accept-Language`.
+`sitemap.xml` emits hreflang for every locale × route. Adding a locale:
+[docs/development.md](docs/development.md#working-with-messages-i18n).
 
 ### Documentation
 
@@ -220,6 +226,8 @@ locale × route. Adding a locale: [docs/development.md](docs/development.md#work
 ---
 
 ## فارسی
+
+▶ **[دموی ۱۷ ثانیه‌ای محصول](docs/media/demo.mp4)** — ضبط‌شده از خود اپ در حال اجرا.
 
 ### این پروژه چیست
 
@@ -243,9 +251,8 @@ locale × route. Adding a locale: [docs/development.md](docs/development.md#work
 | حساب، سهمیه روزانه، تاریخچه، داشبورد | ✅ فعال — `FREE_DAILY_JOBS` (پیش‌فرض ۵ در روز) |
 | پرداخت / اشتراک | ⏸ کدها کامل، ولی خاموش پشت `PAYMENTS_ENABLED=false` (نسخه ۲) |
 | حمایت مالی | ✅ Buy Me a Coffee · Ko-fi · GitHub Sponsors |
-| زبان‌ها | ✅ en · fa (RTL) · es · zh · hi با تشخیص از روی IP |
-| UI/UX و موشن | ✅ سیستم طراحی، اسکرول‌استوری، اسلایدر مقایسه تعاملی |
-| ویدیو دموی محصول | ⏳ در برنامه |
+| زبان‌ها | ✅ en · fa · ar (RTL) · es · zh · hi · pt-BR · ru · fr · de · ja — ۱۱ زبان، تشخیص از روی IP |
+| UI/UX و موشن | ✅ سیستم طراحی، اسکرول‌استوری، اسلایدر مقایسه تعاملی، [ویدیو دمو](docs/media/demo.mp4) |
 
 وضعیت کامل فازها: [docs/ROADMAP.md](docs/ROADMAP.md) · سیستم طراحی: [docs/ui.md](docs/ui.md)
 
@@ -311,6 +318,10 @@ locale × route. Adding a locale: [docs/development.md](docs/development.md#work
 </tr>
 <tr>
 <td width="50%"><img src="docs/screenshots/login.png" alt="ورود"></td>
+<td width="50%"><img src="docs/screenshots/support.png" alt="حمایت مالی"></td>
+</tr>
+<tr>
+<td width="50%"><img src="docs/screenshots/arabic-landing.png" alt="لندینگ عربی (RTL)"></td>
 <td width="50%"><img src="docs/screenshots/landing-cta.png" alt="دعوت پایانی"></td>
 </tr>
 </table>
@@ -407,10 +418,11 @@ UI همین را صادقانه می‌گوید.
 
 ### چندزبانه
 
-پنج زبان فعال است (`en` پیش‌فرض، `fa` راست‌به‌چپ، `es`، `zh`، `hi`) زیر `/{locale}/**`. ترتیب تشخیص
-زبان: کوکی `NEXT_LOCALE` → مسیر صریح → هدر geo (`x-vercel-ip-country`، `cf-ipcountry`،
-`x-geo-country`) → `Accept-Language`. `sitemap.xml` برای هر زبان × مسیر، hreflang می‌دهد. روش
-افزودن زبان: [docs/development.md](docs/development.md#working-with-messages-i18n).
+یازده زبان فعال است — `en` (پیش‌فرض)، `fa` و `ar` راست‌به‌چپ، `es`، `zh`، `hi`، `pt-BR`، `ru`،
+`fr`، `de`، `ja` — زیر `/{locale}/**`. ترتیب تشخیص زبان: کوکی `NEXT_LOCALE` → مسیر صریح → هدر geo
+(`x-vercel-ip-country`، `cf-ipcountry`، `x-geo-country`) → `Accept-Language`. `sitemap.xml` برای هر
+زبان × مسیر، hreflang می‌دهد. روش افزودن زبان:
+[docs/development.md](docs/development.md#working-with-messages-i18n).
 
 ### مستندات
 

@@ -60,7 +60,8 @@ client:  GET /api/jobs/:id    → poll until COMPLETED|FAILED|CANCELLED
 
 ## Internationalization layer
 
-- `src/i18n/config.ts` — locale list, labels, RTL set, `dir()`.
+- `src/i18n/config.ts` — locale list (11 wired), labels, RTL set (`fa`, `ar`), `dir()`, Arabic-script
+  font stack.
 - `src/i18n/routing.ts` — next-intl routing (`localePrefix: 'always'`).
 - `src/proxy.ts` — middleware: next-intl negotiation plus geo-header → locale hint
   (`x-vercel-ip-country`, `cf-ipcountry`, `x-geo-country`), used only when the request has no
