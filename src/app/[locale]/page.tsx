@@ -1,5 +1,6 @@
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { getEnv } from '@/lib/env';
+import { OG_IMAGE } from '@/lib/seo';
 import { Hero } from '@/components/landing/hero';
 import { Features } from '@/components/landing/features';
 import { HowItWorks } from '@/components/landing/how-it-works';
@@ -11,6 +12,21 @@ import { PrivacyBanner } from '@/components/landing/privacy-banner';
 import { FinalCta } from '@/components/landing/final-cta';
 
 type Props = { params: Promise<{ locale: string }> };
+
+/** Open Graph locale tags (OG wants language_TERRITORY, not BCP-47). */
+const OG_LOCALE: Record<string, string> = {
+  en: 'en_US',
+  fa: 'fa_IR',
+  es: 'es_ES',
+  zh: 'zh_CN',
+  hi: 'hi_IN',
+  ar: 'ar_AR',
+  'pt-BR': 'pt_BR',
+  ru: 'ru_RU',
+  fr: 'fr_FR',
+  de: 'de_DE',
+  ja: 'ja_JP',
+};
 
 export default async function HomePage({ params }: Props) {
   const { locale } = await params;
@@ -52,6 +68,17 @@ export async function generateMetadata({ params }: Props) {
     title: t('title'),
     description: t('description'),
     alternates: { canonical: `/${locale}` },
-    openGraph: { title: t('ogTitle'), description: t('ogDescription'), locale: locale === 'fa' ? 'fa_IR' : 'en_US' },
+    openGraph: {
+      title: t('ogTitle'),
+      description: t('ogDescription'),
+      locale: OG_LOCALE[locale] ?? 'en_US',
+      images: [OG_IMAGE],
+    },
+    twitter: {
+      card: 'summary_large_image' as const,
+      title: t('ogTitle'),
+      description: t('ogDescription'),
+      images: [OG_IMAGE],
+    },
   };
 }

@@ -4,7 +4,7 @@ import { locales } from '@/i18n/config';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = getEnv().APP_URL;
-  const routes = ['', '/remove', '/faq', '/login', '/register', '/privacy', '/terms'];
+  const routes = ['', '/remove', '/faq', '/support', '/login', '/register', '/privacy', '/terms'];
   if (getEnv().PAYMENTS_ENABLED) routes.push('/pricing');
   const now = new Date();
   return locales.flatMap((locale) =>

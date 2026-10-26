@@ -26,6 +26,7 @@ export function Footer() {
   const t = useTranslations('footer');
   const nav = useTranslations('nav');
   const legal = useTranslations('legal');
+  const donate = useTranslations('donate');
   const year = new Date().getFullYear();
 
   return (
@@ -49,6 +50,7 @@ export function Footer() {
             <div className="flex flex-col gap-2.5">
               <span className="text-xs font-semibold uppercase tracking-widest text-primary/80">{t('resources')}</span>
               <FooterLink href="/faq">{nav('faq')}</FooterLink>
+              <FooterLink href="/support">{donate('title')}</FooterLink>
             </div>
             <div className="flex flex-col gap-2.5">
               <span className="text-xs font-semibold uppercase tracking-widest text-primary/80">{t('legal')}</span>

@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
 import { Link } from '@/i18n/routing';
-import { Check, Download, RefreshCw } from 'lucide-react';
+import { Check, Download, Heart, RefreshCw } from 'lucide-react';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
@@ -15,6 +15,7 @@ export function ResultView({ job }: { job: JobDto }) {
   const t = useTranslations('result');
   const tBeforeAfter = useTranslations('beforeAfter');
   const tcommon = useTranslations('common');
+  const tdonate = useTranslations('donate');
   const locale = useLocale() as 'fa' | 'en';
   const reduce = useReducedMotion();
   const [downloaded, setDownloaded] = useState(false);
@@ -92,6 +93,16 @@ export function ResultView({ job }: { job: JobDto }) {
           </Link>
         </Button>
       </div>
+
+      <p className="text-xs text-muted-foreground">
+        <Link
+          href="/support"
+          className="inline-flex items-center gap-1.5 underline decoration-primary/30 underline-offset-4 transition-colors hover:text-primary"
+        >
+          <Heart className="h-3.5 w-3.5" />
+          {tdonate('title')}
+        </Link>
+      </p>
 
       <Card className="p-4">
         <dl className="grid grid-cols-2 gap-3 text-sm sm:grid-cols-4">
