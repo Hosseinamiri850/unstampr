@@ -3,12 +3,19 @@
 import { useState } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
 import { Button } from '@/components/ui/button';
-import { formatNumber } from '@/lib/utils';
 import type { PlanId } from '@/lib/plans';
 
 type BaleStatus = { configured: boolean; linked: boolean; username: string | null };
 
-export function PurchaseButton({ planId, priceToman, credits }: { planId: PlanId; priceToman: number; credits: number }) {
+export function PurchaseButton({
+  planId,
+  priceToman,
+}: {
+  planId: PlanId;
+  priceToman: number;
+  /** kept for call-site compatibility; credits are shown by the plan card */
+  credits?: number;
+}) {
   const t = useTranslations('pricing');
   const locale = useLocale() as 'fa' | 'en';
   const [busy, setBusy] = useState<string | null>(null);
@@ -106,9 +113,6 @@ export function PurchaseButton({ planId, priceToman, credits }: { planId: PlanId
           )}
         </div>
       )}
-      <p className="text-center text-xs text-muted-foreground">
-        {formatNumber(credits, locale)} {t('credits')}
-      </p>
     </div>
   );
 }

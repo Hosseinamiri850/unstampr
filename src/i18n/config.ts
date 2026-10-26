@@ -1,12 +1,23 @@
-export type Locale = 'fa' | 'en';
-export const locales: Locale[] = ['fa', 'en'];
-export const defaultLocale: Locale = 'fa';
+export type Locale =
+  | 'en'
+  | 'fa'
+  | 'es'
+  | 'zh'
+  | 'hi';
+
+export const locales: Locale[] = ['en', 'fa', 'es', 'zh', 'hi'];
+export const defaultLocale: Locale = 'en';
 
 export const localeLabels: Record<Locale, string> = {
-  fa: 'فارسی',
   en: 'English',
+  fa: 'فارسی',
+  es: 'Español',
+  zh: '中文',
+  hi: 'हिन्दी',
 };
 
-export function dir(locale: Locale): 'rtl' | 'ltr' {
-  return locale === 'fa' ? 'rtl' : 'ltr';
+export const rtlLocales: Locale[] = ['fa'];
+
+export function dir(locale: string): 'rtl' | 'ltr' {
+  return rtlLocales.includes(locale as Locale) ? 'rtl' : 'ltr';
 }

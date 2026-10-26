@@ -33,10 +33,13 @@
     "credits": "credits"
   },
   "hero": {
-    "title": "Remove watermarks, simple and fast.",
-    "subtitle": "Remove watermarks from your images and videos with automatic processing.",
+    "title": "Keep the photo. Lose the watermark.",
+    "subtitle": "Drop in an image or video and we take the watermark off automatically — nothing to configure.",
     "ctaPrimary": "Start free",
-    "ctaSecondary": "How it works"
+    "ctaSecondary": "How it works",
+    "badge": "AI watermark removal",
+    "trust": "No signup needed · Files removed after 24h",
+    "demoCaption": "Drag to see the watermark disappear"
   },
   "upload": {
     "idleTitle": "Is your file ready?",
@@ -100,7 +103,8 @@
     "title": "Before and after",
     "before": "Before",
     "after": "After",
-    "subtitle": "Result processed with Unstampr"
+    "subtitle": "Result processed with Unstampr",
+    "dragHint": "Drag to compare"
   },
   "donate": {
     "title": "Support this project",
@@ -132,7 +136,8 @@
     "openBaleToLink": "Open Bale and send the code",
     "linkCodeHint": "This code is single-use. In Bale, send /start with this code to the Unstampr bot.",
     "baleInvoiceSent": "Invoice sent to your Bale app",
-    "baleInvoiceSentHint": "Open the Bale app and pay the invoice. Credits are added automatically after payment."
+    "baleInvoiceSentHint": "Open the Bale app and pay the invoice. Credits are added automatically after payment.",
+    "toman": "Toman"
   },
   "result": {
     "downloadImage": "Download image",
@@ -237,7 +242,8 @@
       "a4": "Yes, MP4, MOV, and WEBM videos are processed with audio preserved.",
       "q5": "Does processing work offline?",
       "a5": "Processing happens on our servers; the app does not process offline."
-    }
+    },
+    "subtitle": "Short answers to the usual questions."
   },
   "finalCta": {
     "title": "Get started now",
@@ -249,7 +255,7 @@
     "resources": "Resources",
     "legal": "Legal",
     "rights": "All rights reserved.",
-    "madeFor": "Built for Persian creators"
+    "madeFor": "Built for creators worldwide"
   },
   "providersList": {
     "hailuo": "Hailuo",
@@ -258,5 +264,12 @@
     "sora": "Sora",
     "seedance": "Seedance",
     "dola": "Dola"
+  },
+  "workspace": {
+    "title": "Remove a watermark",
+    "subtitle": "Add a file and we take it from there — nothing to configure.",
+    "step1": "Add file",
+    "step2": "We clean it",
+    "step3": "Download"
   }
 }

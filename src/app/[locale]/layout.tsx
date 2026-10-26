@@ -7,6 +7,7 @@ import localFont from 'next/font/local';
 import { dir, locales, defaultLocale, type Locale } from '@/i18n/config';
 import { Navbar } from '@/components/layout/navbar';
 import { Footer } from '@/components/layout/footer';
+import { ScrollProgress } from '@/components/motion/scroll-progress';
 import '../globals.css';
 
 const inter = Inter({
@@ -15,7 +16,7 @@ const inter = Inter({
   display: 'swap',
 });
 
-// IRANYekanX variable font (wght 100–1000, dots 0–4) — only mounted on fa pages.
+// IRANYekanX variable font (wght 100–1000, dots 0–4) — only mounted on RTL pages.
 const iranYekanX = localFont({
   src: '../fonts/IRANYekanXVF.woff',
   variable: '--font-yekan',
@@ -43,11 +44,16 @@ export default async function LocaleLayout({ children, params }: Props) {
     <html
       lang={locale}
       dir={direction}
-      className={locale === 'fa' ? `${inter.variable} ${iranYekanX.variable}` : inter.variable}
+      className={locale === 'fa' || locale === 'ar' ? `${inter.variable} ${iranYekanX.variable}` : inter.variable}
       suppressHydrationWarning
     >
       <body className="min-h-dvh bg-background font-sans text-foreground antialiased">
+        {/* Entrance animations start from opacity:0; without JS they must not hide content. */}
+        <noscript>
+          <style>{`[data-reveal]{opacity:1!important;transform:none!important}`}</style>
+        </noscript>
         <NextIntlClientProvider messages={messages}>
+          <ScrollProgress />
           <div className="flex min-h-dvh flex-col">
             <Navbar />
             <main className="flex-1">{children}</main>

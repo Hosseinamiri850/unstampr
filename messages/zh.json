@@ -1,0 +1,275 @@
+{
+  "meta": {
+    "title": "Unstampr | AI 水印去除",
+    "description": "快速、自动去除图片和视频中的 AI 水印。",
+    "ogTitle": "Unstampr | AI 水印去除",
+    "ogDescription": "快速、自动去除图片和视频中的 AI 水印。"
+  },
+  "nav": {
+    "remove": "去除水印",
+    "pricing": "价格",
+    "faq": "常见问题",
+    "login": "登录",
+    "startFree": "免费开始",
+    "dashboard": "控制台"
+  },
+  "language": {
+    "fa": "فارسی",
+    "en": "English",
+    "switch": "切换语言"
+  },
+  "common": {
+    "comingSoon": "即将推出",
+    "loading": "加载中...",
+    "cancel": "取消",
+    "delete": "删除",
+    "download": "下载",
+    "view": "查看",
+    "retry": "重试",
+    "processNew": "处理新文件",
+    "back": "返回",
+    "confirm": "确认",
+    "newFile": "新文件",
+    "credits": "积分"
+  },
+  "hero": {
+    "title": "留下画面，去掉水印。",
+    "subtitle": "放入图片或视频，自动去除水印，无需任何设置。",
+    "ctaPrimary": "免费开始",
+    "ctaSecondary": "工作原理",
+    "badge": "AI 去水印",
+    "trust": "无需注册 · 文件 24 小时后自动删除",
+    "demoCaption": "拖动滑块，水印立即消失"
+  },
+  "upload": {
+    "idleTitle": "文件准备好了吗？",
+    "idlePrompt": "将图片或视频拖放到此处",
+    "idlePrompt2": "或点击选择文件",
+    "selectFile": "选择文件",
+    "dragging": "释放文件",
+    "startProcess": "开始处理",
+    "cancelUpload": "取消上传",
+    "removeFile": "移除文件",
+    "uploading": "上传中...",
+    "unsupported": "不支持的文件格式",
+    "tooLarge": "文件超过大小限制",
+    "empty": "未选择文件",
+    "supportedImages": "图片：PNG、JPG、WEBP",
+    "supportedVideos": "视频：MP4、MOV、WEBM",
+    "maxImage": "图片最大大小",
+    "maxVideo": "视频最大大小"
+  },
+  "stages": {
+    "UPLOADING": "上传中...",
+    "ANALYZING": "正在分析文件...",
+    "DETECTING": "正在检测水印...",
+    "PROCESSING": "正在去除水印...",
+    "ENCODING": "正在准备输出...",
+    "COMPLETED": "处理完成。",
+    "FAILED": "处理失败。",
+    "CANCELLED": "处理已取消。"
+  },
+  "features": {
+    "title": "为什么选择 Unstampr？",
+    "auto": "自动处理",
+    "autoDesc": "无需手动设置即可检测并去除水印。",
+    "imageVideo": "支持图片和视频",
+    "imageVideoDesc": "同时适用于照片和视频。",
+    "detect": "水印检测",
+    "detectDesc": "自动检测水印类型和位置。",
+    "private": "隐私处理",
+    "privateDesc": "文件会在设定的时间后自动删除。",
+    "quality": "高质量输出",
+    "qualityDesc": "处理后保留原始文件质量。",
+    "fast": "快速",
+    "fastDesc": "处理队列经过优化，可快速完成。"
+  },
+  "howItWorks": {
+    "title": "工作原理",
+    "step1": "上传文件",
+    "step1Desc": "选择带有水印的图片或视频。",
+    "step2": "检测到水印",
+    "step2Desc": "系统识别水印类型。",
+    "step3": "水印已去除",
+    "step3Desc": "自动处理会清理你的文件。",
+    "step4": "下载",
+    "step4Desc": "获取最终输出。"
+  },
+  "providers": {
+    "title": "支持 AI 工具",
+    "subtitle": "支持以下工具生成的水印"
+  },
+  "beforeAfter": {
+    "title": "前后对比",
+    "before": "之前",
+    "after": "之后",
+    "subtitle": "使用 Unstampr 处理的结果",
+    "dragHint": "拖动对比"
+  },
+  "donate": {
+    "title": "支持此项目",
+    "desc": "这里的一切都是免费的。如果对你有帮助，请考虑支持开发。"
+  },
+  "pricing": {
+    "title": "价格",
+    "subtitle": "选择适合你的方案",
+    "monthly": "按月",
+    "credits": "积分",
+    "mostPopular": "最受欢迎",
+    "choose": "选择方案",
+    "current": "当前方案",
+    "perMonth": "每月",
+    "plans": {
+      "free": "免费",
+      "freeDesc": "入门试用",
+      "mvp": "MVP",
+      "mvpDesc": "更长视频和优先队列",
+      "proPlus": "Pro+",
+      "proPlusDesc": "更多积分和快速队列"
+    },
+    "payWithBale": "使用 Bale 支付",
+    "processing": "处理中…",
+    "paymentFailed": "支付失败。请重试。",
+    "baleUnavailable": "Bale 支付不可用。",
+    "baleNotLinked": "请先连接你的 Bale 账户才能使用 Bale 支付。",
+    "connectBale": "连接 Bale 账户",
+    "openBaleToLink": "打开 Bale 并发送代码",
+    "linkCodeHint": "此代码只能使用一次。在 Bale 中，向 Unstampr 机器人发送 /start 和此代码。",
+    "baleInvoiceSent": "账单已发送到你的 Bale 应用",
+    "baleInvoiceSentHint": "打开 Bale 应用并支付账单。付款后积分会自动添加。",
+    "toman": "托曼"
+  },
+  "result": {
+    "downloadImage": "下载图片",
+    "downloadVideo": "下载视频",
+    "originalSize": "原始大小",
+    "outputSize": "输出大小",
+    "processingTime": "处理时间",
+    "detectedWatermark": "检测到的水印",
+    "duration": "时长",
+    "fileSize": "文件大小",
+    "status": "状态",
+    "provider": "提供商",
+    "confidence": "置信度",
+    "location": "位置",
+    "noneDetected": "未检测到支持的水印。",
+    "noneDetectedDesc": "你的文件没有来自受支持 AI 工具的水印。你可以尝试其他文件。"
+  },
+  "dashboard": {
+    "title": "控制台",
+    "remainingCredits": "剩余积分",
+    "todayUsage": "今日已用",
+    "of": "/",
+    "currentPlan": "当前方案",
+    "dailyQuota": "今日配额",
+    "totalProcessed": "已处理文件",
+    "recentJobs": "最近任务",
+    "noJobs": "尚未处理任何文件",
+    "viewAll": "查看全部",
+    "startProcessing": "开始处理",
+    "history": "历史",
+    "colFile": "文件",
+    "colType": "类型",
+    "colWatermark": "水印",
+    "colStatus": "状态",
+    "colDate": "日期",
+    "colCredits": "积分",
+    "colActions": "操作",
+    "typeImage": "图片",
+    "typeVideo": "视频"
+  },
+  "auth": {
+    "loginTitle": "登录 Unstampr",
+    "loginSubtitle": "访问你的账户",
+    "registerTitle": "创建账户",
+    "registerSubtitle": "立即开始",
+    "email": "电子邮箱",
+    "password": "密码",
+    "confirmPassword": "确认密码",
+    "loginSubmit": "登录",
+    "registerSubmit": "创建账户",
+    "noAccount": "没有账户？",
+    "haveAccount": "已有账户？",
+    "createAccount": "创建账户",
+    "loginInstead": "登录",
+    "logout": "退出登录",
+    "invalidCreds": "邮箱或密码错误",
+    "emailExists": "该邮箱已被注册",
+    "loggedOut": "已退出登录",
+    "welcomeCredits": "欢迎积分已添加"
+  },
+  "errors": {
+    "FILE_TOO_LARGE": "文件超过大小限制",
+    "UNSUPPORTED_FORMAT": "不支持的文件格式",
+    "INVALID_VIDEO": "无效的视频文件",
+    "NO_WATERMARK_DETECTED": "未检测到支持的水印",
+    "UNSUPPORTED_WATERMARK": "不支持此水印类型",
+    "PROCESSING_FAILED": "处理失败",
+    "INSUFFICIENT_CREDITS": "积分不足",
+    "DAILY_QUOTA_EXCEEDED": "今日免费配额已用完。明天再来！",
+    "RATE_LIMITED": "请求过多。请放慢速度。",
+    "STORAGE_ERROR": "文件存储错误",
+    "WORKER_TIMEOUT": "处理时间过长",
+    "UNAUTHORIZED": "请先登录",
+    "NOT_FOUND": "未找到",
+    "generic": "发生错误。请重试。"
+  },
+  "privacy": {
+    "title": "隐私",
+    "statement": "我们重视你的隐私。",
+    "filesUsed": "上传的文件仅用于处理。",
+    "autoDelete": "文件会在设定的时间后自动删除。",
+    "manualDelete": "你可以手动删除文件。",
+    "payment": "支付信息由支付服务商处理。",
+    "retention": "文件保留期限：输入和输出均为 24 小时。"
+  },
+  "legal": {
+    "responsibleUse": "负责任的使用",
+    "responsibleUseNotice": "Unstampr 旨在去除 AI 生成内容中的水印，并假定你拥有该内容或有权对其进行修改。此服务不用于规避商业或付费图库授权。",
+    "terms": "条款",
+    "privacy": "隐私"
+  },
+  "faq": {
+    "title": "常见问题",
+    "items": {
+      "q1": "支持哪些类型的水印？",
+      "a1": "支持 Hailuo、Veo、Kling、Sora、Seedance 和 Dola 等 AI 工具的水印。",
+      "q2": "处理后的文件会怎样？",
+      "a2": "输入和输出文件会在 24 小时后自动删除。",
+      "q3": "需要注册才能使用吗？",
+      "a3": "无需注册即可进行有限的免费处理，但需要注册才能获得历史记录和更多积分。",
+      "q4": "支持视频吗？",
+      "a4": "支持，MP4、MOV 和 WEBM 视频在处理时保留音频。",
+      "q5": "处理可以离线进行吗？",
+      "a5": "处理在我们的服务器上进行；应用不支持离线处理。"
+    },
+    "subtitle": "常见问题的简短回答。"
+  },
+  "finalCta": {
+    "title": "立即开始",
+    "subtitle": "处理你的第一个文件 — 免费。",
+    "button": "免费开始"
+  },
+  "footer": {
+    "product": "产品",
+    "resources": "资源",
+    "legal": "法律",
+    "rights": "保留所有权利。",
+    "madeFor": "为全球创作者打造"
+  },
+  "providersList": {
+    "hailuo": "Hailuo",
+    "veo": "Veo",
+    "kling": "Kling",
+    "sora": "Sora",
+    "seedance": "Seedance",
+    "dola": "Dola"
+  },
+  "workspace": {
+    "title": "去除水印",
+    "subtitle": "放入文件，剩下的交给我们，无需任何设置。",
+    "step1": "添加文件",
+    "step2": "自动处理",
+    "step3": "下载"
+  }
+}

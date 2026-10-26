@@ -1,42 +1,87 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
 import { Link } from '@/i18n/routing';
-import { Download, RefreshCw } from 'lucide-react';
+import { Check, Download, RefreshCw } from 'lucide-react';
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
+import { CompareSlider } from '@/components/motion/compare-slider';
 import { formatBytes, formatDate, formatDuration } from '@/lib/utils';
 import type { JobDto } from '@/lib/types';
 
 export function ResultView({ job }: { job: JobDto }) {
   const t = useTranslations('result');
+  const tBeforeAfter = useTranslations('beforeAfter');
   const tcommon = useTranslations('common');
   const locale = useLocale() as 'fa' | 'en';
-  const [slider, setSlider] = useState(50);
+  const reduce = useReducedMotion();
+  const [downloaded, setDownloaded] = useState(false);
   const isImage = job.type === 'image';
 
+  useEffect(() => {
+    if (!downloaded) return;
+    const id = setTimeout(() => setDownloaded(false), 2600);
+    return () => clearTimeout(id);
+  }, [downloaded]);
+
   return (
-    <div className="mt-6 space-y-4">
+    <motion.div
+      initial={reduce ? false : { opacity: 0, y: 12 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.45, ease: [0.22, 0.61, 0.36, 1] }}
+      className="mt-6 space-y-4"
+    >
       {isImage && job.outputUrl ? (
-        <BeforeAfterSlider
-          beforeUrl={job.inputUrl ?? ''}
-          afterUrl={job.outputUrl}
-          value={slider}
-          onChange={setSlider}
+        <CompareSlider
+          beforeLabel={tBeforeAfter('before')}
+          afterLabel={tBeforeAfter('after')}
+          className="shadow-lift"
+          before={
+            job.inputUrl ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                src={job.inputUrl}
+                alt={tBeforeAfter('before')}
+                className="h-full w-full object-cover"
+                draggable={false}
+              />
+            ) : (
+              <div className="h-full w-full bg-secondary" />
+            )
+          }
+          after={
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={job.outputUrl}
+              alt={tBeforeAfter('after')}
+              className="h-full w-full object-cover"
+              draggable={false}
+            />
+          }
         />
       ) : job.outputUrl ? (
-        <div className="overflow-hidden rounded-xl border border-border bg-black">
-          { }
+        <div className="overflow-hidden rounded-2xl border border-border bg-black shadow-soft">
           <video src={job.outputUrl} controls className="w-full" />
         </div>
       ) : null}
 
-      <div className="flex flex-wrap gap-2">
-        <Button asChild>
-          { }
-          <a href={job.outputUrl ?? '#'} download>
-            <Download className="h-4 w-4" />
+      <div className="flex flex-wrap items-center gap-2">
+        <Button asChild className="shadow-soft">
+          <a href={job.outputUrl ?? '#'} download onClick={() => setDownloaded(true)}>
+            <AnimatePresence initial={false} mode="wait">
+              <motion.span
+                key={downloaded ? 'done' : 'idle'}
+                initial={reduce ? false : { scale: 0.7, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                exit={reduce ? { opacity: 0 } : { scale: 0.7, opacity: 0 }}
+                transition={{ duration: 0.18 }}
+                className="flex"
+              >
+                {downloaded ? <Check className="h-4 w-4" /> : <Download className="h-4 w-4" />}
+              </motion.span>
+            </AnimatePresence>
             {isImage ? t('downloadImage') : t('downloadVideo')}
           </a>
         </Button>
@@ -62,7 +107,7 @@ export function ResultView({ job }: { job: JobDto }) {
           )}
         </dl>
       </Card>
-    </div>
+    </motion.div>
   );
 }
 
@@ -71,44 +116,6 @@ function Field({ label, value }: { label: string; value: string }) {
     <div>
       <dt className="text-xs text-muted-foreground">{label}</dt>
       <dd className="mt-0.5 font-medium">{value}</dd>
-    </div>
-  );
-}
-
-function BeforeAfterSlider({
-  beforeUrl,
-  afterUrl,
-  value,
-  onChange,
-}: {
-  beforeUrl: string;
-  afterUrl: string;
-  value: number;
-  onChange: (v: number) => void;
-}) {
-  const t = useTranslations('beforeAfter');
-  return (
-    <div className="relative aspect-video select-none overflow-hidden rounded-xl border border-border bg-secondary">
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src={afterUrl} alt={t('after')} className="absolute inset-0 h-full w-full object-cover" draggable={false} />
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        src={beforeUrl}
-        alt={t('before')}
-        className="absolute inset-0 h-full w-full object-cover"
-        draggable={false}
-        style={{ clipPath: `inset(0 ${100 - value}% 0 0)` }}
-      />
-      <div className="absolute inset-y-0 w-0.5 bg-white shadow" style={{ insetInlineStart: `${value}%` }} aria-hidden />
-      <input
-        type="range"
-        min={0}
-        max={100}
-        value={value}
-        onChange={(e) => onChange(Number(e.target.value))}
-        aria-label={t('title')}
-        className="absolute inset-0 h-full w-full cursor-ew-resize opacity-0"
-      />
     </div>
   );
 }

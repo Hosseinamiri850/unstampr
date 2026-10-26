@@ -10,8 +10,15 @@ export default async function PricingPage({ params }: Props) {
   setRequestLocale(locale);
   if (!getEnv().PAYMENTS_ENABLED) notFound();
   return (
-    <div className="container py-16 md:py-24">
-      <PricingTable />
+    <div className="relative">
+      <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-72 gradient-radial opacity-80" />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 -z-10 bg-dots opacity-40 [mask-image:radial-gradient(60%_50%_at_50%_0%,black,transparent)]"
+      />
+      <div className="container py-16 md:py-24">
+        <PricingTable />
+      </div>
     </div>
   );
 }

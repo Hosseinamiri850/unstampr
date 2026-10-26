@@ -1,31 +1,22 @@
 import { getTranslations } from 'next-intl/server';
-import { Upload, ScanEye, Eraser, Download } from 'lucide-react';
+import { Reveal } from '@/components/motion/motion-primitives';
+import { StepsShowcase } from './steps-showcase';
 
 export async function HowItWorks() {
   const t = await getTranslations('howItWorks');
-  const steps = [
-    { key: 'step1', icon: Upload },
-    { key: 'step2', icon: ScanEye },
-    { key: 'step3', icon: Eraser },
-    { key: 'step4', icon: Download },
-  ];
+  const steps = [1, 2, 3, 4].map((n) => ({
+    key: `step${n}`,
+    label: t(`step${n}`),
+    desc: t(`step${n}Desc`),
+  }));
 
   return (
-    <section id="how-it-works" className="py-16 md:py-24">
+    <section id="how-it-works" className="scroll-mt-24 border-t border-border/60 py-16 md:py-24">
       <div className="container">
-        <h2 className="text-center text-3xl font-semibold tracking-tight sm:text-4xl">{t('title')}</h2>
-        <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {steps.map(({ key, icon: Icon }, i) => (
-            <div key={key} className="relative flex flex-col items-center text-center">
-              <div className="flex h-14 w-14 items-center justify-center rounded-full border border-border bg-card text-primary">
-                <Icon className="h-6 w-6" />
-              </div>
-              <span className="mt-4 text-xs font-medium text-muted-foreground">{String(i + 1).padStart(2, '0')}</span>
-              <h3 className="mt-1 text-base font-semibold">{t(key)}</h3>
-              <p className="mt-1.5 text-sm text-muted-foreground">{t(`${key}Desc`)}</p>
-            </div>
-          ))}
-        </div>
+        <Reveal className="max-w-2xl">
+          <h2 className="text-balance text-3xl font-semibold tracking-tight sm:text-4xl">{t('title')}</h2>
+        </Reveal>
+        <StepsShowcase steps={steps} />
       </div>
     </section>
   );

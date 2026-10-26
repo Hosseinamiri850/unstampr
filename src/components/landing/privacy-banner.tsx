@@ -1,5 +1,6 @@
 import { getTranslations } from 'next-intl/server';
 import { ShieldCheck } from 'lucide-react';
+import { Reveal } from '@/components/motion/motion-primitives';
 
 export async function PrivacyBanner() {
   const t = await getTranslations('privacy');
@@ -7,12 +8,20 @@ export async function PrivacyBanner() {
   return (
     <section className="py-12 md:py-16">
       <div className="container">
-        <div className="flex flex-col items-center gap-4 rounded-xl border border-border bg-card p-8 text-center sm:p-10">
-          <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary">
-            <ShieldCheck className="h-6 w-6" />
+        <Reveal>
+          <div className="relative overflow-hidden rounded-2xl border border-primary/15 bg-brand-soft/70 px-6 py-6 dark:bg-accent/40">
+            <div
+              aria-hidden
+              className="pointer-events-none absolute inset-0 bg-dots opacity-30 [mask-image:linear-gradient(to_right,black,transparent)]"
+            />
+            <div className="relative flex flex-col items-center gap-3 text-center sm:flex-row sm:text-start">
+              <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary text-primary-foreground shadow-soft">
+                <ShieldCheck className="h-5 w-5" />
+              </span>
+              <p className="max-w-xl text-balance text-sm leading-relaxed text-foreground/80">{t('autoDelete')}</p>
+            </div>
           </div>
-          <p className="max-w-xl text-balance text-sm text-muted-foreground">{t('autoDelete')}</p>
-        </div>
+        </Reveal>
       </div>
     </section>
   );

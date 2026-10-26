@@ -3,10 +3,12 @@
 import { useCallback, useRef, useState, type DragEvent } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
 import { useRouter } from 'next/navigation';
-import { UploadCloud, X, Image as ImageIcon, Film, Loader2 } from 'lucide-react';
+import { UploadCloud, X, Image as ImageIcon, Film, Loader2, AlertCircle, ArrowRight } from 'lucide-react';
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import { cn, formatBytes } from '@/lib/utils';
+import { easeOutSoft } from '@/components/motion/motion-primitives';
 
 type LocalState = 'idle' | 'selected' | 'uploading';
 
@@ -22,6 +24,7 @@ export function RemoveClient({ maxImage, maxVideo }: { maxImage: number; maxVide
   const router = useRouter();
   const inputRef = useRef<HTMLInputElement>(null);
   const abortRef = useRef<AbortController | null>(null);
+  const reduce = useReducedMotion();
 
   const [state, setState] = useState<LocalState>('idle');
   const [dragging, setDragging] = useState(false);
@@ -140,9 +143,11 @@ export function RemoveClient({ maxImage, maxVideo }: { maxImage: number; maxVide
     reset();
   };
 
+  const percent = locale === 'fa' ? progress.toLocaleString('fa-IR') : progress;
+
   return (
     <div className="mx-auto w-full max-w-2xl">
-      <div
+      <motion.div
         role="button"
         tabIndex={0}
         aria-label={t('idlePrompt')}
@@ -159,10 +164,12 @@ export function RemoveClient({ maxImage, maxVideo }: { maxImage: number; maxVide
         }}
         onDragLeave={() => setDragging(false)}
         onDrop={onDrop}
+        animate={reduce ? undefined : { scale: dragging ? 1.01 : 1 }}
+        transition={{ duration: 0.2, ease: easeOutSoft }}
         className={cn(
-          'relative flex min-h-72 flex-col items-center justify-center gap-4 rounded-2xl border-2 border-dashed bg-card/50 p-8 text-center transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
-          state === 'idle' ? 'cursor-pointer border-border hover:border-primary/50' : 'border-border',
-          dragging && 'border-primary bg-primary/5',
+          'relative flex min-h-72 flex-col items-center justify-center gap-4 overflow-hidden rounded-3xl border-2 border-dashed bg-card p-6 text-center shadow-soft transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background sm:p-8',
+          state === 'idle' ? 'cursor-pointer' : 'cursor-default',
+          dragging ? 'border-primary bg-brand-soft/50' : 'border-border hover:border-primary/45',
         )}
       >
         <input
@@ -177,93 +184,140 @@ export function RemoveClient({ maxImage, maxVideo }: { maxImage: number; maxVide
           }}
         />
 
-        {state === 'idle' && (
-          <>
-            <div className="flex h-16 w-16 items-center justify-center rounded-full bg-primary/10 text-primary">
-              <UploadCloud className="h-8 w-8" />
-            </div>
-            <div className="space-y-1">
-              <p className="text-base font-medium">{dragging ? t('dragging') : t('idleTitle')}</p>
-              <p className="text-sm text-muted-foreground">{t('idlePrompt')}</p>
-              <p className="text-xs text-muted-foreground">{t('idlePrompt2')}</p>
-            </div>
-            <Button type="button" size="sm" variant="outline" onClick={(e) => { e.stopPropagation(); inputRef.current?.click(); }}>
-              {t('selectFile')}
-            </Button>
-            <p className="mt-1 text-xs text-muted-foreground">
-              {t('supportedImages')} · {t('supportedVideos')}
-            </p>
-          </>
-        )}
+        {/* warm glow that intensifies while dragging */}
+        <div
+          aria-hidden
+          className={cn(
+            'pointer-events-none absolute inset-0 bg-gradient-to-b from-primary/[0.04] to-transparent transition-opacity duration-300',
+            dragging ? 'opacity-100' : 'opacity-0',
+          )}
+        />
 
-        {state !== 'idle' && file && (
-          <div className="flex w-full flex-col gap-4">
-            <div className="flex items-center gap-4">
-              <div className="h-20 w-20 shrink-0 overflow-hidden rounded-lg border border-border bg-secondary">
-                {previewUrl && isVideo ? (
-                  <video src={previewUrl} className="h-full w-full object-cover" muted />
-                ) : previewUrl ? (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img src={previewUrl} alt={file.name} className="h-full w-full object-cover" />
-                ) : (
-                  <div className="flex h-full items-center justify-center text-muted-foreground">
-                    {isVideo ? <Film className="h-6 w-6" /> : <ImageIcon className="h-6 w-6" />}
-                  </div>
+        <AnimatePresence mode="wait" initial={false}>
+          {state === 'idle' && (
+            <motion.div
+              key="idle"
+              initial={reduce ? false : { opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={reduce ? { opacity: 0 } : { opacity: 0, y: -8 }}
+              transition={{ duration: 0.22, ease: easeOutSoft }}
+              className="relative flex flex-col items-center gap-4"
+            >
+              <span className="relative flex h-16 w-16 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+                {!reduce && (
+                  <motion.span
+                    aria-hidden
+                    className="absolute inset-0 rounded-2xl border border-primary/30"
+                    animate={{ scale: [1, 1.18], opacity: [0.5, 0] }}
+                    transition={{ duration: 2.4, repeat: Infinity, ease: 'easeOut' }}
+                  />
+                )}
+                <UploadCloud className={cn('h-7 w-7 transition-transform duration-300', dragging && 'scale-110')} />
+              </span>
+              <div className="space-y-1">
+                <p className="text-base font-semibold">{dragging ? t('dragging') : t('idleTitle')}</p>
+                <p className="text-sm text-muted-foreground">{t('idlePrompt')}</p>
+                <p className="text-xs text-muted-foreground">{t('idlePrompt2')}</p>
+              </div>
+              <Button
+                type="button"
+                size="sm"
+                variant="outline"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  inputRef.current?.click();
+                }}
+              >
+                {t('selectFile')}
+              </Button>
+              <p className="text-xs text-muted-foreground">
+                {t('supportedImages')} · {t('supportedVideos')}
+              </p>
+            </motion.div>
+          )}
+
+          {state !== 'idle' && file && (
+            <motion.div
+              key="file"
+              initial={reduce ? false : { opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={reduce ? { opacity: 0 } : { opacity: 0, y: -8 }}
+              transition={{ duration: 0.22, ease: easeOutSoft }}
+              className="relative flex w-full flex-col gap-4"
+            >
+              <div className="flex items-center gap-4 text-start">
+                <div className="h-20 w-20 shrink-0 overflow-hidden rounded-xl border border-border bg-secondary shadow-soft">
+                  {previewUrl && isVideo ? (
+                    <video src={previewUrl} className="h-full w-full object-cover" muted />
+                  ) : previewUrl ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img src={previewUrl} alt={file.name} className="h-full w-full object-cover" />
+                  ) : (
+                    <div className="flex h-full items-center justify-center text-muted-foreground">
+                      {isVideo ? <Film className="h-6 w-6" /> : <ImageIcon className="h-6 w-6" />}
+                    </div>
+                  )}
+                </div>
+                <div className="min-w-0 flex-1">
+                  <p className="truncate text-sm font-semibold">{file.name}</p>
+                  <p className="mt-0.5 text-xs text-muted-foreground">
+                    {formatBytes(file.size, locale)} · {isVideo ? t('supportedVideos') : t('supportedImages')}
+                  </p>
+                </div>
+                {state === 'selected' && (
+                  <Button size="icon" variant="ghost" aria-label={t('removeFile')} onClick={reset}>
+                    <X className="h-4 w-4" />
+                  </Button>
                 )}
               </div>
-              <div className="min-w-0 flex-1 text-start">
-                <p className="truncate text-sm font-medium">{file.name}</p>
-                <p className="text-xs text-muted-foreground">{formatBytes(file.size, locale)}</p>
-                <p className="text-xs text-muted-foreground">{isVideo ? t('supportedVideos') : t('supportedImages')}</p>
-              </div>
+
               {state === 'selected' && (
-                <Button size="icon" variant="ghost" aria-label={t('removeFile')} onClick={reset}>
-                  <X className="h-4 w-4" />
+                <Button size="lg" onClick={startUpload} className="w-full shadow-soft">
+                  {t('startProcess')}
+                  <ArrowRight className="h-4 w-4 rtl:rotate-180" />
                 </Button>
               )}
-            </div>
 
-            {state === 'selected' && (
-              <Button size="lg" onClick={startUpload} className="w-full">
-                {t('startProcess')}
-              </Button>
-            )}
-
-            {state === 'uploading' && (
-              <div className="space-y-2">
-                <div className="flex items-center justify-between text-xs text-muted-foreground">
-                  <span className="flex items-center gap-1.5">
-                    <Loader2 className="h-3.5 w-3.5 animate-spin" />
-                    {t('uploading')}
-                  </span>
-                  <span>{locale === 'fa' ? progress.toLocaleString('fa-IR') : progress}%</span>
+              {state === 'uploading' && (
+                <div className="space-y-2">
+                  <div className="flex items-center justify-between text-xs text-muted-foreground">
+                    <span className="flex items-center gap-1.5">
+                      <Loader2 className="h-3.5 w-3.5 animate-spin" />
+                      {t('uploading')}
+                    </span>
+                    <span className="font-medium tabular-nums text-foreground">{percent}%</span>
+                  </div>
+                  <Progress value={progress} />
+                  <Button size="sm" variant="ghost" onClick={cancelUpload} className="w-full">
+                    {t('cancelUpload')}
+                  </Button>
                 </div>
-                <Progress value={progress} />
-                <Button size="sm" variant="ghost" onClick={cancelUpload} className="w-full">
-                  {t('cancelUpload')}
-                </Button>
-              </div>
-            )}
-          </div>
+              )}
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </motion.div>
+
+      <AnimatePresence initial={false}>
+        {error && (
+          <motion.p
+            role="alert"
+            key="error"
+            initial={reduce ? { opacity: 0 } : { opacity: 0, y: -6 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="mt-3 flex items-center justify-center gap-2 text-center text-sm text-destructive"
+          >
+            <AlertCircle className="h-4 w-4 shrink-0" />
+            {error}
+          </motion.p>
         )}
-      </div>
+      </AnimatePresence>
 
-      {error && (
-        <p role="alert" className="mt-3 text-center text-sm text-destructive">
-          {error}
-        </p>
-      )}
-
-      {locale === 'fa' && (
-        <p className="mt-3 text-center text-xs text-muted-foreground">
-          {t('maxImage')}: {formatBytes(maxImage, locale)} · {t('maxVideo')}: {formatBytes(maxVideo, locale)}
-        </p>
-      )}
-      {locale === 'en' && (
-        <p className="mt-3 text-center text-xs text-muted-foreground">
-          {t('maxImage')}: {formatBytes(maxImage, locale)} · {t('maxVideo')}: {formatBytes(maxVideo, locale)}
-        </p>
-      )}
+      <p className="mt-3 text-center text-xs text-muted-foreground">
+        {t('maxImage')}: {formatBytes(maxImage, locale)} · {t('maxVideo')}: {formatBytes(maxVideo, locale)}
+      </p>
     </div>
   );
 }

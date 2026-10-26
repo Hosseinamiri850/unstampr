@@ -1,7 +1,6 @@
 'use client';
 
 import { useLocale, useTranslations } from 'next-intl';
-import { useRouter, usePathname } from 'next/navigation';
 import { useTransition } from 'react';
 import { Globe, Check } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -11,7 +10,8 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { locales, type Locale } from '@/i18n/config';
+import { locales, localeLabels, type Locale } from '@/i18n/config';
+import { usePathname, useRouter } from '@/i18n/routing';
 import { cn } from '@/lib/utils';
 
 export function LanguageSwitcher() {
@@ -24,13 +24,7 @@ export function LanguageSwitcher() {
   function onChoose(next: Locale) {
     if (next === current) return;
     startTransition(() => {
-      const segs = pathname.split('/');
-      if (segs.length > 1 && locales.includes(segs[1] as Locale)) {
-        segs[1] = next;
-        router.push(segs.join('/') || '/');
-      } else {
-        router.push(`/${next}`);
-      }
+      router.replace(pathname, { locale: next });
     });
   }
 
@@ -41,10 +35,10 @@ export function LanguageSwitcher() {
           <Globe className="h-5 w-5" />
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end">
+      <DropdownMenuContent align="end" className="max-h-80 overflow-y-auto">
         {locales.map((l) => (
           <DropdownMenuItem key={l} onClick={() => onChoose(l)} className="justify-between">
-            <span>{l === 'fa' ? 'فارسی' : 'English'}</span>
+            <span>{localeLabels[l]}</span>
             <Check className={cn('h-4 w-4', l === current ? 'opacity-100' : 'opacity-0')} />
           </DropdownMenuItem>
         ))}
