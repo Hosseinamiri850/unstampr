@@ -1,8 +1,8 @@
-import { SignJWT, jwtVerify } from 'jose';
+﻿import { SignJWT, jwtVerify } from 'jose';
 import { cookies } from 'next/headers';
 import { getEnv } from '@/lib/env';
 
-const COOKIE = 'pakino_session';
+const COOKIE = 'unstampr_session';
 const ALG = 'HS256';
 
 export interface SessionPayload {

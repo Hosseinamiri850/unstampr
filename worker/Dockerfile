@@ -1,5 +1,5 @@
-# Unstampr Python worker image — Python + FFmpeg + pinned requirements.
-# Build: docker build -f worker/Dockerfile -t pakino-worker .
+# Unstampr Python worker image - Python + FFmpeg + pinned requirements.
+# Build: docker build -f worker/Dockerfile -t unstampr-worker .
 
 FROM python:3.13-slim
 
@@ -17,8 +17,8 @@ RUN pip install --no-cache-dir -r worker/requirements.txt
 
 COPY worker /app/worker
 
-RUN useradd --system --create-home pakino \
- && chown -R pakino:pakino /app
-USER pakino
+RUN useradd --system --create-home unstampr \
+ && chown -R unstampr:unstampr /app
+USER unstampr
 
 CMD ["python", "-m", "worker"]

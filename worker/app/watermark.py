@@ -1,4 +1,4 @@
-"""Thin wrappers over remove-ai-watermarks (imported as raiw).
+﻿"""Thin wrappers over remove-ai-watermarks (imported as raiw).
 
 Visible-watermark removal is CPU-friendly and needs only the [visible]/[video]
 extras. The invisible path requires CUDA and is intentionally NOT used in the
@@ -9,7 +9,7 @@ from __future__ import annotations
 import logging
 from pathlib import Path
 
-log = logging.getLogger("pakino.watermark")
+log = logging.getLogger("unstampr.watermark")
 
 try:
     import remove_ai_watermarks as raiw  # type: ignore

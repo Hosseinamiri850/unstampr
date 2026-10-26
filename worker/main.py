@@ -1,4 +1,4 @@
-"""Unstampr processing worker. Consumes Redis jobs, processes media with
+﻿"""Unstampr processing worker. Consumes Redis jobs, processes media with
 remove-ai-watermarks + FFmpeg, uploads results to S3, updates PostgreSQL.
 
 Reliability model (docs/JOB_RELIABILITY_PLAN.md):
@@ -7,7 +7,7 @@ Reliability model (docs/JOB_RELIABILITY_PLAN.md):
 - heartbeats distinguish long-running jobs from dead workers
 - a periodic recovery pass requeues stale jobs and terminal-fails exhausted ones
 - refunds stay exactly-once via the credit ledger (worker/app/db.py)
-Run: python -m worker (project root) — or `python worker/main.py`.
+Run: python -m worker (project root) â€” or `python worker/main.py`.
 """
 from __future__ import annotations
 
@@ -35,7 +35,7 @@ from worker.app import image as image_proc
 from worker.app import video as video_proc
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(name)s: %(message)s")
-log = logging.getLogger("pakino.worker")
+log = logging.getLogger("unstampr.worker")
 
 _MIME_EXT = {
     "image/png": "png", "image/jpeg": "jpg", "image/webp": "webp",
@@ -146,7 +146,7 @@ def process_one(msg: JobMessage, settings) -> None:
                     beater.join(timeout=2)
 
             if result.get("no_watermark"):
-                # Policy: no output was produced, so the user pays nothing —
+                # Policy: no output was produced, so the user pays nothing â€”
                 # refund the un-refunded remainder.
                 refund_job_credits(conn, msg.job_id, msg.user_id)
                 update_job(
@@ -246,7 +246,7 @@ def _requeue_via_outbox(conn, job_id: str) -> None:
 def recovery_pass(r, settings) -> None:
     """Stale-job sweep: bounded retries then terminal failure with refund.
 
-    Idempotent by construction — every transition is a guarded UPDATE and the
+    Idempotent by construction â€” every transition is a guarded UPDATE and the
     advisory lock keeps concurrent workers from duplicating work.
     """
     conn = connect(settings)
@@ -289,7 +289,7 @@ def payment_reconcile_pass(settings) -> None:
 
     Off unless PAYMENT_RECONCILE_URL is set. The web service owns all payment
     logic and auth (x-reconcile-token); the worker only fires the trigger.
-    stdlib-only HTTP call, bounded timeout, every failure logged and swallowed —
+    stdlib-only HTTP call, bounded timeout, every failure logged and swallowed â€”
     a web outage or a bad response must never kill the worker loop.
     """
     if not settings.payment_reconcile_url:

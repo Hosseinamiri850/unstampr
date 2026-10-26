@@ -1,4 +1,4 @@
-import { db, schema } from '@/lib/db/client';
+﻿import { db, schema } from '@/lib/db/client';
 import { eq } from 'drizzle-orm';
 import { createPresignedDownload } from '@/lib/storage/s3';
 
@@ -8,7 +8,7 @@ export async function mapJob(job: typeof schema.jobs.$inferSelect) {
     const [f] = await db.select().from(schema.files).where(eq(schema.files.id, job.outputFileId)).limit(1);
     if (f) {
       const ext = f.storageKey.split('.').pop() ?? 'bin';
-      outputUrl = await createPresignedDownload(f.storageKey, `pakino-${job.id}.${ext}`);
+      outputUrl = await createPresignedDownload(f.storageKey, `unstampr-${job.id}.${ext}`);
     }
   }
   let inputUrl: string | null = null;

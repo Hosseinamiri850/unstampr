@@ -1,11 +1,11 @@
-from __future__ import annotations
+﻿from __future__ import annotations
 
 import logging
 from pathlib import Path
 
 from . import watermark
 
-log = logging.getLogger("pakino.image")
+log = logging.getLogger("unstampr.image")
 
 
 def process_image(input_path: str, output_path: str) -> dict:

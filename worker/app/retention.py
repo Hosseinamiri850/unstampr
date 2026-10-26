@@ -1,7 +1,7 @@
-"""Retention reaper: delete expired file objects from S3 and their DB rows.
+﻿"""Retention reaper: delete expired file objects from S3 and their DB rows.
 
 files.expires_at is written at upload/output time; this pass enforces it.
-Deletion order matters: S3 object first, then the row — a crash between the
+Deletion order matters: S3 object first, then the row â€” a crash between the
 two leaves an orphaned row (retried next pass, harmless) but never a live
 object that looks deleted. Rows still referenced by jobs (input_file_id /
 output_file_id) are skipped so job history keeps its FKs intact.
@@ -10,7 +10,7 @@ from __future__ import annotations
 
 import logging
 
-log = logging.getLogger("pakino.reaper")
+log = logging.getLogger("unstampr.reaper")
 
 
 def reap_expired_files(conn, s3, bucket: str, batch_limit: int = 100) -> dict:

@@ -54,11 +54,15 @@ release.
 ### 3 — Global re-brand · 90%
 
 Done: name, wordmark + icon, favicon, metadata/OpenGraph copy, schema.org payload, footer/nav
-strings, message catalogs. Internal identifiers (database `pakino`, S3 bucket, `pakino:jobs` queue,
-`pakino:rl:` prefixes, compose service names) intentionally kept to avoid a risky data migration —
-they are invisible to users.
+strings, message catalogs. The GitHub repository was renamed `pakino` → `unstampr` (old URL
+redirects), and user-visible leftovers were renamed too: session cookie `unstampr_session`,
+download filenames `unstampr-{jobId}.{ext}`, container user `unstampr`, log logger names
+`unstampr.*`. Internal data identifiers (database `pakino`, S3 bucket, `pakino:jobs` queue,
+`pakino:*` Redis prefixes, compose service names) intentionally stay as-is to avoid a risky data
+migration — they are invisible to users and are documented here.
 
-Open: domain purchase/DNS (owner action), a designed OG/social image.
+Open: domain purchase/DNS (owner action), a designed OG/social image. The local checkout folder can
+also be renamed (`Pakino` → `unstampr`); it is a manual, out-of-repo step.
 
 ### 4 — Multi-language rollout · 50%
 

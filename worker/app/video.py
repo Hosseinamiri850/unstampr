@@ -1,4 +1,4 @@
-from __future__ import annotations
+﻿from __future__ import annotations
 
 import logging
 from pathlib import Path
@@ -6,11 +6,11 @@ from pathlib import Path
 from . import ffmpeg, watermark
 from .models import SUPPORTED_VIDEO_PROVIDERS
 
-log = logging.getLogger("pakino.video")
+log = logging.getLogger("unstampr.video")
 
 
 def probe_duration(input_path: str) -> float:
-    """Actual duration via ffprobe — used for billing settlement before processing."""
+    """Actual duration via ffprobe â€” used for billing settlement before processing."""
     return ffmpeg.duration_seconds(input_path)
 
 
